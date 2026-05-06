@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConexaoDB {
 
-    private static final String URL    = "jdbc:mysql://127.0.0.1:3306/mydb?useSSL=false&serverTimezone=UTC";
-    private static final String USUARIO = "QuiZmica";
-    private static final String SENHA   = "etecquimica10";
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/mydb?useSSL=false&serverTimezone=UTC";
+    private static final String user = "QuiZmica";
+    private static final String senha = "etecquimica10";
 
     private static Connection instancia = null;
 
@@ -18,7 +18,7 @@ public class ConexaoDB {
         try {
             if (instancia == null || instancia.isClosed()) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                instancia = DriverManager.getConnection(URL, USUARIO, SENHA);
+                instancia = DriverManager.getConnection(url, user, senha);
                 System.out.println("[DB] Conectado ao MySQL com sucesso.");
             }
         } catch (ClassNotFoundException e) {

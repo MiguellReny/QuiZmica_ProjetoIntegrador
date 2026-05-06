@@ -6,48 +6,72 @@ import quizquimica.dao.UsuarioDAO;
 import quizquimica.model.Aluno;
 import quizquimica.model.Professor;
 import quizquimica.model.Usuario;
-import quizquimica.util.GeradorSenha;
+import quizquimica.util.CadastrarSenha;
+import quizquimica.util.GeradorCredencial;
 import quizquimica.util.ValidadorEmail;
 
 public class AuthService {
 
-    private UsuarioDAO   usuarioDAO   = new UsuarioDAO();
-    private AlunoDAO     alunoDAO     = new AlunoDAO();
-    private ProfessorDAO professorDAO = new ProfessorDAO();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private final AlunoDAO alunoDAO = new AlunoDAO();
+    private final ProfessorDAO professorDAO = new ProfessorDAO();
 
-    // Autentica e retorna Aluno ou Professor, ou null se falhar
     public Usuario login(String login, String senha) {
 
         // 1. Valida domínio do login
-        if (!ValidadorEmail.isEmailValido(login)) {
-            System.out.println("[AuthService] Login invalido: " + login);
+        if (!ValidadorEmail.emailValido(login)) {
+            System.out.println("[AuthService] Login com domínio inválido: " + login);
             return null;
         }
 
-        // 2. Gera hash da senha
-        String senhaHash = GeradorSenha.hashSenha(senha);
-
-        // 3. Autentica no banco
+        // 2. Gera hash e confere com o banco
+        String senhaHash = CadastrarSenha.hashSenha(senha);
         if (!usuarioDAO.autenticar(login, senhaHash)) {
-            System.out.println("[AuthService] Credenciais incorretas.");
+            System.out.println("[AuthService] Credenciais inválidas para: " + login);
             return null;
         }
 
-        // 4. Identifica tipo e retorna objeto correto
+        // 3. Identifica o tipo e retorna o objeto correto
         String tipo = usuarioDAO.buscarTipo(login);
-
         if ("professor".equals(tipo)) {
             return professorDAO.buscarPorLogin(login);
-        } else {
-            return alunoDAO.buscarPorLogin(login);
         }
+        return alunoDAO.buscarPorLogin(login);
     }
 
-    // Redefine senha de um aluno — retorna nova senha legível para o professor
-    public String redefinirSenha(String loginAluno) {
-        String novaSenha = GeradorSenha.gerarSenhaAleatoria();
-        String hash      = GeradorSenha.hashSenha(novaSenha);
-        boolean ok       = usuarioDAO.atualizarSenha(loginAluno, hash);
-        return ok ? novaSenha : null;
+    public String[] cadastrarAluno(String nome, String turma, String senha) {
+
+        if (!CadastrarSenha.senhaValida(senha)) {
+            System.out.println("[AuthService] Senha inválida — mínimo 6 caracteres.");
+            return null;
+        }
+
+        String login = GeradorCredencial.gerarLoginAluno(nome, turma);
+        String senhaHash = CadastrarSenha.hashSenha(senha);
+
+        if (usuarioDAO.loginExiste(login)) {
+            System.out.println("[AuthService] Login já existe: " + login);
+            return null;
+        }
+
+        Aluno aluno = new Aluno();
+        aluno.setNome(nome);
+        aluno.setLogin(login);
+        aluno.setSenha(senhaHash);
+        aluno.setTurma(turma);
+
+        if (alunoDAO.inserir(aluno)) {
+            System.out.println("[AuthService] Aluno cadastrado: " + login);
+            return login;
+        }
+        return null;
     }
-}
+
+    
+    public boolean redefinirSenha(String loginAluno, String novaSenha) {
+        if (!CadastrarSenha.senhaValida(novaSenha)) {
+            System.out.println("[AuthService] Senha inválida — mínimo 6 caracteres.");
+            return false;}
+        String hash = CadastrarSenha.hashSenha(novaSenha);
+        return usuarioDAO.atualizarSenha(loginAluno, hash);}
+    }

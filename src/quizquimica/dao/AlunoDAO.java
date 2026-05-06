@@ -9,18 +9,18 @@ import java.util.List;
 public class AlunoDAO {
 
     public Aluno buscarPorLogin(String login) {
-        String sql = "SELECT * FROM usuário WHERE Login = ? AND Tipo = 'aluno'";
+        String sql = "SELECT * FROM usuario WHERE login = ? AND tipo = 'aluno'";
         try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, login);
-            ResultSet rs = stmt.executeQuery();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return new Aluno(
-                    rs.getInt("idUsuário"),
-                    rs.getString("Nome"),
-                    rs.getString("Login"),
-                    rs.getString("Senha"),
-                    rs.getString("Turma")
+                    rs.getInt("idUsuario"),
+                    rs.getString("nome"),
+                    rs.getString("login"),
+                    rs.getString("senha"),
+                    rs.getString("turma")
                 );
             }
         } catch (SQLException e) {
@@ -30,14 +30,14 @@ public class AlunoDAO {
     }
 
     public boolean inserir(Aluno aluno) {
-        String sql = "INSERT INTO usuário (Nome, Login, Senha, Tipo, Turma) VALUES (?, ?, ?, 'aluno', ?)";
+        String sql = "INSERT INTO usuario (nome, login, senha, tipo, turma) VALUES (?, ?, ?, 'aluno', ?)";
         try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, aluno.getNome());
-            stmt.setString(2, aluno.getLogin());
-            stmt.setString(3, aluno.getSenha());
-            stmt.setString(4, aluno.getTurma());
-            return stmt.executeUpdate() > 0;
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, aluno.getNome());
+            ps.setString(2, aluno.getLogin());
+            ps.setString(3, aluno.getSenha());
+            ps.setString(4, aluno.getTurma());
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("[AlunoDAO] Erro ao inserir aluno: " + e.getMessage());
         }
@@ -45,11 +45,11 @@ public class AlunoDAO {
     }
 
     public boolean remover(String login) {
-        String sql = "DELETE FROM usuário WHERE Login = ? AND Tipo = 'aluno'";
+        String sql = "DELETE FROM usuario WHERE login = ? AND tipo = 'aluno'";
         try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, login);
-            return stmt.executeUpdate() > 0;
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, login);
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("[AlunoDAO] Erro ao remover aluno: " + e.getMessage());
         }
@@ -58,18 +58,18 @@ public class AlunoDAO {
 
     public List<Aluno> listarPorTurma(String turma) {
         List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM usuário WHERE Turma = ? AND Tipo = 'aluno'";
+        String sql = "SELECT * FROM usuario WHERE turma = ? AND tipo = 'aluno'";
         try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, turma);
-            ResultSet rs = stmt.executeQuery();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, turma);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 alunos.add(new Aluno(
-                    rs.getInt("idUsuário"),
-                    rs.getString("Nome"),
-                    rs.getString("Login"),
-                    rs.getString("Senha"),
-                    rs.getString("Turma")
+                    rs.getInt("idUsuario"),
+                    rs.getString("nome"),
+                    rs.getString("login"),
+                    rs.getString("senha"),
+                    rs.getString("turma")
                 ));
             }
         } catch (SQLException e) {

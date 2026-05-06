@@ -2,17 +2,17 @@ package quizquimica.util;
 
 public class ValidadorEmail {
 
-    private static final String DOMINIO_ETEC = "@etec.sp.gov.br";
+    private static final String dominioProf = "@cps";
+    private static final String dominioALuno = "@aluno.cps";
 
-    // Valida se o login é um email da ETEC
-    public static boolean isEmailValido(String login) {
-        return login != null && login.toLowerCase().endsWith(DOMINIO_ETEC);
+    public static boolean emailValido(String login) {
+        if (login == null) return false;
+        String l = login.toLowerCase();
+        return l.endsWith(dominioProf) || l.endsWith(dominioALuno);
     }
 
-    // Identifica perfil pelo prefixo do login
-    // Convenção: prof.nome@etec... = professor
     public static String identificarPerfil(String login) {
         if (login == null) return null;
-        return login.toLowerCase().startsWith("prof.") ? "professor" : "aluno";
+        return login.toLowerCase().endsWith(dominioALuno) ? "aluno" : "professor";
     }
 }
