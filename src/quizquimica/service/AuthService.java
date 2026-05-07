@@ -4,7 +4,6 @@ import quizquimica.dao.AlunoDAO;
 import quizquimica.dao.ProfessorDAO;
 import quizquimica.dao.UsuarioDAO;
 import quizquimica.model.Aluno;
-import quizquimica.model.Professor;
 import quizquimica.model.Usuario;
 import quizquimica.util.CadastrarSenha;
 import quizquimica.util.GeradorCredencial;
@@ -62,7 +61,7 @@ public class AuthService {
 
         if (alunoDAO.inserir(aluno)) {
             System.out.println("[AuthService] Aluno cadastrado: " + login);
-            return login;
+            return new String[]{login};
         }
         return null;
     }

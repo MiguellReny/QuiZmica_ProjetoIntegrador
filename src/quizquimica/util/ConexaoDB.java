@@ -1,16 +1,38 @@
 package quizquimica.util;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConexaoDB {
 
-    private static final String url = "jdbc:mysql://127.0.0.1:3306/mydb?useSSL=false&serverTimezone=UTC";
-    private static final String user = "QuiZmica";
-    private static final String senha = "etecquimica10";
-
     private static Connection instancia = null;
+    private static String url;
+    private static String user;
+    private static String senha;
+
+    static {
+        try (InputStream input = ConexaoDB.class
+                .getClassLoader()
+                .getResourceAsStream("config.properties")) {
+
+            if (input == null) {
+                System.out.println("[DB] Arquivo config.properties nao encontrado!");
+            } else {
+                Properties prop = new Properties();
+                prop.load(input);
+
+                url = prop.getProperty("db.url");
+                user = prop.getProperty("db.usuario");
+                senha = prop.getProperty("db.senha");
+            }
+
+        } catch (Exception e) {
+            System.out.println("[DB] Erro ao carregar configuracoes: " + e.getMessage());
+        }
+    }
 
     private ConexaoDB() {}
 
