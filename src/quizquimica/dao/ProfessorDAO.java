@@ -7,7 +7,7 @@ import java.sql.*;
 public class ProfessorDAO {
 
     public Professor buscarPorLogin(String login) {
-        String sql = "SELECT FROM usuario WHERE login = ? AND tipo = 'professor'";
+        String sql = "SELECT * FROM usuario WHERE login = ? AND tipo = 'professor'";
         try (Connection conn = ConexaoDB.getConexao();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, login);
