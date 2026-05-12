@@ -23,18 +23,7 @@ public class AuthController {
         }
         return credenciais;
     }
-
-    // ----------------------------------------------------------------
-    // Redefinição de senha (professor redefine para aluno)
-    // ----------------------------------------------------------------
-
-    /**
-     * Redefine a senha de um aluno com uma nova senha definida pelo professor.
-     *
-     * @param loginAluno  e-mail institucional do aluno
-     * @param novaSenha   nova senha definida pelo professor
-     * @return true se redefinida com sucesso
-     */
+    
     public boolean redefinirSenhaAluno(String loginAluno, String novaSenha) {
         boolean ok = authService.redefinirSenha(loginAluno, novaSenha);
         if (ok) {

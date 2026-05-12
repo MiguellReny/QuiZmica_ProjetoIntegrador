@@ -24,9 +24,9 @@ public class UsuarioDAO {
     public String buscarTipo(String login) {
         String sql = "SELECT tipo FROM usuario WHERE login = ?";
         try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, login);
-            ResultSet rs = stmt.executeQuery();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) return rs.getString("tipo");
         } catch (SQLException e) {
             System.out.println("[UsuarioDAO] Erro ao buscar tipo: " + e.getMessage());

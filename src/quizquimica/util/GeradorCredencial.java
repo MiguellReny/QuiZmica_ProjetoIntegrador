@@ -8,7 +8,7 @@ public class GeradorCredencial {
         String nomeMinus = Normalizer.normalize(nome, Normalizer.Form.NFD)
                 .replaceAll("[^\\p{ASCII}]", "") // remove acentos
                 .toLowerCase()
-                .replaceAll("\\s+", "");// remove espaços
+                .replaceAll("\\s+", ""); // remove espaços
 
         String turmaMinus = turma.toLowerCase().replaceAll("\\s+", "");
 
