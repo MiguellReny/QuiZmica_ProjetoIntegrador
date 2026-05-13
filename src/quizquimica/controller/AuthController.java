@@ -17,7 +17,7 @@ public class AuthController {
     }
 
     public String[] cadastrarAluno(String nome, String turma, String senhaDefinida) {
-        String[] credenciais = authService.cadastrarAluno(nome, turma,senhaDefinida);
+        String[] credenciais = authService.cadastrarAluno(nome, turma, senhaDefinida);
         if (credenciais != null) {
             System.out.println("[AuthController] Aluno cadastrado: " + credenciais[0]);
         }
