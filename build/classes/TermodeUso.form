@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/images/Quizmica 2 sem fundo 1.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel2"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Quizmica"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="fb" green="f0" red="e6" type="rgb"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,44,0,0,1,-116"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="false"/>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel3">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f9" green="f3" red="ee" type="rgb"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="-20" y="-10" width="420" height="320"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Helvetica Neue" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Termo de Uso"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="160" y="10" width="-1" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f9" green="f3" red="ee" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="50" y="40" width="340" height="260"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                <Property name="useNullLayout" type="boolean" value="false"/>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="16" y="15" width="310" height="210"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTextArea" name="jTextArea1">
+                      <Properties>
+                        <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="SansSerif" size="10" style="0"/>
+                        </Property>
+                        <Property name="lineWrap" type="boolean" value="true"/>
+                        <Property name="rows" type="int" value="5"/>
+                        <Property name="text" type="java.lang.String" value="1. Aceita&#xe7;&#xe3;o dos Termos &#xa;&#xa;Ao instalar, acessar ou utilizar o jogo QuiZmica (&quot;Jogo&quot;), o usu&#xe1;rio declara ter lido, compreendido e concordado com todos os termos e condi&#xe7;&#xf5;es estabelecidos neste documento. Caso n&#xe3;o concorde com qualquer disposi&#xe7;&#xe3;o aqui prevista, o uso do Jogo deve ser imediatamente interrompido. &#xa;Para usu&#xe1;rios com idade inferior a 18 (dezoito) anos, a aceita&#xe7;&#xe3;o destes Termos dever&#xe1; ser realizada pelos pais ou respons&#xe1;veis legais, que assumem a responsabilidade pelo uso. &#xa;2. Descri&#xe7;&#xe3;o do Jogo &#xa;&#xa;O QuiZmica &#xe9; um jogo educacional desktop voltado ao ensino de qu&#xed;mica para estudantes do ensino m&#xe9;dio e professores. Seu objetivo &#xe9; proporcionar uma experi&#xea;ncia de aprendizagem interativa e l&#xfa;dica, complementando o conte&#xfa;do curricular da disciplina. &#xa;3. Cadastro e Conta de Usu&#xe1;rio &#xa;&#xa;3.1 Dados coletados no cadastro &#xa;&#xa;Para utilizar o Jogo, o usu&#xe1;rio dever&#xe1; criar uma conta fornecendo as seguintes informa&#xe7;&#xf5;es: &#xa;Nome completo &#xa;Endere&#xe7;o de e-mail v&#xe1;lido &#xa;Senha de acesso &#xa;O usu&#xe1;rio &#xe9; o &#xfa;nico respons&#xe1;vel pela veracidade das informa&#xe7;&#xf5;es fornecidas. &#xa;3.2 Perfis de usu&#xe1;rio &#xa;&#xa;O Jogo suporta dois tipos de perfil: &#xa;Aluno: estudante do ensino m&#xe9;dio que utiliza o Jogo para aprendizagem. &#xa;Professor: docente que utiliza o Jogo como ferramenta pedag&#xf3;gica. &#xa;Cada perfil possui funcionalidades e permiss&#xf5;es distintas dentro do Jogo. &#xa;3.3 Seguran&#xe7;a da conta &#xa;&#xa;O usu&#xe1;rio &#xe9; inteiramente respons&#xe1;vel pela confidencialidade de sua senha e por todas as atividades realizadas com sua conta. Em caso de uso n&#xe3;o autorizado ou suspeita de viola&#xe7;&#xe3;o, o usu&#xe1;rio deve comunicar imediatamente a equipe do Jogo. &#xa;4. Uso Permitido &#xa;&#xa;O usu&#xe1;rio se compromete a utilizar o Jogo exclusivamente para fins educacionais, respeitando as seguintes diretrizes: &#xa;N&#xe3;o utilizar o Jogo para fins comerciais sem autoriza&#xe7;&#xe3;o expressa dos desenvolvedores. &#xa;N&#xe3;o tentar burlar, descompilar, modificar ou fazer engenharia reversa do software. &#xa;N&#xe3;o compartilhar sua conta ou credenciais de acesso com terceiros. &#xa;N&#xe3;o inserir dados falsos ou se fazer passar por outra pessoa no cadastro. &#xa;N&#xe3;o utilizar o Jogo de forma que viole leis, regulamentos ou direitos de terceiros. &#xa;5. Privacidade e Prote&#xe7;&#xe3;o de Dados &#xa;&#xa;O Jogo coleta e armazena os dados de cadastro (nome, e-mail e senha) com a &#xfa;nica finalidade de identificar o usu&#xe1;rio e personalizar sua experi&#xea;ncia. Os dados s&#xe3;o tratados em conformidade com a Lei Geral de Prote&#xe7;&#xe3;o de Dados Pessoais (LGPD &#x2014; Lei n&#xba; 13.709/2018). &#xa;Os dados pessoais dos usu&#xe1;rios n&#xe3;o ser&#xe3;o compartilhados com terceiros para fins comerciais ou publicit&#xe1;rios. Informa&#xe7;&#xf5;es poder&#xe3;o ser utilizadas de forma agregada e anonimizada para melhorias no Jogo. &#xa;O usu&#xe1;rio poder&#xe1;, a qualquer momento, solicitar a exclus&#xe3;o de sua conta e de seus dados pessoais por meio dos canais de suporte do Jogo. &#xa;6. Propriedade Intelectual &#xa;&#xa;Todo o conte&#xfa;do do Jogo &#x2014; incluindo, mas n&#xe3;o se limitando a, c&#xf3;digo-fonte, gr&#xe1;ficos, textos, sons, personagens e l&#xf3;gica de jogo &#x2014; &#xe9; de propriedade exclusiva dos desenvolvedores do Qu&#xed;mica e est&#xe1; protegido pela legisla&#xe7;&#xe3;o brasileira de direitos autorais e propriedade intelectual. &#xa;&#xc9; vedada qualquer reprodu&#xe7;&#xe3;o, distribui&#xe7;&#xe3;o, modifica&#xe7;&#xe3;o ou uso comercial do conte&#xfa;do do Jogo sem autoriza&#xe7;&#xe3;o pr&#xe9;via e por escrito dos desenvolvedores. &#xa;7. Isen&#xe7;&#xe3;o de Responsabilidade &#xa;&#xa;O Jogo &#xe9; fornecido &quot;no estado em que se encontra&quot;, sem garantias de qualquer natureza. Os desenvolvedores n&#xe3;o se responsabilizam por: &#xa;Interrup&#xe7;&#xf5;es, falhas t&#xe9;cnicas ou indisponibilidade do Jogo. &#xa;Danos causados por uso inadequado ou n&#xe3;o autorizado do Jogo. &#xa;Perda de dados decorrente de problemas t&#xe9;cnicos ou de seguran&#xe7;a. &#xa;O uso do Jogo para fins exclusivamente educacionais &#xe9; de responsabilidade do usu&#xe1;rio e de seus respons&#xe1;veis legais, quando aplic&#xe1;vel. &#xa;8. Altera&#xe7;&#xf5;es nos Termos &#xa;&#xa;Os desenvolvedores reservam-se o direito de modificar estes Termos de Uso a qualquer momento. Altera&#xe7;&#xf5;es relevantes ser&#xe3;o comunicadas aos usu&#xe1;rios por meio do pr&#xf3;prio Jogo ou por e-mail cadastrado. O uso continuado do Jogo ap&#xf3;s a publica&#xe7;&#xe3;o das altera&#xe7;&#xf5;es implica aceita&#xe7;&#xe3;o dos novos termos. &#xa;9. Cancelamento e Exclus&#xe3;o de Conta &#xa;&#xa;O usu&#xe1;rio pode solicitar o cancelamento de sua conta a qualquer momento. Ap&#xf3;s a exclus&#xe3;o, todos os dados pessoais associados ser&#xe3;o removidos dos sistemas, observados os prazos legais de reten&#xe7;&#xe3;o previstos na legisla&#xe7;&#xe3;o brasileira. &#xa;Os desenvolvedores se reservam o direito de suspender ou encerrar contas que violem estes Termos de Uso, sem aviso pr&#xe9;vio. &#xa;10. Legisla&#xe7;&#xe3;o Aplic&#xe1;vel e Foro &#xa;&#xa;Estes Termos de Uso s&#xe3;o regidos pelas leis da Rep&#xfa;blica Federativa do Brasil. Fica eleito o foro da comarca de domic&#xed;lio do usu&#xe1;rio para dirimir quaisquer controv&#xe9;rsias decorrentes deste instrumento, com ren&#xfa;ncia expressa a qualquer outro, por mais privilegiado que seja. "/>
+                        <Property name="wrapStyleWord" type="boolean" value="true"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="11" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Li e aceito os Termos de Uso"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="20" y="230" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton1">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e3" green="e3" red="e3" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Helvetica Neue" size="11" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Cotinuar"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="230" y="230" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="c0" red="a9" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="120" y="20" width="170" height="10"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
