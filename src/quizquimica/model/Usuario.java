@@ -9,6 +9,8 @@ public abstract class Usuario {
     private String senha;
     private String tipo;
     private String turma;
+    private int acertos;
+    private int erros;
 
     public Usuario() {}
 
@@ -41,6 +43,20 @@ public abstract class Usuario {
 
     public String getTurma() { return turma; }
     public void setTurma(String turma) { this.turma = turma; }
+
+    //desempenho
+    public int getAcertos() {
+        return acertos;
+    }
+    public void setAcertos(int acertos) {
+        this.acertos = acertos;
+    }
+    public int getErros() {
+        return erros;
+    }
+    public void setErros(int erros) {
+        this.erros = erros;
+    }
 
     @Override
     public String toString() {
