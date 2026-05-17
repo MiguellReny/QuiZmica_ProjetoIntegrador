@@ -1,3 +1,8 @@
+package quizquimica.view;
+
+import quizquimica.controller.TermoController;
+import javax.swing.*;
+import java.awt.*;
 
 public class TermodeUso extends javax.swing.JFrame {
 
@@ -5,9 +10,18 @@ public class TermodeUso extends javax.swing.JFrame {
      * Creates new form DashboardAluno
      */
     public TermodeUso() {
-        initComponents();
-        setLocationRelativeTo(null);
-    }
+    initComponents();
+    setLocationRelativeTo(null);
+
+    // conecta controller
+    TermoController controller = new TermoController(this);
+
+    // ação do botão
+    btnContinuar.addActionListener(e -> {
+        controller.aceitarTermos();
+    });
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -19,7 +33,6 @@ public class TermodeUso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -30,9 +43,6 @@ public class TermodeUso extends javax.swing.JFrame {
         btnContinuar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
         setBackground(new java.awt.Color(230, 240, 251));
@@ -40,15 +50,19 @@ public class TermodeUso extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(238, 243, 249));
         jPanel3.setLayout(null);
+        jPanel3.setBounds(0, 0, 430, 500);
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel6.setText("Termo de Uso");
+        jLabel6.setBounds(160, 15, 120, 30);
         jPanel3.add(jLabel6);
 
         jScrollPane1.setBackground(new java.awt.Color(238, 243, 249));
+        jScrollPane1.setBounds(20, 50, 380, 330);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
+        jPanel1.setPreferredSize(new java.awt.Dimension(360, 900));
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
@@ -57,11 +71,13 @@ public class TermodeUso extends javax.swing.JFrame {
         jTextArea1.setText("1. Aceitação dos Termos \n\nAo instalar, acessar ou utilizar o jogo QuiZmica (\"Jogo\"), o usuário declara ter lido, compreendido e concordado com todos os termos e condições estabelecidos neste documento. Caso não concorde com qualquer disposição aqui prevista, o uso do Jogo deve ser imediatamente interrompido. \nPara usuários com idade inferior a 18 (dezoito) anos, a aceitação destes Termos deverá ser realizada pelos pais ou responsáveis legais, que assumem a responsabilidade pelo uso. \n2. Descrição do Jogo \n\nO QuiZmica é um jogo educacional desktop voltado ao ensino de química para estudantes do ensino médio e professores. Seu objetivo é proporcionar uma experiência de aprendizagem interativa e lúdica, complementando o conteúdo curricular da disciplina. \n3. Cadastro e Conta de Usuário \n\n3.1 Dados coletados no cadastro \n\nPara utilizar o Jogo, o usuário deverá criar uma conta fornecendo as seguintes informações: \nNome completo \nEndereço de e-mail válido \nSenha de acesso \nO usuário é o único responsável pela veracidade das informações fornecidas. \n3.2 Perfis de usuário \n\nO Jogo suporta dois tipos de perfil: \nAluno: estudante do ensino médio que utiliza o Jogo para aprendizagem. \nProfessor: docente que utiliza o Jogo como ferramenta pedagógica. \nCada perfil possui funcionalidades e permissões distintas dentro do Jogo. \n3.3 Segurança da conta \n\nO usuário é inteiramente responsável pela confidencialidade de sua senha e por todas as atividades realizadas com sua conta. Em caso de uso não autorizado ou suspeita de violação, o usuário deve comunicar imediatamente a equipe do Jogo. \n4. Uso Permitido \n\nO usuário se compromete a utilizar o Jogo exclusivamente para fins educacionais, respeitando as seguintes diretrizes: \nNão utilizar o Jogo para fins comerciais sem autorização expressa dos desenvolvedores. \nNão tentar burlar, descompilar, modificar ou fazer engenharia reversa do software. \nNão compartilhar sua conta ou credenciais de acesso com terceiros. \nNão inserir dados falsos ou se fazer passar por outra pessoa no cadastro. \nNão utilizar o Jogo de forma que viole leis, regulamentos ou direitos de terceiros. \n5. Privacidade e Proteção de Dados \n\nO Jogo coleta e armazena os dados de cadastro (nome, e-mail e senha) com a única finalidade de identificar o usuário e personalizar sua experiência. Os dados são tratados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018). \nOs dados pessoais dos usuários não serão compartilhados com terceiros para fins comerciais ou publicitários. Informações poderão ser utilizadas de forma agregada e anonimizada para melhorias no Jogo. \nO usuário poderá, a qualquer momento, solicitar a exclusão de sua conta e de seus dados pessoais por meio dos canais de suporte do Jogo. \n6. Propriedade Intelectual \n\nTodo o conteúdo do Jogo — incluindo, mas não se limitando a, código-fonte, gráficos, textos, sons, personagens e lógica de jogo — é de propriedade exclusiva dos desenvolvedores do Química e está protegido pela legislação brasileira de direitos autorais e propriedade intelectual. \nÉ vedada qualquer reprodução, distribuição, modificação ou uso comercial do conteúdo do Jogo sem autorização prévia e por escrito dos desenvolvedores. \n7. Isenção de Responsabilidade \n\nO Jogo é fornecido \"no estado em que se encontra\", sem garantias de qualquer natureza. Os desenvolvedores não se responsabilizam por: \nInterrupções, falhas técnicas ou indisponibilidade do Jogo. \nDanos causados por uso inadequado ou não autorizado do Jogo. \nPerda de dados decorrente de problemas técnicos ou de segurança. \nO uso do Jogo para fins exclusivamente educacionais é de responsabilidade do usuário e de seus responsáveis legais, quando aplicável. \n8. Alterações nos Termos \n\nOs desenvolvedores reservam-se o direito de modificar estes Termos de Uso a qualquer momento. Alterações relevantes serão comunicadas aos usuários por meio do próprio Jogo ou por e-mail cadastrado. O uso continuado do Jogo após a publicação das alterações implica aceitação dos novos termos. \n9. Cancelamento e Exclusão de Conta \n\nO usuário pode solicitar o cancelamento de sua conta a qualquer momento. Após a exclusão, todos os dados pessoais associados serão removidos dos sistemas, observados os prazos legais de retenção previstos na legislação brasileira. \nOs desenvolvedores se reservam o direito de suspender ou encerrar contas que violem estes Termos de Uso, sem aviso prévio. \n10. Legislação Aplicável e Foro \n\nEstes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca de domicílio do usuário para dirimir quaisquer controvérsias decorrentes deste instrumento, com renúncia expressa a qualquer outro, por mais privilegiado que seja. ");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea1);
+        jScrollPane2.setBounds(10, 10, 330, 700);
 
         jPanel1.add(jScrollPane2);
 
         chkTermos.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         chkTermos.setText("Li e aceito os Termos de Uso");
+        chkTermos.setBounds(15, 730, 250, 30);
         chkTermos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkTermosActionPerformed(evt);
@@ -71,12 +87,9 @@ public class TermodeUso extends javax.swing.JFrame {
 
         btnContinuar.setBackground(new java.awt.Color(227, 227, 227));
         btnContinuar.setFont(new java.awt.Font("Helvetica Neue", 0, 11)); // NOI18N
-        btnContinuar.setText("Cotinuar");
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
+        btnContinuar.setText("Continuar");
+        btnContinuar.setBounds(120, 780, 120, 35);
+
         jPanel1.add(btnContinuar);
 
         jScrollPane1.setViewportView(jPanel1);
@@ -84,18 +97,22 @@ public class TermodeUso extends javax.swing.JFrame {
         jPanel3.add(jScrollPane1);
 
         jPanel2.setBackground(new java.awt.Color(169, 192, 225));
-        jPanel3.add(jPanel2);
+        jPanel2.setBounds(0, 0, 430, 500);
 
         getContentPane().add(jPanel3);
 
-        pack();
+        setSize(430, 500);
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkTermosActionPerformed(java.awt.event.ActionEvent evt) {
-    }//GEN-LAST:event_chkTermosActionPerformed
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {
-    }//GEN-LAST:event_btnContinuarActionPerformed
+    }
+    public JCheckBox getChkTermos() {
+    return chkTermos;
+    }
+    public JButton getBtnContinuar() {
+    return btnContinuar;
+    }
 
     /**
      * @param args the command line arguments
@@ -109,18 +126,18 @@ public class TermodeUso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TermodeUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TermodeUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TermodeUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TermodeUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardAluno().setVisible(true);
+                new TermodeUso().setVisible(true);
             }
         });
     }
@@ -128,7 +145,6 @@ public class TermodeUso extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JCheckBox chkTermos;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -137,4 +153,5 @@ public class TermodeUso extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
 }
