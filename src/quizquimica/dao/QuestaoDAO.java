@@ -18,10 +18,15 @@ public class QuestaoDAO {
             ps.setString(1, dificuldade);
             ps.setInt(2, quantidade);
             ResultSet rs = ps.executeQuery();
+            List<Integer> ids = new ArrayList<>();
             while (rs.next()) {
                 Questao questao = mapearQuestao(rs);
-                questao.setAlternativas(buscarAlternativas(questao.getIdQuestao()));
+                ids.add(questao.getIdQuestao());
                 questoes.add(questao);
+            }
+            rs.close();
+            for (int i = 0; i < questoes.size(); i++) {
+                questoes.get(i).setAlternativas(buscarAlternativas(ids.get(i)));
             }
         } catch (SQLException e) {
             System.out.println("[QuestaoDAO] Erro ao listar questoes por dificuldade: " + e.getMessage());
@@ -37,6 +42,7 @@ public class QuestaoDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Questao questao = mapearQuestao(rs);
+                rs.close();
                 questao.setAlternativas(buscarAlternativas(questao.getIdQuestao()));
                 return questao;
             }

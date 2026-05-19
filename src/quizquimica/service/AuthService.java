@@ -17,20 +17,17 @@ public class AuthService {
 
     public Usuario login(String login, String senha) {
 
-        // 1. Valida domínio do login
         if (!ValidadorEmail.emailValido(login)) {
             System.out.println("[AuthService] Login com domínio inválido: " + login);
             return null;
         }
 
-        // 2. Gera hash e confere com o banco
         String senhaHash = CadastrarSenha.hashSenha(senha);
         if (!usuarioDAO.autenticar(login, senhaHash)) {
             System.out.println("[AuthService] Credenciais inválidas para: " + login);
             return null;
         }
-
-        // 3. Identifica o tipo e retorna o objeto correto
+ 
         String tipo = usuarioDAO.buscarTipo(login);
         if ("professor".equals(tipo)) {
             return professorDAO.buscarPorLogin(login);
@@ -66,7 +63,6 @@ public class AuthService {
         return null;
     }
 
-    
     public boolean redefinirSenha(String loginAluno, String novaSenha) {
         if (!CadastrarSenha.senhaValida(novaSenha)) {
             System.out.println("[AuthService] Senha inválida — mínimo 6 caracteres.");
