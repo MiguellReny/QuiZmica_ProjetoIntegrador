@@ -10,20 +10,38 @@ import java.util.List;
 
 public class PartidaDAO {
 
-    public boolean salvar(Partida partida) {
+    public int salvar(Partida partida) {
         String sql = "INSERT INTO partida (pontuacao, data, nivel, dicasUsadas, usuario_idUsuario) VALUES (?, ?, ?, ?, ?)";
         Connection conn = ConexaoDB.getConexao();
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, partida.getPontuacao());
             ps.setDate(2, Date.valueOf(partida.getData()));
             ps.setString(3, partida.getNivel());
             ps.setInt(4, partida.getDicasUsadas());
             ps.setInt(5, partida.getIdUsuario());
             ps.executeUpdate();
-            return true;
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println("[PartidaDAO] Erro ao salvar partida: " + e.getMessage());
+        }
+        return -1;
+    }
+
+    public boolean atualizar(Partida partida) {
+        String sql = "UPDATE partida SET pontuacao = ?, dicasUsadas = ? WHERE idPartida = ?";
+        Connection conn = ConexaoDB.getConexao();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, partida.getPontuacao());
+            ps.setInt(2, partida.getDicasUsadas());
+            ps.setInt(3, partida.getIdPartida());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("[PartidaDAO] Erro ao atualizar partida: " + e.getMessage());
             return false;
         }
     }

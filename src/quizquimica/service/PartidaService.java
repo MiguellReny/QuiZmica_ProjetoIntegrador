@@ -2,6 +2,7 @@ package quizquimica.service;
 
 import quizquimica.dao.PartidaDAO;
 import quizquimica.dao.QuestaoDAO;
+import quizquimica.dao.RespostaDAO;
 import quizquimica.model.Alternativa;
 import quizquimica.model.Partida;
 import quizquimica.model.Questao;
@@ -16,6 +17,7 @@ public class PartidaService {
 
     private final QuestaoDAO questaoDAO = new QuestaoDAO();
     private final PartidaDAO partidaDAO = new PartidaDAO();
+    private final RespostaDAO respostaDAO = new RespostaDAO();
 
     private List<Questao> questoesDaPartida;
     private int questaoAtual;
@@ -23,15 +25,25 @@ public class PartidaService {
     private int dicasUsadas;
     private String nivel;
     private int idUsuario;
+    private int idPartidaAtual;
 
     public boolean iniciarPartida(int idUsuario) {
-    this.idUsuario = idUsuario;
-    this.nivel = partidaDAO.buscarNivelAtual(idUsuario);
-    this.pontuacao = 0;
-    this.dicasUsadas = 0;
-    this.questaoAtual = 0;
-    this.questoesDaPartida = montarQuestoes(nivel);
-    return true;
+        this.idUsuario = idUsuario;
+        this.nivel = partidaDAO.buscarNivelAtual(idUsuario);
+        this.pontuacao = 0;
+        this.dicasUsadas = 0;
+        this.questaoAtual = 0;
+        this.questoesDaPartida = montarQuestoes(nivel);
+
+        Partida partida = new Partida();
+        partida.setIdUsuario(idUsuario);
+        partida.setNivel(nivel);
+        partida.setPontuacao(0);
+        partida.setData(LocalDate.now());
+        partida.setDicasUsadas(0);
+        this.idPartidaAtual = partidaDAO.salvar(partida);
+
+        return idPartidaAtual != -1;
     }
 
     private List<Questao> montarQuestoes(String nivel) {
@@ -86,6 +98,8 @@ public class PartidaService {
             dicasUsadas++;
         }
 
+        respostaDAO.salvar(idPartidaAtual, questao.getIdQuestao(), idAlternativa);
+
         questaoAtual++;
         return acertou;
     }
@@ -117,12 +131,15 @@ public class PartidaService {
 
     public Partida finalizarPartida() {
         Partida partida = new Partida();
+        partida.setIdPartida(idPartidaAtual);
         partida.setIdUsuario(idUsuario);
         partida.setNivel(nivel);
         partida.setPontuacao(pontuacao);
         partida.setData(LocalDate.now());
         partida.setDicasUsadas(dicasUsadas);
-        partidaDAO.salvar(partida);
+
+        partidaDAO.atualizar(partida);
+
         return partida;
     }
 
