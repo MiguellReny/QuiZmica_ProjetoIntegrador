@@ -2,8 +2,8 @@ package quizquimica.util;
 
 public class ValidadorEmail {
 
-    private static final String dominioProf = "@cps";
-    private static final String dominioALuno = "@aluno.cps";
+    private static final String dominioProf = "@cps.sp.gov.br";
+    private static final String dominioALuno = "@aluno.cps.sp.gov.br";
 
     public static boolean emailValido(String login) {
         if (login == null) return false;
