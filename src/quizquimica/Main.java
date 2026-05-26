@@ -8,7 +8,7 @@ public class Main {
 
         AuthController auth = new AuthController();
 
-        Usuario prof = auth.realizarLogin("mariadosocorro@cps.sp.gov.br", "482951");
+        Usuario prof = auth.realizarLogin("mariadosocorro@cps.sp.gov.br", "******");
         System.out.println(prof != null ? "Professora OK: " + prof.getNome() + " (" + prof.getTipo() + ")" : "Professora FALHOU");
 
         Usuario aluno = auth.realizarLogin("alunoteste3a@aluno.cps.sp.gov.br", "xK9#mP2q");
