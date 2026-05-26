@@ -3,6 +3,7 @@ package quizquimica.dao;
 import quizquimica.model.Alternativa;
 import quizquimica.model.Questao;
 import quizquimica.util.ConexaoDB;
+import quizquimica.util.ConversorImagemUrl;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -53,13 +54,14 @@ public class QuestaoDAO {
     }
 
     public boolean inserir(Questao questao) {
-        String sql = "INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica, tipo) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = ConexaoDB.getConexao();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, questao.getEnunciado());
             ps.setString(2, questao.getImagemUrl());
             ps.setString(3, questao.getDificuldade());
             ps.setString(4, questao.getDica());
+            ps.setString(5, questao.getTipo());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("[QuestaoDAO] Erro ao inserir questao: " + e.getMessage());
@@ -68,14 +70,15 @@ public class QuestaoDAO {
     }
 
     public boolean atualizar(Questao questao) {
-        String sql = "UPDATE perguntas SET enunciado = ?, perguntaImagem = ?, dificuldade = ?, dica = ? WHERE idPerguntas = ?";
+        String sql = "UPDATE perguntas SET enunciado = ?, perguntaImagem = ?, dificuldade = ?, dica = ?, tipo = ? WHERE idPerguntas = ?";
         try (Connection conn = ConexaoDB.getConexao();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, questao.getEnunciado());
             ps.setString(2, questao.getImagemUrl());
             ps.setString(3, questao.getDificuldade());
             ps.setString(4, questao.getDica());
-            ps.setInt(5, questao.getIdQuestao());
+            ps.setString(5, questao.getTipo());
+            ps.setInt(6, questao.getIdQuestao());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("[QuestaoDAO] Erro ao atualizar questao: " + e.getMessage());
@@ -108,6 +111,7 @@ public class QuestaoDAO {
                 alternativa.setAlternativa(rs.getString("alternativa"));
                 alternativa.setAlternativaCorreta(rs.getBoolean("alternativaCorreta"));
                 alternativa.setIdQuestao(rs.getInt("perguntas_idPerguntas"));
+                alternativa.setAlternativaImagem(ConversorImagemUrl.converter(rs.getString("alternativaImagem")));
                 alternativas.add(alternativa);
             }
         } catch (SQLException e) {
@@ -123,6 +127,7 @@ public class QuestaoDAO {
         questao.setImagemUrl(rs.getString("perguntaImagem"));
         questao.setDificuldade(rs.getString("dificuldade"));
         questao.setDica(rs.getString("dica"));
+        questao.setTipo(rs.getString("tipo"));
         return questao;
     }
 }

@@ -1,6 +1,7 @@
 package quizquimica.service;
 
 import quizquimica.dao.QuestaoDAO;
+import quizquimica.util.ConversorImagemUrl;
 import quizquimica.model.Questao;
 import quizquimica.util.Constantes;
 
@@ -40,10 +41,17 @@ public class QuestaoService {
         return false;
         }
 
+        if (!questao.getTipo().equals("textual") && !questao.getTipo().equals("imagem")) {
+            System.out.println("[QuestaoService] Tipo inválido: " + questao.getTipo());
+            return false;
+        }
+
         if(questao.getDica().isBlank()){
             System.out.println("[QuestaoService] Dica não pode ficar vazia");
             return false;
         }
+
+        questao.setImagemUrl(ConversorImagemUrl.converter(questao.getImagemUrl()));
 
         return questaoDAO.inserir(questao);
 
@@ -80,10 +88,17 @@ public class QuestaoService {
         return false;
         }
 
+        if (!questao.getTipo().equals("textual") && !questao.getTipo().equals("imagem")) {
+            System.out.println("[QuestaoService] Tipo inválido: " + questao.getTipo());
+            return false;
+        }
+
         if(questao.getDica().isBlank()){
             System.out.println("[QuestaoService] Dica não pode ficar vazia");
             return false;
         }
+
+        questao.setImagemUrl(ConversorImagemUrl.converter(questao.getImagemUrl()));
 
         return questaoDAO.atualizar(questao);
     }

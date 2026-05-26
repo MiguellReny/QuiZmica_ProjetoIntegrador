@@ -28,6 +28,7 @@ CREATE TABLE `alternativa` (
   `idAlternativa` int NOT NULL,
   `alternativaCorreta` tinyint(1) NOT NULL,
   `alternativa` varchar(60) NOT NULL,
+  `alternativaImagem` varchar(255) DEFAULT NULL,
   `perguntas_idPerguntas` int NOT NULL,
   PRIMARY KEY (`idAlternativa`,`perguntas_idPerguntas`),
   KEY `fk_Alternativa_Perguntas1_idx` (`perguntas_idPerguntas`),
@@ -53,6 +54,7 @@ CREATE TABLE `perguntas` (
   `perguntaImagem` varchar(255) DEFAULT NULL,
   `dificuldade` enum('FACIL','MEDIO','DIFICIL') NOT NULL,
   `dica` varchar(255) NOT NULL,
+  `tipo` enum('textual','imagem') NOT NULL DEFAULT 'textual',
   PRIMARY KEY (`idPerguntas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -150,27 +152,27 @@ UNLOCK TABLES;
 -- Dump completed on 2026-04-29 20:01:50
 USE quizmica;
 
-INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica) VALUES
-('O que é uma bureta?', NULL, 'FACIL', 'É usada para medir volumes variáveis de líquidos.'),
-('O que é um béquer?', NULL, 'FACIL', 'É um recipiente cilíndrico usado para conter líquidos.'),
-('Para que serve um funil de separação?', NULL, 'FACIL', 'É usado para separar líquidos imiscíveis.'),
-('O que é um erlenmeyer?', NULL, 'FACIL', 'É um frasco cônico usado em titulações.'),
-('Para que serve uma pipeta?', NULL, 'FACIL', 'É usada para transferir volumes precisos de líquidos.'),
-('O que é um bastão de vidro?', NULL, 'FACIL', 'É usado para agitar soluções.'),
-('Para que serve um vidro de relógio?', NULL, 'FACIL', 'É usado para cobrir béqueres ou pesar substâncias.'),
-('O que é uma proveta?', NULL, 'FACIL', 'É usada para medir volumes aproximados de líquidos.'),
-('Para que serve um cadinho?', NULL, 'FACIL', 'É usado para aquecer substâncias em altas temperaturas.'),
-('O que é um funil de vidro simples?', NULL, 'FACIL', 'É usado para transferir líquidos ou filtrar.'),
-('Para que serve o tripé de laboratório?', NULL, 'FACIL', 'É usado para apoiar vidrarias durante o aquecimento.'),
-('O que é uma tela de amianto?', NULL, 'FACIL', 'É usada para distribuir o calor uniformemente.'),
-('Para que serve o suporte universal?', NULL, 'FACIL', 'É usado para fixar e suportar equipamentos de laboratório.'),
-('O que é um balão volumétrico?', NULL, 'FACIL', 'É usado para preparar soluções de concentração exata.'),
-('O que é uma centrífuga?', NULL, 'MEDIO', 'É usada para separar substâncias por diferença de densidade.'),
-('Para que serve um condensador?', NULL, 'MEDIO', 'É usado para resfriar vapores e convertê-los em líquido.'),
-('O que é um dessecador?', NULL, 'MEDIO', 'É usado para armazenar substâncias sem umidade.'),
-('O que é uma mufla?', NULL, 'MEDIO', 'É um forno usado para calcinar substâncias.'),
-('O que é um espectrofotômetro?', NULL, 'DIFICIL', 'É usado para medir a absorção de luz por uma solução.'),
-('O que é uma coluna cromatográfica?', NULL, 'DIFICIL', 'É usada para separar componentes de uma mistura.');
+INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica, tipo) VALUES
+('O que é uma bureta?', NULL, 'FACIL', 'É usada para medir volumes variáveis de líquidos.', 'textual'),
+('O que é um béquer?', NULL, 'FACIL', 'É um recipiente cilíndrico usado para conter líquidos.', 'textual'),
+('Para que serve um funil de separação?', NULL, 'FACIL', 'É usado para separar líquidos imiscíveis.', 'textual'),
+('O que é um erlenmeyer?', NULL, 'FACIL', 'É um frasco cônico usado em titulações.', 'textual'),
+('Para que serve uma pipeta?', NULL, 'FACIL', 'É usada para transferir volumes precisos de líquidos.', 'textual'),
+('O que é um bastão de vidro?', NULL, 'FACIL', 'É usado para agitar soluções.', 'textual'),
+('Para que serve um vidro de relógio?', NULL, 'FACIL', 'É usado para cobrir béqueres ou pesar substâncias.', 'textual'),
+('O que é uma proveta?', NULL, 'FACIL', 'É usada para medir volumes aproximados de líquidos.', 'textual'),
+('Para que serve um cadinho?', NULL, 'FACIL', 'É usado para aquecer substâncias em altas temperaturas.','textual'),
+('O que é um funil de vidro simples?', NULL, 'FACIL', 'É usado para transferir líquidos ou filtrar.', 'textual'),
+('Para que serve o tripé de laboratório?', NULL, 'FACIL', 'É usado para apoiar vidrarias durante o aquecimento.','textual'),
+('O que é uma tela de amianto?', NULL, 'FACIL', 'É usada para distribuir o calor uniformemente.', 'textual'),
+('Para que serve o suporte universal?', NULL, 'FACIL', 'É usado para fixar e suportar equipamentos de laboratório.','textual'),
+('O que é um balão volumétrico?', NULL, 'FACIL', 'É usado para preparar soluções de concentração exata.', 'textual'),
+('O que é uma centrífuga?', NULL, 'MEDIO', 'É usada para separar substâncias por diferença de densidade.', 'textual'),
+('Para que serve um condensador?', NULL, 'MEDIO', 'É usado para resfriar vapores e convertê-los em líquido.', 'textual'),
+('O que é um dessecador?', NULL, 'MEDIO', 'É usado para armazenar substâncias sem umidade.','textual'),
+('O que é uma mufla?', NULL, 'MEDIO', 'É um forno usado para calcinar substâncias.','textual'),
+('O que é um espectrofotômetro?', NULL, 'DIFICIL', 'É usado para medir a absorção de luz por uma solução.', 'textual'),
+('O que é uma coluna cromatográfica?', NULL, 'DIFICIL', 'É usada para separar componentes de uma mistura.', 'textual');
 
 INSERT INTO alternativa (idAlternativa, alternativaCorreta, alternativa, perguntas_idPerguntas) VALUES
 (1, 1, 'Instrumento para medir volumes variáveis', 1),
@@ -256,9 +258,13 @@ INSERT INTO alternativa (idAlternativa, alternativaCorreta, alternativa, pergunt
 
 INSERT INTO usuario (nome, login, senha, tipo) VALUES (
   'Maria do Socorro',
-  'mariadosocorro@cps',
+  'mariadosocorro@cps.sp.gov.br',
   'b68939004065e85da9ce2976cf4839c2a75dd7a8d706351a8becc301b743fd35',
   'professor'
 );
+
+CREATE USER IF NOT EXISTS 'QuiZmica'@'%' IDENTIFIED BY 'etecquimica10';
+GRANT ALL PRIVILEGES ON quizmica.* TO 'QuiZmica'@'%';
+FLUSH PRIVILEGES;
 
 SHOW TABLES;

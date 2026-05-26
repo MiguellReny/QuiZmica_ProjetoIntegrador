@@ -10,15 +10,17 @@ public class Questao {
     private String dificuldade;
     private String dica;
     private List<Alternativa> alternativas;
+    private String tipo;
 
     public Questao() {}
 
-    public Questao(int idQuestao, String enunciado, String imagemUrl, String dificuldade, String dica) {
+    public Questao(int idQuestao, String enunciado, String imagemUrl, String dificuldade, String dica, String tipo) {
         this.idQuestao = idQuestao;
         this.enunciado = enunciado;
         this.imagemUrl = imagemUrl;
         this.dificuldade = dificuldade;
         this.dica = dica;
+        this.tipo = tipo;
     }
 
     public int getIdQuestao() {
@@ -67,6 +69,14 @@ public class Questao {
 
     public void setAlternativas(List<Alternativa> alternativas) {
         this.alternativas = alternativas;
+    }
+
+    public String getTipo(){
+        return tipo;
+    }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
     }
 
     @Override

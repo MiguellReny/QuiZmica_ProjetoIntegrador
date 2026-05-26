@@ -6,14 +6,24 @@ public class Alternativa {
     private String alternativa;
     private boolean alternativaCorreta;
     private int idQuestao;
+    private String alternativaImagem;
 
     public Alternativa() {}
 
-    public Alternativa(int idAlternativa, String alternativa, boolean alternativaCorreta, int idQuestao) {
+    public Alternativa(int idAlternativa, String alternativa, boolean alternativaCorreta, int idQuestao, String alternativaImagem) {
         this.idAlternativa = idAlternativa;
         this.alternativa = alternativa;
         this.alternativaCorreta = alternativaCorreta;
         this.idQuestao = idQuestao;
+        this.alternativaImagem = alternativaImagem;
+    }
+
+    public String getAlternativaImagem(){
+          return alternativaImagem;
+    }
+
+    public void setAlternativaImagem(String alternativaImagem){
+          this.alternativaImagem = alternativaImagem;
     }
 
     public int getIdAlternativa() {
