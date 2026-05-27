@@ -35,6 +35,10 @@ public class ProfessorController {
         return desempenhoService.buscarQuestoesMaisErradasTurma();
     }
 
+    public double calcularMedia(int idUsuario) {
+        return desempenhoService.calcularMedia(idUsuario);
+    }
+
 }
 
 

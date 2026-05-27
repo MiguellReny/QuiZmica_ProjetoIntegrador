@@ -32,4 +32,8 @@ public class DesempenhoService {
     public Map<Integer, Integer> buscarQuestoesMaisErradasTurma() {
         return respostaDAO.questoesMaisErradas();
     }
+
+    public double calcularMedia(int idUsuario) {
+        return partidaDAO.calcularMedia(idUsuario);
+    }
 }

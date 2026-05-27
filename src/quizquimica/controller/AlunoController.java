@@ -19,4 +19,9 @@ public class AlunoController {
     public List<Questao> listarPorDificuldade(String dificuldade){
         return questaoService.listarPorDificuldade(dificuldade);
     }
+
+    public double calcularMedia(int idUsuario) {
+        return partidaDAO.calcularMedia(idUsuario);
+    }
+    
 }

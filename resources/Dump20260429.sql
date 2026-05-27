@@ -1,8 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `quizmica` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `quizmica`;
 -- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: quizmica
+-- Host: quizmica-brenorossinimaua-7324.d.aivencloud.com    Database: defaultdb
 -- ------------------------------------------------------
 -- Server version	8.0.45
 
@@ -18,10 +16,14 @@ USE `quizmica`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `alternativa`
+-- Table structure 
 --
-
+DROP TABLE IF EXISTS `pergunta_partida`;
+DROP TABLE IF EXISTS `partida`;
 DROP TABLE IF EXISTS `alternativa`;
+DROP TABLE IF EXISTS `perguntas`;
+DROP TABLE IF EXISTS `usuario`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alternativa` (
@@ -41,11 +43,6 @@ LOCK TABLES `alternativa` WRITE;
 /*!40000 ALTER TABLE `alternativa` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `perguntas`
---
-
-DROP TABLE IF EXISTS `perguntas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `perguntas` (
@@ -64,11 +61,6 @@ LOCK TABLES `perguntas` WRITE;
 /*!40000 ALTER TABLE `perguntas` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `usuario`
---
-
-DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
@@ -88,11 +80,6 @@ LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `partida`
---
-
-DROP TABLE IF EXISTS `partida`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `partida` (
@@ -113,11 +100,6 @@ LOCK TABLES `partida` WRITE;
 /*!40000 ALTER TABLE `partida` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `pergunta_partida`
---
-
-DROP TABLE IF EXISTS `pergunta_partida`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pergunta_partida` (
@@ -130,10 +112,8 @@ CREATE TABLE `pergunta_partida` (
   KEY `fk_pergunta_partida_Perguntas1_idx` (`idPerguntas`),
   KEY `fk_pergunta_partida_Alternativa1_idx` (`idAlternativa`),
   CONSTRAINT `fk_pergunta_partida_Partida1` FOREIGN KEY (`idPartida`) REFERENCES `partida` (`idPartida`),
-  CONSTRAINT `fk_pergunta_partida_Perguntas1` FOREIGN KEY (`idPerguntas`) REFERENCES `perguntas` (`idPerguntas`),
-  CONSTRAINT `fk_pergunta_partida_Alternativa1` FOREIGN KEY (`idAlternativa`) REFERENCES `alternativa` (`idAlternativa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  CONSTRAINT `fk_pergunta_partida_Perguntas1` FOREIGN KEY (`idPerguntas`) REFERENCES `perguntas` (`idPerguntas`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;/*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `pergunta_partida` WRITE;
 /*!40000 ALTER TABLE `pergunta_partida` DISABLE KEYS */;
@@ -150,7 +130,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-04-29 20:01:50
-USE quizmica;
 
 INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica, tipo) VALUES
 ('O que é uma bureta?', NULL, 'FACIL', 'É usada para medir volumes variáveis de líquidos.', 'textual'),
@@ -262,9 +241,5 @@ INSERT INTO usuario (nome, login, senha, tipo) VALUES (
   'b68939004065e85da9ce2976cf4839c2a75dd7a8d706351a8becc301b743fd35',
   'professor'
 );
-
-CREATE USER IF NOT EXISTS 'QuiZmica'@'%' IDENTIFIED BY 'etecquimica10';
-GRANT ALL PRIVILEGES ON quizmica.* TO 'QuiZmica'@'%';
-FLUSH PRIVILEGES;
 
 SHOW TABLES;

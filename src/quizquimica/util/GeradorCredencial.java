@@ -12,6 +12,6 @@ public class GeradorCredencial {
 
         String turmaMinus = turma.toLowerCase().replaceAll("\\s+", "");
 
-        return nomeMinus + turmaMinus + "@aluno.cps";
+        return nomeMinus + turmaMinus + "@aluno.cps.sp.gov.br";
     }
 }
