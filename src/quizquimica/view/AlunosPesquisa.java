@@ -1,4 +1,4 @@
-package view;
+package quizquimica.view;
 
 
 public class AlunosPesquisa extends javax.swing.JFrame {
@@ -52,102 +52,117 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
         setBackground(new java.awt.Color(230, 240, 251));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 230px.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 210, 80));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
+        getContentPane().add(jLabel9, new java.awt.Rectangle(-40, 0, 210, 80));
+        getContentPane().add(jPanel1, new java.awt.Rectangle(130, -30, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(179, 40, 36));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setLayout(null);
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Alunos");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 150, -1));
+        jLabel10.setBounds(170, 10, 150, 20);
+        jPanel2.add(jLabel10);
 
         jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
         jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("☰");
         jToggleButton1.setToolTipText("");
         jToggleButton1.setBorder(null);
-        jPanel2.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 40, -1));
+        jLabel10.setBounds(340, 10, 40, -1);
+        jPanel2.add(jToggleButton1);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 40));
+        getContentPane().add(jPanel2, new java.awt.Rectangle(0, 0, 400, 40));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Todos os alunos");
         jLabel4.setToolTipText("");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jPanel4.setBounds(20, 60, -1, -1);
+        getContentPane().add(jLabel4);
 
         jPanel4.setBackground(new java.awt.Color(179, 40, 36));
         jPanel4.setPreferredSize(new java.awt.Dimension(10, 3));
         jPanel4.setRequestFocusEnabled(false);
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 80, 2));
+        jPanel4.setBounds(10, 70, 80, 2);
+        getContentPane().add(jPanel4);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel10.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Resumo da Turma");
-        jPanel10.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel10.setBounds(10, 10, -1, -1);
+        jPanel10.add(jLabel1);
 
         labelTotal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelTotal.setForeground(new java.awt.Color(179, 40, 36));
         labelTotal.setText("32");
-        jPanel10.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 20, 20));
+        labelTotal.setBounds(20, 40, 20, 20);
+        jPanel10.add(labelTotal);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel6.setText("Total de Alunos");
-        jPanel10.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        jLabel6.setBounds(10, 30, -1, -1);
+        jPanel10.add(jLabel6);
 
         labelQuiz.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelQuiz.setForeground(new java.awt.Color(179, 40, 36));
         labelQuiz.setText("32");
-        jPanel10.add(labelQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 20, 20));
+        labelQuiz.setBounds(20, 70, 20, 20);
+        jPanel10.add(labelQuiz);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel8.setText("Quizzes Concluídos");
-        jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jLabel8.setBounds(10, 60, -1, -1);
+        jPanel10.add(jLabel8);
 
         labelMedia.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelMedia.setForeground(new java.awt.Color(179, 40, 36));
         labelMedia.setText("32");
-        jPanel10.add(labelMedia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 20, 20));
+        labelMedia.setBounds(20, 100, 20, 20);
+        jPanel10.add(labelMedia);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel12.setText("Média Geral da Turma");
-        jPanel10.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        jLabel12.setBounds(10, 90, -1, -1);
+        jPanel10.add(jLabel12);
 
         labelMelhor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelMelhor.setForeground(new java.awt.Color(179, 40, 36));
         labelMelhor.setText("32");
-        jPanel10.add(labelMelhor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 20, 20));
+        labelMelhor.setBounds(20, 130, 20, 20);
+        jPanel10.add(labelMelhor);
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel14.setText("Melhor Média");
-        jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jLabel14.setBounds(10, 120, -1, -1);
+        jPanel10.add(jLabel14);
 
         jButton1.setBackground(new java.awt.Color(179, 40, 36));
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Ver Relatórios");
-        jPanel10.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jButton1.setBounds(20, 150, -1, -1);
+        jPanel10.add(jButton1);
 
-        getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 140, 180));
+        getContentPane().add(jPanel10, new java.awt.Rectangle(230, 100, 140, 180));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/etec.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 40, 30));
+        getContentPane().add(jLabel5, new java.awt.Rectangle(10, 270, 40, 30));
 
         jTextField1.setBackground(new java.awt.Color(245, 247, 250));
         jTextField1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         jTextField1.setText("Buscar aluno...");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 180, 15));
+        jTextField1.setBounds(10, 80, 180, 15);
+        getContentPane().add(jTextField1);
 
         jPanel6.setBackground(new java.awt.Color(238, 243, 249));
         jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.setLayout(null);
 
         tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,9 +182,9 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaAlunos);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 200, 160));
+        jPanel6.add(jScrollPane1, new java.awt.Rectangle(40, 130, 200, 160));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, 430, 330));
+        getContentPane().add(jPanel6, new java.awt.Rectangle(-30, -20, 430, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

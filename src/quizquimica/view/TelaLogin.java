@@ -133,8 +133,8 @@ jButton1.setBounds(55, 125, 70, 25);
                 authService.login(loginUsuario, senhaUsuario);
         if (usuario != null) {
             if (usuario instanceof Professor) {
-                DashboardProfessor professor =
-                        new DashboardProfessor();
+                TelaProfessor professor =
+                        new TelaProfessor();
                 professor.setVisible(true);
             } else {
                 DashboardAluno aluno =
