@@ -21,14 +21,12 @@ public class Quiz extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -41,9 +39,10 @@ public class Quiz extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -51,43 +50,41 @@ public class Quiz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
         setBackground(new java.awt.Color(230, 240, 251));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
-
-        jPanel2.setBackground(new java.awt.Color(179, 40, 36));
-
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("QUESTÃO 1");
-        jPanel2.add(jLabel1);
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 20));
 
         jPanel6.setBackground(new java.awt.Color(238, 243, 249));
         jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
+        jPanel6.setSize(new java.awt.Dimension(1366, 768));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/QuizmicaLogoQuiz.png"))); // NOI18N
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 210, 80));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicaSimples.png"))); // NOI18N
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 620, 100));
 
         jPanel3.setBackground(new java.awt.Color(179, 40, 36));
         jPanel3.setPreferredSize(new java.awt.Dimension(2, 100));
-        jPanel6.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 62, 400, 2));
+        jPanel6.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1366, 5));
+
+        jPanel2.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("QUESTÃO 1");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        jPanel6.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 240, 50));
 
         jPanel12.setBackground(new java.awt.Color(214, 226, 240));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jLabel3.setText("Qual material é utilizado para medir volumes com alta precisão?");
-        jPanel12.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel12.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 360, 1));
+        jPanel12.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1250, 2));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizImagens/BalaoVolumetrico.jpeg"))); // NOI18N
-        jPanel12.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 120));
+        jPanel12.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 480, 410));
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton1.setText("Vidro de relógio");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,12 +92,12 @@ public class Quiz extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, 20));
+        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 490, 70));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Alternativa D.png"))); // NOI18N
-        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 60, 40));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa D.png"))); // NOI18N
+        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 60, 40));
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton2.setText("Erlenmeyer");
         jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +105,9 @@ public class Quiz extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 53, 140, 20));
+        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, 490, 70));
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton3.setText("Bêquer");
         jButton3.setToolTipText("");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -118,9 +115,9 @@ public class Quiz extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 140, 20));
+        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 490, 70));
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton4.setText("Balão volumétrico");
         jButton4.setToolTipText("");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -128,45 +125,47 @@ public class Quiz extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 140, 20));
+        jPanel12.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 200, 490, 70));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Alternativa A.png"))); // NOI18N
-        jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 60, 40));
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa A.png"))); // NOI18N
+        jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 60, 40));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Alternativa B.png"))); // NOI18N
-        jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 60, 40));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa B.png"))); // NOI18N
+        jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 60, 40));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Alternativa C.png"))); // NOI18N
-        jPanel12.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 60, 40));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa C.png"))); // NOI18N
+        jPanel12.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, 60, 40));
 
         jButton5.setBackground(new java.awt.Color(241, 193, 192));
-        jButton5.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(102, 102, 102));
         jButton5.setText("Voltar");
-        jPanel12.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 70, 20));
+        jPanel12.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 490, 210, 50));
 
         jButton6.setBackground(new java.awt.Color(179, 40, 36));
-        jButton6.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Próxima");
-        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 70, 20));
+        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 210, 50));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel5.setText("Qual material é utilizado para medir volumes com alta precisão?");
+        jPanel12.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 23, -1, 50));
 
         jButton7.setBackground(new java.awt.Color(179, 40, 36));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/idea  1.png"))); // NOI18N
-        jPanel12.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 176, 20, 20));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/idea  1.png"))); // NOI18N
+        jPanel12.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 470, 70, 60));
 
-        jPanel6.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 360, 200));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/etec.png"))); // NOI18N
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 40, 30));
+        jPanel6.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 1250, 560));
 
         jLabel6.setBackground(new java.awt.Color(179, 40, 36));
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(179, 40, 36));
         jLabel6.setText("1/10");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 120, -1, -1));
+        jPanel6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, 430, 330));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -229,7 +228,6 @@ public class Quiz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

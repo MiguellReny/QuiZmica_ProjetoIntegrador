@@ -3,241 +3,244 @@ package quizquimica.view;
 import quizquimica.controller.AlunoController;
 
 public class DashboardAluno extends javax.swing.JFrame {
+
     public DashboardAluno() {
         initComponents();
         setLocationRelativeTo(null);
     }
 
-    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        jLabel9 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel(); 
-        jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jProgressBar2 = new javax.swing.JProgressBar();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jLabel5 = new javax.swing.JLabel();
+
+        jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jProgressBar4 = new javax.swing.JProgressBar();
+        jProgressBar5 = new javax.swing.JProgressBar();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jProgressBar6 = new javax.swing.JProgressBar();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jPanel21 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
-        setSize(400, 330);
-        setResizable(false);
-        setLayout(null);
+        setBackground(new java.awt.Color(230, 240, 251));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setSize(new java.awt.Dimension(1366, 768));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // FUNDO
         jPanel6.setBackground(new java.awt.Color(238, 243, 249));
-        jPanel6.setBounds(0, 0, 400, 330);
-        jPanel6.setLayout(null);
-        add(jPanel6);
+        jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // TOPO
-        jPanel2.setBackground(new java.awt.Color(179, 40, 36));
-        jPanel2.setBounds(0, 0, 400, 40);
-        jPanel2.setLayout(null);
-        jPanel6.add(jPanel2);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 520, -1));
+        jPanel6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
 
-        // LOGO
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Quizmica 230px.png")));
-        jLabel9.setBounds(-40, 0, 150, 50);
-        jPanel2.add(jLabel9);
+        jPanel12.setBackground(new java.awt.Color(238, 243, 249));
+        jPanel12.setPreferredSize(new java.awt.Dimension(1366, 768));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // TITULO
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel1.setForeground(java.awt.Color.WHITE);
-        jLabel1.setText("Painel do aluno");
-        jLabel1.setBounds(160, 10, 150, 20);
-        jPanel2.add(jLabel1);
+        jPanel13.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel12.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 180, 190, 2));
 
-        // BOTAO SAIR
-        jButton2.setText("Sair");
-        jButton2.setBackground(java.awt.Color.WHITE);
-        jButton2.setForeground(new java.awt.Color(179, 40, 36));
-        jButton2.setFocusPainted(false);
-        jButton2.setBounds(330, 10, 50, 20);
-        jPanel2.add(jButton2);
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // TITULO QUIZZES
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12));
-        jLabel4.setText("Seus quizzes:");
-        jLabel4.setBounds(20, 60, 120, 20);
-        jPanel6.add(jLabel4);
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(57, 57, 57));
+        jLabel14.setText("Acertos:");
+        jPanel14.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        // LINHA
-        jPanel4.setBackground(new java.awt.Color(179, 40, 36));
-        jPanel4.setBounds(20, 75, 80, 2);
-        jPanel6.add(jPanel4);
+        jProgressBar4.setForeground(new java.awt.Color(141, 212, 135));
+        jPanel14.add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 520, 40));
 
-        // TITULO DESEMPENHO
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12));
-        jLabel3.setText("Seu desempenho:");
-        jLabel3.setBounds(230, 60, 140, 20);
-        jPanel6.add(jLabel3);
+        jProgressBar5.setForeground(new java.awt.Color(51, 79, 242));
+        jPanel14.add(jProgressBar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 520, 40));
 
-        // LINHA
+        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(57, 57, 57));
+        jLabel15.setText("Aproveitamento:");
+        jPanel14.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(57, 57, 57));
+        jLabel16.setText("Erros:");
+        jPanel14.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        jProgressBar6.setForeground(new java.awt.Color(224, 55, 40));
+        jPanel14.add(jProgressBar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 520, 40));
+
+        jPanel12.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 200, 610, 490));
+
+        jButton6.setBackground(new java.awt.Color(25, 72, 85));
+        jButton6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Participar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, 180, 40));
+
+        jButton7.setBackground(new java.awt.Color(25, 72, 85));
+        jButton7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Participar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 180, 40));
+
+        jButton8.setBackground(new java.awt.Color(25, 72, 85));
+        jButton8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 255));
+        jButton8.setText("Participar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 670, 180, 40));
+
+        jPanel15.setBackground(new java.awt.Color(230, 230, 230));
+        jPanel15.setPreferredSize(new java.awt.Dimension(180, 200));
+
+        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setText("Materiais do");
+        jLabel17.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel15.add(jLabel17);
+
+        jLabel23.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel23.setText("Laboratório");
+        jLabel23.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel15.add(jLabel23);
+
+        jPanel12.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 180, 200));
+
+        jPanel16.setBackground(new java.awt.Color(230, 230, 230));
+
+        jLabel18.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("Experimentos ");
+        jLabel18.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel16.add(jLabel18);
+
+        jLabel19.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setText("Químicos");
+        jLabel19.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel19.setAutoscrolls(true);
+        jPanel16.add(jLabel19);
+
+        jPanel12.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 180, 200));
+
+        jPanel18.setBackground(new java.awt.Color(230, 230, 230));
+
+        jLabel20.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel20.setText("Materiais");
+        jPanel18.add(jLabel20);
+
+        jLabel24.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel24.setText("de Segurança");
+        jPanel18.add(jLabel24);
+
+        jPanel12.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 180, 200));
+
+        jPanel19.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel19.setPreferredSize(new java.awt.Dimension(2, 100));
+        jPanel12.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 90, 2, 615));
+
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel21.setText("Seu desempenho:");
+        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 150, -1, -1));
+
+        jPanel20.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 40)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Painel do aluno");
+        jPanel20.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 510, 40));
+
+        jButton10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(179, 40, 36));
+        jButton10.setText("Sair");
+        jButton10.setToolTipText("");
+        jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel20.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 10, 100, 40));
+
+        jPanel12.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
+        jPanel12.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
+
         jPanel11.setBackground(new java.awt.Color(179, 40, 36));
-        jPanel11.setBounds(230, 75, 100, 2);
-        jPanel6.add(jPanel11);
+        jPanel12.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 190, 2));
 
-        // DIVISORIA
-        jPanel3.setBackground(new java.awt.Color(120, 120, 120));
-        jPanel3.setBounds(200, 60, 2, 220);
-        jPanel6.add(jPanel3);
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel3.setText("Quizzes:");
+        jPanel12.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
-        // QUIZ 1
-        jPanel8.setBackground(new java.awt.Color(230, 230, 230));
-        jPanel8.setBounds(20, 90, 60, 70);
-        jLabel11.setText("Experimento");
-        jPanel8.add(jLabel11);
-        jPanel6.add(jPanel8);
+        jPanel6.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
-        // QUIZ 2
-        jPanel9.setBackground(new java.awt.Color(230, 230, 230));
-        jPanel9.setBounds(120, 90, 60, 70);
-        jLabel10.setText("Experimento");
-        jPanel9.add(jLabel10);
-        jPanel6.add(jPanel9);
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
-        // QUIZ 3
-        jPanel5.setBackground(new java.awt.Color(230, 230, 230));
-        jPanel5.setBounds(20, 190, 60, 70);
-        jLabel12.setText("Experimento");
-        jPanel5.add(jLabel12);
-        jPanel6.add(jPanel5);
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
-        // QUIZ 4
-        jPanel7.setBackground(new java.awt.Color(230, 230, 230));
-        jPanel7.setBounds(120, 190, 60, 70);
-        jLabel13.setText("Experimento");
-        jPanel7.add(jLabel13);
-        jPanel6.add(jPanel7);
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
 
-        // BOTAO 1
-        configurarBotao(jButton4);
-        jButton4.setBounds(20, 160, 60, 20);
-        jPanel6.add(jButton4);
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
 
-        // BOTAO 2
-        configurarBotao(jButton5);
-        jButton5.setBounds(120, 160, 60, 20);
-        jPanel6.add(jButton5);
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-        // BOTAO 3
-        configurarBotao(jButton3);
-        jButton3.setBounds(20, 260, 60, 20);
-        jPanel6.add(jButton3);
-
-        // BOTAO 4
-        configurarBotao(jButton1);
-        jButton1.setBounds(120, 260, 60, 20);
-        jPanel6.add(jButton1);
-
-
-        // PAINEL DESEMPENHO
-        jPanel10.setBackground(java.awt.Color.WHITE);
-        jPanel10.setBounds(230, 100, 140, 170);
-        jPanel10.setLayout(null);
-        jPanel6.add(jPanel10);
-
-        // ACERTOS
-        jLabel6.setText("Acertos:");
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12));
-        jLabel6.setBounds(10, 10, 100, 20);
-        jPanel10.add(jLabel6);
-
-        jProgressBar1.setBounds(10, 35, 90, 15);
-        jProgressBar1.setOpaque(true);
-        jProgressBar1.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
-        jProgressBar1.setValue(50);
-        jProgressBar1.setForeground(new java.awt.Color(141, 212, 135));
-        jProgressBar1.setBackground(new java.awt.Color(220, 220, 220));
-        jProgressBar1.setBorderPainted(false);
-        jProgressBar1.setMaximum(100);
-        jPanel10.add(jProgressBar1);
-
-        // TEXTO %
-        lblAcertosValor = new javax.swing.JLabel();
-        lblAcertosValor.setText("50%");
-        lblAcertosValor.setFont(new java.awt.Font("Arial", 1, 10));
-        lblAcertosValor.setBounds(105, 32, 40, 20);
-        jPanel10.add(lblAcertosValor);
-
-        // ERROS
-        jLabel8.setText("Erros:");
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12));
-        jLabel8.setBounds(10, 60, 100, 20);
-        jPanel10.add(jLabel8);
-
-        jProgressBar3.setBounds(10, 85, 90, 15);
-        jProgressBar3.setOpaque(true);
-        jProgressBar3.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
-        jProgressBar3.setValue(30);
-        jProgressBar3.setForeground(new java.awt.Color(224, 55, 40));
-        jProgressBar3.setBackground(new java.awt.Color(220, 220, 220));
-        jProgressBar3.setBorderPainted(false);
-        jProgressBar3.setMaximum(100);
-        jPanel10.add(jProgressBar3);
-
-        // TEXTO %
-        lblErrosValor = new javax.swing.JLabel();
-        lblErrosValor.setText("30%");
-        lblErrosValor.setFont(new java.awt.Font("Arial", 1, 10));
-        lblErrosValor.setBounds(105, 82, 40, 20);
-        jPanel10.add(lblErrosValor);
-
-        // APROVEITAMENTO
-
-        jLabel7.setText("Aproveitamento:");
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12));
-        jLabel7.setBounds(10, 110, 120, 20);
-        jPanel10.add(jLabel7);
-
-        jProgressBar2.setBounds(10, 135, 90, 15);
-        jProgressBar2.setOpaque(true);
-        jProgressBar2.setUI(new javax.swing.plaf.basic.BasicProgressBarUI());
-        jProgressBar2.setValue(70);
-        jProgressBar2.setForeground(new java.awt.Color(51, 79, 242));
-        jProgressBar2.setBackground(new java.awt.Color(220, 220, 220));
-        jProgressBar2.setBorderPainted(false);
-        jProgressBar2.setMaximum(100);
-        jPanel10.add(jProgressBar2);
-
-
-        // TEXTO %
-        lblAproveitamentoValor = new javax.swing.JLabel();
-        lblAproveitamentoValor.setText("70%");
-        lblAproveitamentoValor.setFont(new java.awt.Font("Arial", 1, 10));
-        lblAproveitamentoValor.setBounds(105, 132, 40, 20);
-        jPanel10.add(lblAproveitamentoValor);
-
-        // LOGO ETEC
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etec.png")));
-        jLabel5.setBounds(10, 270, 40, 30);
-
-        jPanel6.add(jLabel5);
-    }
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void configurarBotao(javax.swing.JButton botao) {
         botao.setText("Participar");
@@ -249,40 +252,17 @@ public class DashboardAluno extends javax.swing.JFrame {
         botao.setFont(new java.awt.Font("Arial", 0, 8));
     }
 
-    // GETTERS
-    public javax.swing.JProgressBar getProgressAcertos() {
-        return jProgressBar1;
-    }
-    public javax.swing.JProgressBar getProgressErros() {
-        return jProgressBar3;
-    }
-    public javax.swing.JProgressBar getProgressAproveitamento() {
-        return jProgressBar2;
-    }
-    public javax.swing.JButton getBtnQuiz1() {
-        return jButton1;
-    }
-    public javax.swing.JButton getBtnQuiz2() {
-        return jButton3;
-    }
-    public javax.swing.JButton getBtnQuiz3() {
-        return jButton4;
-    }
-    public javax.swing.JButton getBtnQuiz4() {
-        return jButton5;
-    }
-    public javax.swing.JButton getBtnSair() {
-        return jButton2;
-    }
-    public javax.swing.JLabel getLblAcertosValor() {
-    return lblAcertosValor;
-    }
-    public javax.swing.JLabel getLblErrosValor() {
-        return lblErrosValor;
-    }
-    public javax.swing.JLabel getLblAproveitamentoValor() {
-        return lblAproveitamentoValor;
-    }
+    public javax.swing.JProgressBar getProgressAcertos() { return jProgressBar1; }
+    public javax.swing.JProgressBar getProgressErros() { return jProgressBar3; }
+    public javax.swing.JProgressBar getProgressAproveitamento() { return jProgressBar2; }
+    public javax.swing.JButton getBtnQuiz1() { return jButton1; }
+    public javax.swing.JButton getBtnQuiz2() { return jButton3; }
+    public javax.swing.JButton getBtnQuiz3() { return jButton4; }
+    public javax.swing.JButton getBtnQuiz4() { return jButton5; }
+    public javax.swing.JButton getBtnSair() { return jButton2; }
+    public javax.swing.JLabel getLblAcertosValor() { return lblAcertosValor; }
+    public javax.swing.JLabel getLblErrosValor() { return lblErrosValor; }
+    public javax.swing.JLabel getLblAproveitamentoValor() { return lblAproveitamentoValor; }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -294,38 +274,39 @@ public class DashboardAluno extends javax.swing.JFrame {
         });
     }
 
-    // VARIABLES
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
-    private javax.swing.JProgressBar jProgressBar3;
-    private javax.swing.JLabel lblAcertosValor;
-    private javax.swing.JLabel lblErrosValor;
-    private javax.swing.JLabel lblAproveitamentoValor;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JProgressBar jProgressBar4;
+    private javax.swing.JProgressBar jProgressBar5;
+    private javax.swing.JProgressBar jProgressBar6;
+    // End of variables declaration//GEN-END:variables
 }
