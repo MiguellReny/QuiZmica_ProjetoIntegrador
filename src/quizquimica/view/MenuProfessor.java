@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 
-/**
- *
- * @author keilagomes
- */
+package quizquimica.view;
 public class MenuProfessor extends javax.swing.JDialog {
 
 

@@ -6,137 +6,122 @@ import java.awt.*;
 
 public class TelaJogar extends JFrame {
 
-    private JButton BotaoJogar;
-    private JButton BotaoProfessor;
-    private JLabel TermoUso;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel9;
-    private JPanel jPanel3;
-
     public TelaJogar() {
-
-        // deixa visual mais moderno
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         initComponents();
         setLocationRelativeTo(null);
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new JPanel();
-        jLabel9 = new JLabel();
-        jLabel4 = new JLabel();
-        BotaoJogar = new JButton();
-        BotaoProfessor = new JButton();
-        jLabel5 = new JLabel();
-        jLabel3 = new JLabel();
-        TermoUso = new JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        BotaoJogar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        BotaoProfessor = new javax.swing.JButton();
+        TermoUso = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("QuiZmica");
-        setSize(430, 360);
-        setResizable(false);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
-        getContentPane().setLayout(null);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imageminicial.png"))); // NOI18N
 
-        // ===== PAINEL =====
-        jPanel3.setBackground(new Color(238, 243, 249));
-        jPanel3.setLayout(null);
-        jPanel3.setBounds(0, 0, 430, 360);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quizmica");
+        setBackground(new java.awt.Color(230, 240, 251));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setSize(new java.awt.Dimension(1366, 768));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // ===== LOGO =====
-        jLabel9.setIcon(new ImageIcon(
-                getClass().getResource("/quizquimica/images/quizmica_titulo.png")
-        ));
-        jLabel9.setBounds(15, 10, 320, 100);
-        jPanel3.add(jLabel9);
+        jPanel3.setBackground(new java.awt.Color(238, 243, 249));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1366, 768));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // ===== TEXTO =====
-        jLabel4.setFont(new Font("Arial", Font.PLAIN, 20));
-        jLabel4.setForeground(new Color(40, 40, 40));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicaPgInicial.png"))); // NOI18N
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -30, 1130, 420));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 2, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Misture ideias. Descubra respostas.");
-        jLabel4.setBounds(80, 105, 300, 30);
-        jPanel3.add(jLabel4);
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 760, 100));
 
-        // ===== BOTÃO JOGAR =====
+        BotaoJogar.setBackground(new java.awt.Color(179, 40, 36));
+        BotaoJogar.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
+        BotaoJogar.setForeground(new java.awt.Color(255, 255, 255));
         BotaoJogar.setText("JOGAR");
-        BotaoJogar.setFont(new Font("Arial", Font.BOLD, 18));
-        BotaoJogar.setForeground(Color.WHITE);
-        BotaoJogar.setBackground(new Color(179, 40, 36));
-
-        // IMPORTANTE
-        BotaoJogar.setFocusPainted(false);
-        BotaoJogar.setBorderPainted(false);
-        BotaoJogar.setContentAreaFilled(true);
-        BotaoJogar.setOpaque(true);
-
-        BotaoJogar.setBounds(95, 155, 140, 40);
-
-        BotaoJogar.addActionListener(evt -> {
-            JogarController controller = new JogarController(this);
-            controller.abrirLogin();
-        });
-
-        jPanel3.add(BotaoJogar);
-
-        // ===== BOTÃO PROFESSOR =====
-        BotaoProfessor.setText("Acesso do professor");
-        BotaoProfessor.setFont(new Font("Arial", Font.PLAIN, 11));
-        BotaoProfessor.setForeground(Color.WHITE);
-        BotaoProfessor.setBackground(new Color(120, 120, 120));
-
-        // IMPORTANTE
-        BotaoProfessor.setFocusPainted(false);
-        BotaoProfessor.setBorderPainted(false);
-        BotaoProfessor.setContentAreaFilled(true);
-        BotaoProfessor.setOpaque(true);
-
-        BotaoProfessor.setBounds(285, 15, 120, 25);
-
-        BotaoProfessor.addActionListener(evt -> {
-            JogarController controller = new JogarController(this);
-            controller.abrirLogin();
-        });
-
-        jPanel3.add(BotaoProfessor);
-
-        // ===== LOGO ETEC =====
-        jLabel5.setIcon(new ImageIcon(
-                getClass().getResource("/quizquimica/images/etec.png")
-        ));
-        jLabel5.setBounds(20, 220, 120, 80);
-        jPanel3.add(jLabel5);
-
-        // ===== PERSONAGEM =====
-        jLabel3.setIcon(new ImageIcon(
-                getClass().getResource("/quizquimica/images/inicialCient.png")
-        ));
-        jLabel3.setBounds(245, 135, 160, 180);
-        jPanel3.add(jLabel3);
-
-        // ===== TERMO DE USO =====
-        TermoUso.setText("Termo de Uso");
-        TermoUso.setFont(new Font("Arial", Font.ITALIC, 11));
-        TermoUso.setForeground(new Color(100, 100, 100));
-        TermoUso.setBounds(160, 300, 100, 20);
-
-        TermoUso.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JogarController controller = new JogarController(TelaJogar.this);
-                controller.abrirTermos();
+        BotaoJogar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray));
+        BotaoJogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoJogarActionPerformed(evt);
             }
         });
+        jPanel3.add(BotaoJogar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 490, 80));
 
-        jPanel3.add(TermoUso);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etec.png"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 270, 250));
 
-        // ===== ADD PANEL =====
-        getContentPane().add(jPanel3);
-    }
+        BotaoProfessor.setBackground(new java.awt.Color(102, 102, 102));
+        BotaoProfessor.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        BotaoProfessor.setForeground(new java.awt.Color(255, 255, 255));
+        BotaoProfessor.setText("Acesso do professor");
+        jPanel3.add(BotaoProfessor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, 300, 40));
+
+        TermoUso.setFont(new java.awt.Font("Arial", 2, 16)); // NOI18N
+        TermoUso.setForeground(new java.awt.Color(102, 102, 102));
+        TermoUso.setText("Termo de Uso");
+        TermoUso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TermoUsoMouseClicked(evt);
+            }
+        });
+        jPanel3.add(TermoUso, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 710, 130, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Cientista pg inicial.png"))); // NOI18N
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 190, -1, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 1366, 768));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void BotaoJogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoJogarActionPerformed
+        JogarController controller = new JogarController(this);
+        controller.abrirLogin();
+    }//GEN-LAST:event_BotaoJogarActionPerformed
+
+    private void BotaoProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoProfessorActionPerformed
+        JogarController controller = new JogarController(this);
+        controller.abrirLogin();
+    }//GEN-LAST:event_BotaoProfessorActionPerformed
+
+    private void TermoUsoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TermoUsoMouseClicked
+        JogarController controller = new JogarController(this);
+        controller.abrirTermos();
+    }//GEN-LAST:event_TermoUsoMouseClicked
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotaoJogar;
+    private javax.swing.JButton BotaoProfessor;
+    private javax.swing.JLabel TermoUso;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    // End of variables declaration//GEN-END:variables
 }
