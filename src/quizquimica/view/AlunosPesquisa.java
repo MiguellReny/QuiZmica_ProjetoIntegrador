@@ -1,5 +1,6 @@
 package quizquimica.view;
 
+import javax.swing.ImageIcon;
 
 public class AlunosPesquisa extends javax.swing.JFrame {
 
@@ -19,175 +20,172 @@ public class AlunosPesquisa extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
         
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        labelTotal = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        labelQuiz = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        labelMedia = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        labelMelhor = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaAlunos = new javax.swing.JTable();
+    jLabel2 = new javax.swing.JLabel();
+    jLabel9 = new javax.swing.JLabel();
+    jPanel1 = new javax.swing.JPanel();
+    jPanel2 = new javax.swing.JPanel();
+    jLabel10 = new javax.swing.JLabel();
+    jToggleButton1 = new javax.swing.JToggleButton();
+    jLabel4 = new javax.swing.JLabel();
+    jPanel4 = new javax.swing.JPanel();
+    jPanel10 = new javax.swing.JPanel();
+    jLabel1 = new javax.swing.JLabel();
+    labelTotal = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
+    labelQuiz = new javax.swing.JLabel();
+    jLabel8 = new javax.swing.JLabel();
+    labelMedia = new javax.swing.JLabel();
+    jLabel12 = new javax.swing.JLabel();
+    labelMelhor = new javax.swing.JLabel();
+    jLabel14 = new javax.swing.JLabel();
+    jButton1 = new javax.swing.JButton();
+    jLabel5 = new javax.swing.JLabel();
+    jTextField1 = new javax.swing.JTextField();
+    jPanel6 = new javax.swing.JPanel();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    tabelaAlunos = new javax.swing.JTable();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("Quizmica");
+    setBackground(new java.awt.Color(230, 240, 251));
+    getContentPane().setLayout(null);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quizmica");
-        setBackground(new java.awt.Color(230, 240, 251));
-        getContentPane().setLayout(null);
+    // ── Barra vermelha do topo ──────────────────────────────
+    jPanel2.setBackground(new java.awt.Color(179, 40, 36));
+    jPanel2.setLayout(null);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 230px.png"))); // NOI18N
-        getContentPane().add(jLabel9, new java.awt.Rectangle(-40, 0, 210, 80));
-        getContentPane().add(jPanel1, new java.awt.Rectangle(130, -30, -1, -1));
+    jLabel10.setFont(new java.awt.Font("Arial", 1, 14));
+    jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+    jLabel10.setText("Alunos");
+    jLabel10.setBounds(150, 10, 150, 20);  
+    jPanel2.add(jLabel10);
 
-        jPanel2.setBackground(new java.awt.Color(179, 40, 36));
-        jPanel2.setLayout(null);
+    jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
+    jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
+    jToggleButton1.setText("☰");
+    jToggleButton1.setBorder(null);
+    jToggleButton1.setBounds(340, 8, 40, 24); 
+    jPanel2.add(jToggleButton1);
 
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Alunos");
-        jLabel10.setBounds(170, 10, 150, 20);
-        jPanel2.add(jLabel10);
+    getContentPane().add(jPanel2, new java.awt.Rectangle(0, 0, 400, 40));
 
-        jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("☰");
-        jToggleButton1.setToolTipText("");
-        jToggleButton1.setBorder(null);
-        jLabel10.setBounds(340, 10, 40, -1);
-        jPanel2.add(jToggleButton1);
+    // ── Logo ────────────────────────────────────────────────
+    jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Quizmica 230px.png")));
+    getContentPane().add(jLabel9, new java.awt.Rectangle(10, 40, 130, 50));
 
-        getContentPane().add(jPanel2, new java.awt.Rectangle(0, 0, 400, 40));
+    // ── Título "Todos os alunos" + sublinhado ───────────────
+    jLabel4.setFont(new java.awt.Font("Arial", 1, 12));
+    jLabel4.setText("Todos os alunos");
+    jLabel4.setBounds(10, 50, 150, 20); 
+    getContentPane().add(jLabel4);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setText("Todos os alunos");
-        jLabel4.setToolTipText("");
-        jPanel4.setBounds(20, 60, -1, -1);
-        getContentPane().add(jLabel4);
+    jPanel4.setBackground(new java.awt.Color(179, 40, 36));
+    jPanel4.setPreferredSize(new java.awt.Dimension(10, 3));
+    jPanel4.setBounds(10, 70, 100, 2);
+    getContentPane().add(jPanel4);
 
-        jPanel4.setBackground(new java.awt.Color(179, 40, 36));
-        jPanel4.setPreferredSize(new java.awt.Dimension(10, 3));
-        jPanel4.setRequestFocusEnabled(false);
-        jPanel4.setBounds(10, 70, 80, 2);
-        getContentPane().add(jPanel4);
+    // ── Campo de busca ──────────────────────────────────────
+    jTextField1.setBackground(new java.awt.Color(245, 247, 250));
+    jTextField1.setFont(new java.awt.Font("Arial", 0, 10));
+    jTextField1.setForeground(new java.awt.Color(102, 102, 102));
+    jTextField1.setText("Buscar aluno...");
+    jTextField1.setBounds(10, 78, 180, 22);  
+    getContentPane().add(jTextField1);
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setLayout(null);
+    // ── Painel de resumo da turma ───────────────────────────
+    jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel10.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel1.setText("Resumo da Turma");
-        jLabel10.setBounds(10, 10, -1, -1);
-        jPanel10.add(jLabel1);
+    jLabel1.setFont(new java.awt.Font("Arial", 1, 12));
+    jLabel1.setText("Resumo da Turma");
+    jLabel1.setBounds(10, 10, 130, 20);  
+    jPanel10.add(jLabel1);
 
-        labelTotal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        labelTotal.setForeground(new java.awt.Color(179, 40, 36));
-        labelTotal.setText("32");
-        labelTotal.setBounds(20, 40, 20, 20);
-        jPanel10.add(labelTotal);
+    jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
+    jLabel6.setText("Total de Alunos");
+    jLabel6.setBounds(10, 32, 120, 15);  
+    jPanel10.add(jLabel6);
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel6.setText("Total de Alunos");
-        jLabel6.setBounds(10, 30, -1, -1);
-        jPanel10.add(jLabel6);
+    labelTotal.setFont(new java.awt.Font("Arial", 1, 12));
+    labelTotal.setForeground(new java.awt.Color(179, 40, 36));
+    labelTotal.setText("32");
+    labelTotal.setBounds(10, 47, 60, 16);
+    jPanel10.add(labelTotal);
 
-        labelQuiz.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        labelQuiz.setForeground(new java.awt.Color(179, 40, 36));
-        labelQuiz.setText("32");
-        labelQuiz.setBounds(20, 70, 20, 20);
-        jPanel10.add(labelQuiz);
+    jLabel8.setFont(new java.awt.Font("Arial", 0, 10));
+    jLabel8.setText("Quizzes Concluídos");
+    jLabel8.setBounds(10, 65, 130, 15); 
+    jPanel10.add(jLabel8);
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel8.setText("Quizzes Concluídos");
-        jLabel8.setBounds(10, 60, -1, -1);
-        jPanel10.add(jLabel8);
+    labelQuiz.setFont(new java.awt.Font("Arial", 1, 12));
+    labelQuiz.setForeground(new java.awt.Color(179, 40, 36));
+    labelQuiz.setText("32");
+    labelQuiz.setBounds(10, 80, 60, 16);
+    jPanel10.add(labelQuiz);
 
-        labelMedia.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        labelMedia.setForeground(new java.awt.Color(179, 40, 36));
-        labelMedia.setText("32");
-        labelMedia.setBounds(20, 100, 20, 20);
-        jPanel10.add(labelMedia);
+    jLabel12.setFont(new java.awt.Font("Arial", 0, 10));
+    jLabel12.setText("Média Geral da Turma");
+    jLabel12.setBounds(10, 98, 140, 15);
+    jPanel10.add(jLabel12);
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel12.setText("Média Geral da Turma");
-        jLabel12.setBounds(10, 90, -1, -1);
-        jPanel10.add(jLabel12);
+    labelMedia.setFont(new java.awt.Font("Arial", 1, 12));
+    labelMedia.setForeground(new java.awt.Color(179, 40, 36));
+    labelMedia.setText("32");
+    labelMedia.setBounds(10, 113, 60, 16);
+    jPanel10.add(labelMedia);
 
-        labelMelhor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        labelMelhor.setForeground(new java.awt.Color(179, 40, 36));
-        labelMelhor.setText("32");
-        labelMelhor.setBounds(20, 130, 20, 20);
-        jPanel10.add(labelMelhor);
+    jLabel14.setFont(new java.awt.Font("Arial", 0, 10));
+    jLabel14.setText("Melhor Média");
+    jLabel14.setBounds(10, 131, 100, 15); 
+    jPanel10.add(jLabel14);
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel14.setText("Melhor Média");
-        jLabel14.setBounds(10, 120, -1, -1);
-        jPanel10.add(jLabel14);
+    labelMelhor.setFont(new java.awt.Font("Arial", 1, 12));
+    labelMelhor.setForeground(new java.awt.Color(179, 40, 36));
+    labelMelhor.setText("32");
+    labelMelhor.setBounds(10, 146, 60, 16);
+    jPanel10.add(labelMelhor);
 
-        jButton1.setBackground(new java.awt.Color(179, 40, 36));
-        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Ver Relatórios");
-        jButton1.setBounds(20, 150, -1, -1);
-        jPanel10.add(jButton1);
+    jButton1.setBackground(new java.awt.Color(179, 40, 36));
+    jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 12));
+    jButton1.setForeground(new java.awt.Color(255, 255, 255));
+    jButton1.setText("Ver Relatórios");
+    jButton1.setBounds(10, 168, 120, 25);
+    jPanel10.add(jButton1);
 
-        getContentPane().add(jPanel10, new java.awt.Rectangle(230, 100, 140, 180));
+    getContentPane().add(jPanel10, new java.awt.Rectangle(230, 55, 155, 205));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/etec.png"))); // NOI18N
-        getContentPane().add(jLabel5, new java.awt.Rectangle(10, 270, 40, 30));
+    // ── Logo Etec ───────────────────────────────────────────
+    jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etec.png")));
+    getContentPane().add(jLabel5, new java.awt.Rectangle(10, 270, 60, 30));
 
-        jTextField1.setBackground(new java.awt.Color(245, 247, 250));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Buscar aluno...");
-        jTextField1.setBounds(10, 80, 180, 15);
-        getContentPane().add(jTextField1);
+    // ── Tabela de alunos ────────────────────────────────────
+    jPanel6.setBackground(new java.awt.Color(238, 243, 249));
+    jPanel6.setLayout(null);
 
-        jPanel6.setBackground(new java.awt.Color(238, 243, 249));
-        jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
-        jPanel6.setLayout(null);
+    tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
+        new Object[][] {
+            {"Angela", "angela@gmail.com", "Consultar | Editar"},
+            {null, null, null},
+            {null, null, null},
+            {null, null, null}
+        },
+        new String[]{"Nome", "Email", "Ações"}
+    ));
+    tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            tabelaAlunosMouseClicked(evt);
+        }
+    });
+    jScrollPane1.setViewportView(tabelaAlunos);
+    jPanel6.add(jScrollPane1, new java.awt.Rectangle(10, 10, 210, 140));
 
-        tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Angela", "angela@gmail.com", "Consultar | Editar"},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nome", "Email", "Ações"
-            }
-        ));
-        tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaAlunosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabelaAlunos);
+    getContentPane().add(jPanel6);
+    jPanel6.setBounds(0, 100, 225, 165);
 
-        jPanel6.add(jScrollPane1, new java.awt.Rectangle(40, 130, 200, 160));
-
-        getContentPane().add(jPanel6, new java.awt.Rectangle(-30, -20, 430, 330));
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+    pack();
+}// </editor-fold>//GEN-END:initComponents
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
     int linha = tabelaAlunos.getSelectedRow();
@@ -215,18 +213,18 @@ public class AlunosPesquisa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunosPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunosPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunosPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunosPesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardAluno().setVisible(true);
+                new AlunosPesquisa().setVisible(true);
             }
         });
     }
@@ -256,5 +254,12 @@ public class AlunosPesquisa extends javax.swing.JFrame {
     private javax.swing.JLabel labelQuiz;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTable tabelaAlunos;
+    // --- Getters para o controller ---
+public javax.swing.JTable getTabelaAlunos() { return tabelaAlunos; }
+public javax.swing.JTextField getCampoBusca() { return jTextField1; }
+public javax.swing.JLabel getLabelTotal()  { return labelTotal; }
+public javax.swing.JLabel getLabelQuiz()   { return labelQuiz; }
+public javax.swing.JLabel getLabelMedia()  { return labelMedia; }
+public javax.swing.JLabel getLabelMelhor() { return labelMelhor; }
     // End of variables declaration//GEN-END:variables
 }
