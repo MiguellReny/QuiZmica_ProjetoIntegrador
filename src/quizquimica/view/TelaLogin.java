@@ -35,7 +35,6 @@ public class TelaLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
         setBackground(new java.awt.Color(230, 240, 251));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -91,7 +91,7 @@ public class TelaJogar extends JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Cientista pg inicial.png"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 190, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 1366, 768));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

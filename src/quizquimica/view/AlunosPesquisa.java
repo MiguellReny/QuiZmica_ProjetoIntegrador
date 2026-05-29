@@ -20,185 +20,174 @@ public class AlunosPesquisa extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
         
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-private void initComponents() {
+    private void initComponents() {
 
-    jLabel2 = new javax.swing.JLabel();
-    jLabel9 = new javax.swing.JLabel();
-    jPanel1 = new javax.swing.JPanel();
-    jPanel2 = new javax.swing.JPanel();
-    jLabel10 = new javax.swing.JLabel();
-    jToggleButton1 = new javax.swing.JToggleButton();
-    jLabel4 = new javax.swing.JLabel();
-    jPanel4 = new javax.swing.JPanel();
-    jPanel10 = new javax.swing.JPanel();
-    jLabel1 = new javax.swing.JLabel();
-    labelTotal = new javax.swing.JLabel();
-    jLabel6 = new javax.swing.JLabel();
-    labelQuiz = new javax.swing.JLabel();
-    jLabel8 = new javax.swing.JLabel();
-    labelMedia = new javax.swing.JLabel();
-    jLabel12 = new javax.swing.JLabel();
-    labelMelhor = new javax.swing.JLabel();
-    jLabel14 = new javax.swing.JLabel();
-    jButton1 = new javax.swing.JButton();
-    jLabel5 = new javax.swing.JLabel();
-    jTextField1 = new javax.swing.JTextField();
-    jPanel6 = new javax.swing.JPanel();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    tabelaAlunos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaAlunos = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        labelTotal = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        labelQuiz = new javax.swing.JLabel();
+        labelMedia = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        labelMelhor = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    setTitle("Quizmica");
-    setBackground(new java.awt.Color(230, 240, 251));
-    getContentPane().setLayout(null);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
-    // ── Barra vermelha do topo ──────────────────────────────
-    jPanel2.setBackground(new java.awt.Color(179, 40, 36));
-    jPanel2.setLayout(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quizmica");
+        setBackground(new java.awt.Color(230, 240, 251));
+        setMinimumSize(new java.awt.Dimension(1366, 768));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jLabel10.setFont(new java.awt.Font("Arial", 1, 14));
-    jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-    jLabel10.setText("Alunos");
-    jLabel10.setBounds(150, 10, 150, 20);  
-    jPanel2.add(jLabel10);
+        jPanel6.setBackground(new java.awt.Color(238, 243, 249));
+        jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
-    jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-    jToggleButton1.setText("☰");
-    jToggleButton1.setBorder(null);
-    jToggleButton1.setBounds(340, 8, 40, 24); 
-    jPanel2.add(jToggleButton1);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 520, -1));
 
-    getContentPane().add(jPanel2, new java.awt.Rectangle(0, 0, 400, 40));
+        tabelaAlunos.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Angela", "angela@gmail.com", "Consultar | Editar"},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "Email", "Ações"
+            }
+        ));
+        tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaAlunosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaAlunos);
 
-    // ── Logo ────────────────────────────────────────────────
-    jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Quizmica 230px.png")));
-    getContentPane().add(jLabel9, new java.awt.Rectangle(10, 40, 130, 50));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 610, 490));
 
-    // ── Título "Todos os alunos" + sublinhado ───────────────
-    jLabel4.setFont(new java.awt.Font("Arial", 1, 12));
-    jLabel4.setText("Todos os alunos");
-    jLabel4.setBounds(10, 50, 150, 20); 
-    getContentPane().add(jLabel4);
+        jTextField1.setBackground(new java.awt.Color(245, 247, 250));
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField1.setText("Buscar aluno...");
+        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 610, 40));
 
-    jPanel4.setBackground(new java.awt.Color(179, 40, 36));
-    jPanel4.setPreferredSize(new java.awt.Dimension(10, 3));
-    jPanel4.setBounds(10, 70, 100, 2);
-    getContentPane().add(jPanel4);
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    // ── Campo de busca ──────────────────────────────────────
-    jTextField1.setBackground(new java.awt.Color(245, 247, 250));
-    jTextField1.setFont(new java.awt.Font("Arial", 0, 10));
-    jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-    jTextField1.setText("Buscar aluno...");
-    jTextField1.setBounds(10, 78, 180, 22);  
-    getContentPane().add(jTextField1);
+        labelTotal.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        labelTotal.setForeground(new java.awt.Color(179, 40, 36));
+        labelTotal.setText("32");
+        jPanel10.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 110, 30));
 
-    // ── Painel de resumo da turma ───────────────────────────
-    jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-    jPanel10.setLayout(null);
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel6.setText("Quizzes Concluídos");
+        jPanel10.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, 20));
 
-    jLabel1.setFont(new java.awt.Font("Arial", 1, 12));
-    jLabel1.setText("Resumo da Turma");
-    jLabel1.setBounds(10, 10, 130, 20);  
-    jPanel10.add(jLabel1);
+        labelQuiz.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        labelQuiz.setForeground(new java.awt.Color(179, 40, 36));
+        labelQuiz.setText("32");
+        jPanel10.add(labelQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 60, 40));
 
-    jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-    jLabel6.setText("Total de Alunos");
-    jLabel6.setBounds(10, 32, 120, 15);  
-    jPanel10.add(jLabel6);
+        labelMedia.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        labelMedia.setForeground(new java.awt.Color(179, 40, 36));
+        labelMedia.setText("32");
+        jPanel10.add(labelMedia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 60, 40));
 
-    labelTotal.setFont(new java.awt.Font("Arial", 1, 12));
-    labelTotal.setForeground(new java.awt.Color(179, 40, 36));
-    labelTotal.setText("32");
-    labelTotal.setBounds(10, 47, 60, 16);
-    jPanel10.add(labelTotal);
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel12.setText("Média Geral da Turma");
+        jPanel10.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
 
-    jLabel8.setFont(new java.awt.Font("Arial", 0, 10));
-    jLabel8.setText("Quizzes Concluídos");
-    jLabel8.setBounds(10, 65, 130, 15); 
-    jPanel10.add(jLabel8);
+        labelMelhor.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        labelMelhor.setForeground(new java.awt.Color(179, 40, 36));
+        labelMelhor.setText("32");
+        jPanel10.add(labelMelhor, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 60, 40));
 
-    labelQuiz.setFont(new java.awt.Font("Arial", 1, 12));
-    labelQuiz.setForeground(new java.awt.Color(179, 40, 36));
-    labelQuiz.setText("32");
-    labelQuiz.setBounds(10, 80, 60, 16);
-    jPanel10.add(labelQuiz);
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel14.setText("Melhor Média");
+        jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-    jLabel12.setFont(new java.awt.Font("Arial", 0, 10));
-    jLabel12.setText("Média Geral da Turma");
-    jLabel12.setBounds(10, 98, 140, 15);
-    jPanel10.add(jLabel12);
+        jButton1.setBackground(new java.awt.Color(179, 40, 36));
+        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 30)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Ver Relatórios");
+        jPanel10.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 430, 60));
 
-    labelMedia.setFont(new java.awt.Font("Arial", 1, 12));
-    labelMedia.setForeground(new java.awt.Color(179, 40, 36));
-    labelMedia.setText("32");
-    labelMedia.setBounds(10, 113, 60, 16);
-    jPanel10.add(labelMedia);
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel4.setText("Resumo da Turma");
+        jPanel10.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-    jLabel14.setFont(new java.awt.Font("Arial", 0, 10));
-    jLabel14.setText("Melhor Média");
-    jLabel14.setBounds(10, 131, 100, 15); 
-    jPanel10.add(jLabel14);
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel7.setText("Total de Alunos");
+        jPanel10.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
 
-    labelMelhor.setFont(new java.awt.Font("Arial", 1, 12));
-    labelMelhor.setForeground(new java.awt.Color(179, 40, 36));
-    labelMelhor.setText("32");
-    labelMelhor.setBounds(10, 146, 60, 16);
-    jPanel10.add(labelMelhor);
+        jPanel2.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel10.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 330));
 
-    jButton1.setBackground(new java.awt.Color(179, 40, 36));
-    jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 12));
-    jButton1.setForeground(new java.awt.Color(255, 255, 255));
-    jButton1.setText("Ver Relatórios");
-    jButton1.setBounds(10, 168, 120, 25);
-    jPanel10.add(jButton1);
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 480, 570));
+        jPanel6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
 
-    getContentPane().add(jPanel10, new java.awt.Rectangle(230, 55, 155, 205));
+        jPanel20.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    // ── Logo Etec ───────────────────────────────────────────
-    jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etec.png")));
-    getContentPane().add(jLabel5, new java.awt.Rectangle(10, 270, 60, 30));
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 40)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Alunos");
+        jPanel20.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 510, 40));
 
-    // ── Tabela de alunos ────────────────────────────────────
-    jPanel6.setBackground(new java.awt.Color(238, 243, 249));
-    jPanel6.setLayout(null);
+        jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
+        jToggleButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jToggleButton1.setText("☰");
+        jToggleButton1.setToolTipText("");
+        jToggleButton1.setBorder(null);
+        jPanel20.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 0, 100, 60));
 
-    tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
-        new Object[][] {
-            {"Angela", "angela@gmail.com", "Consultar | Editar"},
-            {null, null, null},
-            {null, null, null},
-            {null, null, null}
-        },
-        new String[]{"Nome", "Email", "Ações"}
-    ));
-    tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            tabelaAlunosMouseClicked(evt);
-        }
-    });
-    jScrollPane1.setViewportView(tabelaAlunos);
-    jPanel6.add(jScrollPane1, new java.awt.Rectangle(10, 10, 210, 140));
+        jPanel6.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
 
-    getContentPane().add(jPanel6);
-    jPanel6.setBounds(0, 100, 225, 165);
+        jPanel11.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel6.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 190, 2));
 
-    pack();
-}// </editor-fold>//GEN-END:initComponents
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel3.setText("Todos os alunos:");
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-    int linha = tabelaAlunos.getSelectedRow();
-    int coluna = tabelaAlunos.getSelectedColumn();
-    String nome = tabelaAlunos
-            .getValueAt(linha, 0)
-            .toString();
-    if(coluna == 2){
-    javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Escolha ação para: " + nome
-    );
-    }
+        int linha = tabelaAlunos.getSelectedRow();
+        int coluna = tabelaAlunos.getSelectedColumn();
+        String nome = tabelaAlunos
+        .getValueAt(linha, 0)
+        .toString();
+        if(coluna == 2){
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Escolha ação para: " + nome
+            );
+        }
     }//GEN-LAST:event_tabelaAlunosMouseClicked
 
     /**
@@ -231,20 +220,20 @@ private void initComponents() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
@@ -254,12 +243,5 @@ private void initComponents() {
     private javax.swing.JLabel labelQuiz;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTable tabelaAlunos;
-    // --- Getters para o controller ---
-public javax.swing.JTable getTabelaAlunos() { return tabelaAlunos; }
-public javax.swing.JTextField getCampoBusca() { return jTextField1; }
-public javax.swing.JLabel getLabelTotal()  { return labelTotal; }
-public javax.swing.JLabel getLabelQuiz()   { return labelQuiz; }
-public javax.swing.JLabel getLabelMedia()  { return labelMedia; }
-public javax.swing.JLabel getLabelMelhor() { return labelMelhor; }
     // End of variables declaration//GEN-END:variables
 }
