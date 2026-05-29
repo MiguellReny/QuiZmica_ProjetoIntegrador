@@ -37,52 +37,54 @@ public class PopUpDica extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(238, 243, 249));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(200, 300));
+        setPreferredSize(new java.awt.Dimension(465, 290));
         setResizable(false);
+        setSize(new java.awt.Dimension(465, 290));
 
         jPanel1.setBackground(new java.awt.Color(235, 242, 250));
-        jPanel1.setPreferredSize(new java.awt.Dimension(371, 165));
+        jPanel1.setMinimumSize(new java.awt.Dimension(465, 290));
+        jPanel1.setPreferredSize(new java.awt.Dimension(465, 290));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Curie.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 80, 90));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Curie.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 80, 90));
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Gujarati Sangam MN", 2, 10)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Pioneira da radiotividade");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 20));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 180, 30));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, 20));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 230, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(51, 51, 51));
         jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(2);
-        jTextArea1.setTabSize(0);
-        jTextArea1.setText("“Esse material é usado para aquecer substâncias em laboratório.”");
+        jTextArea1.setRows(5);
+        jTextArea1.setTabSize(10);
+        jTextArea1.setText("Esse material é usado para aquecer substâncias em laboratório.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextArea1.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 50));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 100));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 330, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 380, 130));
 
         jPanel2.setBackground(new java.awt.Color(179, 40, 36));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Gurmukhi Sangam MN", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Gurmukhi Sangam MN", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("MARIE CURIE");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 180, 30));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +94,7 @@ public class PopUpDica extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
         );
 
         pack();
