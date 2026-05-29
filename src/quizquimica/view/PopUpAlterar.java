@@ -34,24 +34,28 @@ public class PopUpAlterar extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(238, 243, 249));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(350, 234));
+        setPreferredSize(new java.awt.Dimension(515, 400));
         setResizable(false);
+        setSize(new java.awt.Dimension(515, 400));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(350, 234));
-        jPanel1.setPreferredSize(new java.awt.Dimension(371, 208));
+        jPanel1.setPreferredSize(new java.awt.Dimension(515, 400));
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setSize(new java.awt.Dimension(515, 400));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("ALTERAR");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         jTextField1.setBackground(new java.awt.Color(245, 245, 245));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,17 +63,17 @@ public class PopUpAlterar extends javax.swing.JDialog {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 330, 30));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 470, 40));
 
         jTextField2.setBackground(new java.awt.Color(245, 245, 245));
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(102, 102, 102));
         jTextField2.setToolTipText("");
         jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 330, 30));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 470, 40));
 
         jTextField3.setBackground(new java.awt.Color(245, 245, 245));
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(102, 102, 102));
         jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +81,7 @@ public class PopUpAlterar extends javax.swing.JDialog {
                 jTextField3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 330, 30));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 470, 40));
 
         jButton1.setBackground(new java.awt.Color(213, 223, 236));
         jButton1.setForeground(new java.awt.Color(46, 109, 158));
@@ -89,7 +93,7 @@ public class PopUpAlterar extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 100, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 120, 40));
 
         jButton2.setBackground(new java.awt.Color(179, 40, 36));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,32 +105,47 @@ public class PopUpAlterar extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 120, 40));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("senha");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("nome");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("email");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(179, 40, 36));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 160, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 160, 2));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -198,6 +217,7 @@ public class PopUpAlterar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
