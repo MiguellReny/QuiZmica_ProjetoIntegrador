@@ -169,28 +169,19 @@ public class AlunosPesquisaController {
     }
 
     private void consultarAluno(String login) {
-        Aluno aluno = alunoDAO.buscarPorLogin(login);
-        if (aluno == null) {
-            javax.swing.JOptionPane.showMessageDialog(view, "Aluno não encontrado.");
-            return;
-        }
+    Aluno aluno = alunoDAO.buscarPorLogin(login);
 
-        double media  = partidaDAO.calcularMedia(aluno.getIdUsuario());
-        String nivel  = partidaDAO.buscarNivelAtual(aluno.getIdUsuario());
-        int partidas  = partidaDAO.buscarPorAluno(aluno.getIdUsuario()).size();
-
-        String info = "<html>"
-            + "<b>Nome:</b> "               + aluno.getNome()  + "<br>"
-            + "<b>Email:</b> "              + aluno.getLogin() + "<br>"
-            + "<b>Turma:</b> "              + aluno.getTurma() + "<br>"
-            + "<b>Partidas jogadas:</b> "   + partidas         + "<br>"
-            + "<b>Média:</b> "              + String.format("%.1f", media) + "<br>"
-            + "<b>Nível atual:</b> "        + nivel
-            + "</html>";
-
-        javax.swing.JOptionPane.showMessageDialog(view, info, "Dados do Aluno",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    if (aluno == null) {
+        javax.swing.JOptionPane.showMessageDialog(view, "Aluno não encontrado.");
+        return;
     }
+
+    quizquimica.view.DesempenhoAluno telaDesempenho = new quizquimica.view.DesempenhoAluno();
+    new DesempenhoAlunoController(telaDesempenho, aluno);
+
+    telaDesempenho.setVisible(true);
+    view.dispose();
+}
 
     private void removerAluno(String login, String nome) {
         int confirm = javax.swing.JOptionPane.showConfirmDialog(
