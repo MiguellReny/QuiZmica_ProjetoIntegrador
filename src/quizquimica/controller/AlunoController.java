@@ -3,6 +3,7 @@ package quizquimica.controller;
 import quizquimica.service.AuthService;
 import quizquimica.view.DashboardAluno;
 import quizquimica.view.TelaJogar;
+import quizquimica.view.TelaQuiz;
 
 public class AlunoController {
     private DashboardAluno view;
@@ -33,7 +34,12 @@ public class AlunoController {
     }
     //metodo para iniciar o quiz
     private void iniciarQuiz() {
-        System.out.println("Quiz iniciado"); //abrir tela quiz
+       private void iniciarQuiz() {
+       TelaQuiz telaQuiz = new TelaQuiz();
+       new TelaQuizController(telaQuiz);
+
+        telaQuiz.setVisible(true);
+        view.dispose();
     }
     //metodo sair
     private void sair() {
