@@ -29,8 +29,8 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         painelFundo = new javax.swing.JPanel();
-        painelTopo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
+        painelTopo = new javax.swing.JPanel();
         lblTituloTopo = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         btnVoltar = new javax.swing.JButton();
@@ -79,11 +79,11 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         painelFundo.setBackground(new java.awt.Color(238, 243, 249));
         painelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
+        painelFundo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 150));
+
         painelTopo.setBackground(new java.awt.Color(179, 40, 36));
         painelTopo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
-        painelTopo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 490, 150));
 
         lblTituloTopo.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblTituloTopo.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,7 +98,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         jToggleButton1.setBorderPainted(false);
         painelTopo.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 30, 100, -1));
 
-        painelFundo.add(painelTopo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 140));
+        painelFundo.add(painelTopo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 75));
 
         btnVoltar.setBackground(new java.awt.Color(238, 243, 249));
         btnVoltar.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
@@ -108,7 +108,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         btnVoltar.setContentAreaFilled(false);
         btnVoltar.setFocusPainted(false);
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
-        painelFundo.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 160, 130, 35));
+        painelFundo.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 150, 130, 35));
 
         lblTitutloPagina.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTitutloPagina.setForeground(new java.awt.Color(20, 25, 45));
