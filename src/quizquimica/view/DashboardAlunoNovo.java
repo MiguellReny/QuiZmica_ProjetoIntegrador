@@ -282,6 +282,34 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new DashboardAlunoNovo().setVisible(true));
     }
+    
+    public javax.swing.JButton getBtnParticiparExperimentos() {
+    return btnParticiparExperimentos;
+    }
+
+    public javax.swing.JButton getBtnParticiparMateriaisLab() {
+    return btnParticiparMateriaisLab;
+    }
+
+    public javax.swing.JButton getBtnParticiparSeguranca() {
+    return btnParticiparSeguranca;
+    }
+
+    public javax.swing.JButton getBtnSair() {
+    return btnSair;
+    }
+
+    public javax.swing.JProgressBar getProgressAcertos() {
+    return progressAcertos;
+    }
+
+    public javax.swing.JProgressBar getProgressErros() {
+    return progressErros;
+    }
+
+    public javax.swing.JProgressBar getProgressProgresso() {
+    return progressProgresso;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnParticiparExperimentos;
