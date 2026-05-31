@@ -10,12 +10,14 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
         setLocationRelativeTo(null);
+        jButton1.setOpaque(true);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -26,11 +28,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
@@ -57,7 +55,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email 1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(
+            new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/email 1.png"))
+            .getImage().getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH)
+        ));
         jLabel1.setText("E-mail:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
@@ -79,7 +80,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/locked-computer 1.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(
+            new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/locked-computer 1.png"))
+            .getImage().getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH)
+        ));
         jLabel3.setText("Senha:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
@@ -94,19 +98,16 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 430, 50));
 
         jButton1.setBackground(new java.awt.Color(179, 40, 36));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("ENTRAR");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray));
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 110, 40));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/etec - cópia.png"))); // NOI18N
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 130, 110));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 190, 57));
 
         jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 470, 380));
 
@@ -119,9 +120,15 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String loginUsuario = login.getText();
-        String senhaUsuario = senha.getText();
+        String loginUsuario = jTextField1.getText();
+        String senhaUsuario = jTextField2.getText();
         AuthService authService = new AuthService();
         Usuario usuario = authService.login(loginUsuario, senhaUsuario);
         if (usuario != null) {
@@ -149,10 +156,8 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

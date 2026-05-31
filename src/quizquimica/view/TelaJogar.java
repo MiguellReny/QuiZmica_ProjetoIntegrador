@@ -7,20 +7,22 @@ import java.awt.*;
 public class TelaJogar extends JFrame {
 
     public TelaJogar() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            setExtendedState(JFrame.MAXIMIZED_BOTH);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         initComponents();
         setLocationRelativeTo(null);
+            // para corrigir as cores dos botões
+    BotaoJogar.setOpaque(true);
+    BotaoJogar.setBorderPainted(false);
+    BotaoJogar.setFocusPainted(false);
+ 
+
+    BotaoProfessor.setOpaque(true);
+    BotaoProfessor.setBorderPainted(false);
+    BotaoProfessor.setFocusPainted(false);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -32,10 +34,6 @@ public class TelaJogar extends JFrame {
         TermoUso = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imageminicial.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
@@ -61,7 +59,7 @@ public class TelaJogar extends JFrame {
         BotaoJogar.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         BotaoJogar.setForeground(new java.awt.Color(255, 255, 255));
         BotaoJogar.setText("JOGAR");
-        BotaoJogar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray));
+        BotaoJogar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray));
         BotaoJogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotaoJogarActionPerformed(evt);
@@ -77,7 +75,12 @@ public class TelaJogar extends JFrame {
         BotaoProfessor.setForeground(new java.awt.Color(255, 255, 255));
         BotaoProfessor.setText("Acesso do professor");
         jPanel3.add(BotaoProfessor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, 300, 40));
-
+        BotaoProfessor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray));
+        BotaoProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoProfessorActionPerformed(evt);
+            }
+        });
         TermoUso.setFont(new java.awt.Font("Arial", 2, 16)); // NOI18N
         TermoUso.setForeground(new java.awt.Color(102, 102, 102));
         TermoUso.setText("Termo de Uso");
@@ -116,7 +119,6 @@ public class TelaJogar extends JFrame {
     private javax.swing.JButton BotaoProfessor;
     private javax.swing.JLabel TermoUso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
