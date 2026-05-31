@@ -27,21 +27,166 @@ public class TelaQuiz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        painelFundo = new javax.swing.JPanel();
+        lblLogo = new javax.swing.JLabel();
+        linhaTopo = new javax.swing.JPanel();
+        painelQuestaoAtual = new javax.swing.JPanel();
+        lblQuestaoAtual = new javax.swing.JLabel();
+        lblProgresso = new javax.swing.JLabel();
+        cardQuiz = new javax.swing.JPanel();
+        lblEnunciado = new javax.swing.JLabel();
+        linhaEnunciado = new javax.swing.JPanel();
+        lblImagemQuestao = new javax.swing.JLabel();
+        lblAlternativaA = new javax.swing.JLabel();
+        lblAlternativaB = new javax.swing.JLabel();
+        lblAlternativaC = new javax.swing.JLabel();
+        lblAlternativaD = new javax.swing.JLabel();
+        btnAlternativaA = new javax.swing.JButton();
+        btnAlternativaB = new javax.swing.JButton();
+        btnAlternativaD = new javax.swing.JButton();
+        btnAlternativaC = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        btnProxima = new javax.swing.JButton();
+        btnDica = new javax.swing.JButton();
+        lblLogoEtec = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quizmica - Quiz");
+        setBackground(new java.awt.Color(238, 246, 252));
+        setMinimumSize(new java.awt.Dimension(1366, 768));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        painelFundo.setBackground(new java.awt.Color(238, 246, 252));
+        painelFundo.setMinimumSize(new java.awt.Dimension(1366, 768));
+        painelFundo.setPreferredSize(new java.awt.Dimension(1366, 768));
+        painelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quiZmicaSimplificado.png"))); // NOI18N
+        painelFundo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 360, 95));
+
+        linhaTopo.setBackground(new java.awt.Color(179, 40, 36));
+        painelFundo.add(linhaTopo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1366, 4));
+
+        painelQuestaoAtual.setBackground(new java.awt.Color(179, 0, 0));
+        painelQuestaoAtual.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblQuestaoAtual.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblQuestaoAtual.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuestaoAtual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblQuestaoAtual.setText("QUESTÃO 1");
+        painelQuestaoAtual.add(lblQuestaoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 58));
+
+        painelFundo.add(painelQuestaoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 260, 58));
+
+        lblProgresso.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
+        lblProgresso.setForeground(new java.awt.Color(179, 0, 0));
+        lblProgresso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProgresso.setText("1 / 20");
+        painelFundo.add(lblProgresso, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 170, 130, 55));
+
+        cardQuiz.setBackground(new java.awt.Color(214, 226, 240));
+        cardQuiz.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblEnunciado.setForeground(new java.awt.Color(35, 35, 45));
+        lblEnunciado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEnunciado.setText("Qual material é utilizado para aquecer sólidos?");
+        cardQuiz.add(lblEnunciado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 25, 1240, 55));
+
+        linhaEnunciado.setBackground(new java.awt.Color(150, 160, 170));
+        cardQuiz.add(linhaEnunciado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1240, 2));
+
+        lblImagemQuestao.setBackground(new java.awt.Color(255, 255, 255));
+        lblImagemQuestao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagemQuestao.setOpaque(true);
+        cardQuiz.add(lblImagemQuestao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 125, 410, 250));
+
+        lblAlternativaA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa A.png"))); // NOI18N
+        cardQuiz.add(lblAlternativaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+
+        lblAlternativaB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa B.png"))); // NOI18N
+        cardQuiz.add(lblAlternativaB, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
+
+        lblAlternativaC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa C.png"))); // NOI18N
+        cardQuiz.add(lblAlternativaC, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
+
+        lblAlternativaD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Alternativa D.png"))); // NOI18N
+        cardQuiz.add(lblAlternativaD, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
+
+        btnAlternativaA.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnAlternativaA.setForeground(new java.awt.Color(20, 25, 45));
+        btnAlternativaA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        btnAlternativaA.setText("Bico de Bunsen");
+        btnAlternativaA.setFocusPainted(false);
+        btnAlternativaA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlternativaA.setIconTextGap(18);
+        cardQuiz.add(btnAlternativaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, 540, 58));
+
+        btnAlternativaB.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnAlternativaB.setForeground(new java.awt.Color(20, 25, 45));
+        btnAlternativaB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        btnAlternativaB.setText("Béquer");
+        btnAlternativaB.setFocusPainted(false);
+        btnAlternativaB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlternativaB.setIconTextGap(18);
+        cardQuiz.add(btnAlternativaB, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 540, 58));
+
+        btnAlternativaD.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnAlternativaD.setForeground(new java.awt.Color(20, 25, 45));
+        btnAlternativaD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        btnAlternativaD.setText("Tubo de ensaio");
+        btnAlternativaD.setFocusPainted(false);
+        btnAlternativaD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlternativaD.setIconTextGap(18);
+        cardQuiz.add(btnAlternativaD, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 540, 58));
+
+        btnAlternativaC.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnAlternativaC.setForeground(new java.awt.Color(20, 25, 45));
+        btnAlternativaC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        btnAlternativaC.setText("Funil de decantação");
+        btnAlternativaC.setFocusPainted(false);
+        btnAlternativaC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlternativaC.setIconTextGap(18);
+        btnAlternativaC.setInheritsPopupMenu(true);
+        cardQuiz.add(btnAlternativaC, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 540, 58));
+
+        btnVoltar.setBackground(new java.awt.Color(241, 193, 192));
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(100, 100, 100));
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.setFocusPainted(false);
+        cardQuiz.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 415, 190, 42));
+
+        btnProxima.setBackground(new java.awt.Color(179, 40, 36));
+        btnProxima.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnProxima.setForeground(new java.awt.Color(255, 255, 255));
+        btnProxima.setText("PRÓXIMA");
+        btnProxima.setFocusPainted(false);
+        cardQuiz.add(btnProxima, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 415, 190, 42));
+
+        btnDica.setBackground(new java.awt.Color(179, 40, 36));
+        btnDica.setFont(new java.awt.Font("Segoe UI Emoji", 0, 36)); // NOI18N
+        btnDica.setForeground(new java.awt.Color(255, 255, 255));
+        btnDica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/idea  1.png"))); // NOI18N
+        btnDica.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDica.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnDica.addActionListener(this::btnDicaActionPerformed);
+        cardQuiz.add(btnDica, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 390, 65, 58));
+
+        painelFundo.add(cardQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 1240, 460));
+
+        lblLogoEtec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etecRedimensionada.png"))); // NOI18N
+        painelFundo.add(lblLogoEtec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 150, -1));
+
+        getContentPane().add(painelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDicaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,7 +213,73 @@ public class TelaQuiz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaQuiz().setVisible(true));
     }
 
+    public javax.swing.JLabel getLblQuestaoAtual() {
+    return lblQuestaoAtual;
+    }
+
+    public javax.swing.JLabel getLblProgresso() {
+    return lblProgresso;
+    }
+
+    public javax.swing.JLabel getLblEnunciado() {
+    return lblEnunciado;
+    }
+
+    public javax.swing.JLabel getLblImagemQuestao() {
+    return lblImagemQuestao;
+    }
+
+    public javax.swing.JButton getBtnAlternativaA() {
+    return btnAlternativaA;
+    }
+
+    public javax.swing.JButton getBtnAlternativaB() {
+    return btnAlternativaB;
+    }
+
+    public javax.swing.JButton getBtnAlternativaC() {
+    return btnAlternativaC;
+    }
+
+    public javax.swing.JButton getBtnAlternativaD() {
+    return btnAlternativaD;
+    }
+
+    public javax.swing.JButton getBtnVoltar() {
+    return btnVoltar;
+    }
+
+    public javax.swing.JButton getBtnProxima() {
+    return btnProxima;
+    }
+
+    public javax.swing.JButton getBtnDica() {
+    return btnDica;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlternativaA;
+    private javax.swing.JButton btnAlternativaB;
+    private javax.swing.JButton btnAlternativaC;
+    private javax.swing.JButton btnAlternativaD;
+    private javax.swing.JButton btnDica;
+    private javax.swing.JButton btnProxima;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JPanel cardQuiz;
+    private javax.swing.JLabel lblAlternativaA;
+    private javax.swing.JLabel lblAlternativaB;
+    private javax.swing.JLabel lblAlternativaC;
+    private javax.swing.JLabel lblAlternativaD;
+    private javax.swing.JLabel lblEnunciado;
+    private javax.swing.JLabel lblImagemQuestao;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblLogoEtec;
+    private javax.swing.JLabel lblProgresso;
+    private javax.swing.JLabel lblQuestaoAtual;
+    private javax.swing.JPanel linhaEnunciado;
+    private javax.swing.JPanel linhaTopo;
+    private javax.swing.JPanel painelFundo;
+    private javax.swing.JPanel painelQuestaoAtual;
     // End of variables declaration//GEN-END:variables
 
 }
