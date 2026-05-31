@@ -73,7 +73,6 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica - Desempenho do Aluno");
         setMinimumSize(new java.awt.Dimension(1366, 768));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -146,7 +145,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         miniCardQuizzes.setBackground(new java.awt.Color(238, 243, 255));
         miniCardQuizzes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTituloQuizzes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTituloQuizzes.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblTituloQuizzes.setForeground(new java.awt.Color(20, 20, 30));
         lblTituloQuizzes.setText("Quizzes Realizados");
         miniCardQuizzes.add(lblTituloQuizzes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 180, 20));
@@ -166,7 +165,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         miniCardMedia.setBackground(new java.awt.Color(235, 250, 240));
         miniCardMedia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTituloMedia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTituloMedia.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblTituloMedia.setForeground(new java.awt.Color(20, 20, 30));
         lblTituloMedia.setText("Média Geral");
         miniCardMedia.add(lblTituloMedia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, 20));
@@ -186,7 +185,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         miniCardMelhor.setBackground(new java.awt.Color(255, 248, 235));
         miniCardMelhor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTituloMelhor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTituloMelhor.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         lblTituloMelhor.setForeground(new java.awt.Color(150, 80, 0));
         lblTituloMelhor.setText("Melhor Pontuação");
         miniCardMelhor.add(lblTituloMelhor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 180, 20));
@@ -208,10 +207,10 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         cardResumo.setBackground(new java.awt.Color(255, 255, 255));
         cardResumo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTituloResumo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTituloResumo.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblTituloResumo.setForeground(new java.awt.Color(20, 25, 45));
         lblTituloResumo.setText("Resumo de Desempenho");
-        cardResumo.add(lblTituloResumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, 25));
+        cardResumo.add(lblTituloResumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 250, 25));
 
         lblTituloRealizados.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblTituloRealizados.setForeground(new java.awt.Color(20, 25, 45));
@@ -311,17 +310,17 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         cardHistorico.setBackground(new java.awt.Color(255, 255, 255));
         cardHistorico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTituloHistorico.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTituloHistorico.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblTituloHistorico.setForeground(new java.awt.Color(20, 25, 45));
         lblTituloHistorico.setText("Histórico de Quizzes");
         cardHistorico.add(lblTituloHistorico, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 350, 25));
 
-        tblHistorico.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        tblHistorico.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         tblHistorico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Materiais do laboratório", "6", " 2", "DETALHES"},
-                {"Experimentos Químicos", "", null, null},
-                {"Equipamentos de Segurança", null, null, null}
+                {"Materiais do laboratório", "", "", "DETALHES"},
+                {"Experimentos Químicos", "", null, "DETALHES"},
+                {"Equipamentos de Segurança", null, null, "DETALHES"}
             },
             new String [] {
                 "Quiz", "Pontuação", "Dicas Usadas", "Ações"
