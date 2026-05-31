@@ -3,6 +3,8 @@ package quizquimica.view;
 import javax.swing.JOptionPane;
 import quizquimica.model.Usuario;
 import quizquimica.service.AuthService;
+import quizquimica.view.DashboardAlunoNovo;
+import quizquimica.controller.DashboardAlunoNovoController;
 import quizquimica.model.Professor;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -129,7 +131,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 TelaProfessor professor = new TelaProfessor();
                 professor.setVisible(true);
             } else {
-                DashboardAluno aluno = new DashboardAluno();
+                DashboardAlunoNovo aluno = new DashboardAlunoNovo();
+                new DashboardAlunoNovoController(aluno);
                 aluno.setVisible(true);
             }
             dispose();
