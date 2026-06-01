@@ -8,6 +8,7 @@ import quizquimica.dao.PartidaDAO;
 import quizquimica.model.Aluno;
 import quizquimica.service.AuthService;
 import quizquimica.view.AlunosPesquisa;
+import quizquimica.view.MenuProfessor;
 
 public class AlunosPesquisaController {
 
@@ -23,9 +24,7 @@ public class AlunosPesquisaController {
         configurarEventos();
     }
 
-    // -------------------------------------------------------
     // Carregamento inicial
-    // -------------------------------------------------------
 
     private void carregarAlunos() {
         String turma = AuthService.getInstance().getUsuarioLogado().getTurma();
@@ -75,9 +74,7 @@ public class AlunosPesquisaController {
         }
     }
 
-    // -------------------------------------------------------
     // Eventos
-    // -------------------------------------------------------
 
     private void configurarEventos() {
         // Campo de busca — filtrar ao digitar
@@ -86,6 +83,12 @@ public class AlunosPesquisaController {
             public void keyReleased(java.awt.event.KeyEvent e) {
                 filtrarAlunos(view.getCampoBusca().getText().trim());
             }
+        });
+        // Botão menu ☰
+        view.getjToggleButton1().addActionListener(e -> {
+            MenuProfessor menu = new MenuProfessor(view, true);
+            menu.setLocationRelativeTo(view.getjToggleButton1());
+            menu.setVisible(true);
         });
 
         // Placeholder do campo de busca
@@ -113,9 +116,7 @@ public class AlunosPesquisaController {
         });
     }
 
-    // -------------------------------------------------------
     // Filtro
-    // -------------------------------------------------------
 
     private void filtrarAlunos(String texto) {
         if (texto.isBlank() || texto.equals("Buscar aluno...")) {
@@ -133,10 +134,7 @@ public class AlunosPesquisaController {
         }
         preencherTabela(filtrados);
     }
-
-    // -------------------------------------------------------
     // Ações da tabela
-    // -------------------------------------------------------
 
     private void tratarCliqueTabela() {
         int linha  = view.getTabelaAlunos().getSelectedRow();
