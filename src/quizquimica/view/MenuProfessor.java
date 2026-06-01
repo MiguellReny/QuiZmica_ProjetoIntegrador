@@ -49,11 +49,11 @@ public class MenuProfessor extends javax.swing.JDialog {
 
         jButton2.setBackground(new java.awt.Color(179, 40, 36));
         jButton2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit 1.png"))); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        //jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/exit 1.png"))); // NOI18N
         jButton2.setText(" Sair");
         jButton2.setToolTipText("");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204)));
+        //jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204)));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -78,13 +78,13 @@ public class MenuProfessor extends javax.swing.JDialog {
 
         jButton1.setBackground(new java.awt.Color(199, 215, 239));
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Alunos");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 320, 60));
 
         jButton3.setBackground(new java.awt.Color(199, 215, 239));
         jButton3.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Dashboard");
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 320, 60));
 
@@ -105,7 +105,10 @@ public class MenuProfessor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if (getOwner() != null) getOwner().dispose();
+        dispose();
+        quizquimica.view.TelaJogar tela = new quizquimica.view.TelaJogar();
+        tela.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -125,20 +128,20 @@ public class MenuProfessor extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PopUpDica dialog = new PopUpDica(new javax.swing.JFrame(), true);
+                MenuProfessor dialog = new MenuProfessor(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -10,6 +10,49 @@ public class AlunosPesquisa extends javax.swing.JFrame {
     public AlunosPesquisa() {
         initComponents();
         setLocationRelativeTo(null);
+
+        // Impedir edição direta na tabela
+        tabelaAlunos.setDefaultEditor(Object.class, null);
+
+        jButton1.setOpaque(true);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+
+        jToggleButton1.setOpaque(true);
+        jToggleButton1.setBorderPainted(false);
+        jToggleButton1.setFocusPainted(false);
+
+        jToggleButton1.addActionListener(e -> {
+            MenuProfessor menu = new MenuProfessor(this, true);
+            menu.setLocationRelativeTo(this);
+            menu.setVisible(true);
+            // fecha a tela de alunos se o menu foi fechado via Sair
+            if (!menu.isVisible()) {
+                dispose();
+                TelaJogar tela = new TelaJogar();
+                tela.setVisible(true);
+            }
+        });
+
+        // Placeholder do campo de busca
+jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+    @Override
+    public void focusGained(java.awt.event.FocusEvent e) {
+        if (jTextField1.getText().equals("Buscar aluno...")) {
+            jTextField1.setText("");
+            jTextField1.setForeground(java.awt.Color.BLACK);
+        }
+    }
+    @Override
+    public void focusLost(java.awt.event.FocusEvent e) {
+        if (jTextField1.getText().isBlank()) {
+            jTextField1.setText("Buscar aluno...");
+            jTextField1.setForeground(new java.awt.Color(102, 102, 102));
+        }
+    }
+    
+});
+        
     }
 
     /**
@@ -22,7 +65,6 @@ public class AlunosPesquisa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -47,9 +89,6 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
         setBackground(new java.awt.Color(230, 240, 251));
@@ -61,10 +100,10 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
+        //jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
         jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 520, -1));
 
-        tabelaAlunos.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tabelaAlunos.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Angela", "angela@gmail.com", "Consultar | Editar"},
@@ -86,7 +125,7 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 610, 490));
 
         jTextField1.setBackground(new java.awt.Color(245, 247, 250));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         jTextField1.setText("Buscar aluno...");
         jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 610, 40));
@@ -176,20 +215,16 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-        int linha = tabelaAlunos.getSelectedRow();
-        int coluna = tabelaAlunos.getSelectedColumn();
-        String nome = tabelaAlunos
-        .getValueAt(linha, 0)
-        .toString();
-        if(coluna == 2){
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Escolha ação para: " + nome
-            );
-        }
-    }//GEN-LAST:event_tabelaAlunosMouseClicked
-
+private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
+    int linha = tabelaAlunos.getSelectedRow();
+    int coluna = tabelaAlunos.getSelectedColumn();
+    if (linha < 0 || tabelaAlunos.getValueAt(linha, 0) == null) return;
+    if (coluna == 2) {
+        PopUpAlterar popup = new PopUpAlterar(this, true);
+        popup.setLocationRelativeTo(this);
+        popup.setVisible(true);
+    }
+}//GEN-LAST:event_tabelaAlunosMouseClicked
     /**
      * @param args the command line arguments
      */
@@ -218,11 +253,10 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+   // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -244,4 +278,15 @@ public class AlunosPesquisa extends javax.swing.JFrame {
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTable tabelaAlunos;
     // End of variables declaration//GEN-END:variables
+
+    // Getters para o controller
+    public javax.swing.JLabel getLabelTotal()            { return labelTotal; }
+    public javax.swing.JLabel getLabelQuiz()             { return labelQuiz; }
+    public javax.swing.JLabel getLabelMedia()            { return labelMedia; }
+    public javax.swing.JLabel getLabelMelhor()           { return labelMelhor; }
+    public javax.swing.JTextField getCampoBusca()        { return jTextField1; }
+    public javax.swing.JTable getTabelaAlunos()          { return tabelaAlunos; }
+    public javax.swing.JButton getBtnRelatorios()        { return jButton1; }
+    public javax.swing.JToggleButton getjToggleButton1() { return jToggleButton1; }
+
 }
