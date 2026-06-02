@@ -3,7 +3,6 @@
 -- Host: quizmica-brenorossinimaua-7324.d.aivencloud.com    Database: defaultdb
 -- ------------------------------------------------------
 -- Server version	8.0.45
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
