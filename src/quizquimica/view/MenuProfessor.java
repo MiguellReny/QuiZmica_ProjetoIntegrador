@@ -13,6 +13,7 @@ public class MenuProfessor extends javax.swing.JDialog {
     public MenuProfessor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
     }
 
     /**
@@ -80,6 +81,11 @@ public class MenuProfessor extends javax.swing.JDialog {
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Alunos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 320, 60));
 
         jButton3.setBackground(new java.awt.Color(199, 215, 239));
@@ -104,12 +110,14 @@ public class MenuProfessor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (getOwner() != null) getOwner().dispose();
-        dispose();
-        quizquimica.view.TelaJogar tela = new quizquimica.view.TelaJogar();
-        tela.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+            Navegacao.irParaTelaJogar(this);
+
+        }
+        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            Navegacao.irParaAlunosPesquisa(this);
+
+        }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

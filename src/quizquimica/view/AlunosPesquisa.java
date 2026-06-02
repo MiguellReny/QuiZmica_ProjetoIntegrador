@@ -23,16 +23,10 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jToggleButton1.setFocusPainted(false);
 
         jToggleButton1.addActionListener(e -> {
-            MenuProfessor menu = new MenuProfessor(this, true);
-            menu.setLocationRelativeTo(this);
-            menu.setVisible(true);
-            // fecha a tela de alunos se o menu foi fechado via Sair
-            if (!menu.isVisible()) {
-                dispose();
-                TelaJogar tela = new TelaJogar();
-                tela.setVisible(true);
-            }
-        });
+    MenuProfessor menu = new MenuProfessor(this, true);
+    menu.setLocationRelativeTo(this);
+    menu.setVisible(true);
+});
 
         // Placeholder do campo de busca
 jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -106,13 +100,13 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         tabelaAlunos.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Angela", "angela@gmail.com", "Consultar | Editar"},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"Angela", "angela@gmail.com", " Editar", "Consultar", "Remover"},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Email", "Ações"
+                "Nome", "Email", "Editar", "Consultar", "Remover"
             }
         ));
         tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,16 +208,27 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
+    int linha = tabelaAlunos.getSelectedRow();
+    int coluna = tabelaAlunos.getSelectedColumn();
+    if (linha < 0 || tabelaAlunos.getValueAt(linha, 0) == null) return;
 
-    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-        int linha = tabelaAlunos.getSelectedRow();
-        int coluna = tabelaAlunos.getSelectedColumn();
-        if (linha < 0 || tabelaAlunos.getValueAt(linha, 0) == null) return;
-        if (coluna == 2) {
-            PopUpAlterar popup = new PopUpAlterar(this, true);
-            popup.setLocationRelativeTo(this);
-            popup.setVisible(true);
-        
+    if (coluna == 2) {
+        PopUpAlterar popup = new PopUpAlterar(this, true);
+        popup.setLocationRelativeTo(this);
+        popup.setVisible(true);
+    }
+    else if (coluna == 3) {
+        String nomeAluno = tabelaAlunos.getValueAt(linha, 0).toString();
+        DesempenhoAluno tela = new DesempenhoAluno(this, nomeAluno);
+        tela.setLocationRelativeTo(this);
+        dispose();
+        tela.setVisible(true);
+    }
+    else if (coluna == 4) {
+        PopUpDeleteAluno popup = new PopUpDeleteAluno(this, true, linha, tabelaAlunos);
+        popup.setLocationRelativeTo(this);
+        popup.setVisible(true);
     }
 }//GEN-LAST:event_tabelaAlunosMouseClicked
     /**
