@@ -11,12 +11,22 @@ package quizquimica.view;
 public class DesempenhoAluno extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DesempenhoAluno.class.getName());
-
+    private String nomeAluno;
     /**
      * Creates new form DesempenhoAluno
      */
-    public DesempenhoAluno() {
+    public DesempenhoAluno(java.awt.Frame parent, String nomeAluno) {
         initComponents();
+        setLocationRelativeTo(null);
+        this.nomeAluno = nomeAluno;
+        lblNomeAluno.setText(nomeAluno);
+        
+        jToggleButton1.addActionListener(e -> {
+    MenuProfessor menu = new MenuProfessor(this, true);
+    menu.setLocationRelativeTo(this);
+    menu.setVisible(true);
+});
+
     }
 
     /**
@@ -30,9 +40,6 @@ public class DesempenhoAluno extends javax.swing.JFrame {
 
         painelFundo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
-        painelTopo = new javax.swing.JPanel();
-        lblTituloTopo = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
         btnVoltar = new javax.swing.JButton();
         lblTitutloPagina = new javax.swing.JLabel();
         lblSubtituloPagina = new javax.swing.JLabel();
@@ -69,6 +76,9 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         lblTituloHistorico = new javax.swing.JLabel();
         scrollHistorico = new javax.swing.JScrollPane();
         tblHistorico = new javax.swing.JTable();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica - Desempenho do Aluno");
@@ -81,24 +91,6 @@ public class DesempenhoAluno extends javax.swing.JFrame {
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
         painelFundo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 150));
-
-        painelTopo.setBackground(new java.awt.Color(179, 40, 36));
-        painelTopo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblTituloTopo.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        lblTituloTopo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTituloTopo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTituloTopo.setText("ALUNOS");
-        painelTopo.add(lblTituloTopo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
-
-        jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI Symbol", 0, 48)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("☰");
-        jToggleButton1.setBorderPainted(false);
-        painelTopo.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 30, 100, -1));
-
-        painelFundo.add(painelTopo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 75));
 
         btnVoltar.setBackground(new java.awt.Color(238, 243, 249));
         btnVoltar.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
@@ -333,13 +325,33 @@ public class DesempenhoAluno extends javax.swing.JFrame {
 
         painelFundo.add(cardHistorico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 1280, 260));
 
+        jPanel20.setBackground(new java.awt.Color(179, 40, 36));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 40)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Alunos");
+        jPanel20.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 510, 40));
+
+        jToggleButton1.setBackground(new java.awt.Color(179, 40, 36));
+        jToggleButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jToggleButton1.setText("☰");
+        jToggleButton1.setToolTipText("");
+        jToggleButton1.setBorder(null);
+        jPanel20.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 0, 100, 60));
+
+        painelFundo.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
+
         getContentPane().add(painelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        AlunosPesquisa tela = new AlunosPesquisa();
+        tela.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
@@ -364,8 +376,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DesempenhoAluno().setVisible(true));
-    }
+        java.awt.EventQueue.invokeLater(() -> new DesempenhoAluno(null, "Teste").setVisible(true));    }
 
     public javax.swing.JButton getBtnVoltar() {
       return btnVoltar;
@@ -422,7 +433,9 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     private javax.swing.JPanel cardResumo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblAcertosTotais;
     private javax.swing.JLabel lblAvatar;
@@ -444,7 +457,6 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     private javax.swing.JLabel lblTituloRealizados;
     private javax.swing.JLabel lblTituloResumo;
     private javax.swing.JLabel lblTituloTaxa1;
-    private javax.swing.JLabel lblTituloTopo;
     private javax.swing.JLabel lblTitutloPagina;
     private javax.swing.JLabel lblTurmaAluno;
     private javax.swing.JPanel linhaResumo1;
@@ -454,7 +466,6 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     private javax.swing.JPanel miniCardMelhor;
     private javax.swing.JPanel miniCardQuizzes;
     private javax.swing.JPanel painelFundo;
-    private javax.swing.JPanel painelTopo;
     private javax.swing.JScrollPane scrollHistorico;
     private javax.swing.JTable tblHistorico;
     // End of variables declaration//GEN-END:variables
