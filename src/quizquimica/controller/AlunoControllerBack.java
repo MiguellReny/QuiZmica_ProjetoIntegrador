@@ -7,7 +7,7 @@ import quizquimica.model.Partida;
 import quizquimica.service.QuestaoService;
 import quizquimica.model.Questao;
 
-public class AlunoController {
+public class AlunoControllerBack {
 
     private final PartidaDAO partidaDAO = new PartidaDAO();
     private final QuestaoService questaoService = new QuestaoService();

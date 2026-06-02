@@ -4,7 +4,7 @@ import quizquimica.service.PartidaService;
 import quizquimica.model.Questao;
 import quizquimica.model.Partida;
 
-public class PartidaController {
+public class PartidaControllerBack {
 
     private final PartidaService partidaService = new PartidaService();
     

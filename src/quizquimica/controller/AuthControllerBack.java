@@ -3,7 +3,7 @@ package quizquimica.controller;
 import quizquimica.model.Usuario;
 import quizquimica.service.AuthService;
 
-public class AuthController {
+public class AuthControllerBack {
 
     private final AuthService authService = new AuthService();
 

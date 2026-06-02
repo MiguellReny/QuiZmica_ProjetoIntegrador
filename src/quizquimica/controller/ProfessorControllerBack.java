@@ -8,7 +8,7 @@ import quizquimica.service.AuthService;
 import quizquimica.service.QuestaoService;
 import quizquimica.service.DesempenhoService;
 
-public class ProfessorController {
+public class ProfessorControllerBack {
 
     private final QuestaoService questaoService = new QuestaoService();
     private final AuthService authService = new AuthService();
