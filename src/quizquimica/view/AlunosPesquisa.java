@@ -100,7 +100,7 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         jPanel6.setPreferredSize(new java.awt.Dimension(1366, 768));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        //jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicamenor.png"))); // NOI18N
         jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 520, -1));
 
         tabelaAlunos.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -215,14 +215,15 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-    int linha = tabelaAlunos.getSelectedRow();
-    int coluna = tabelaAlunos.getSelectedColumn();
-    if (linha < 0 || tabelaAlunos.getValueAt(linha, 0) == null) return;
-    if (coluna == 2) {
-        PopUpAlterar popup = new PopUpAlterar(this, true);
-        popup.setLocationRelativeTo(this);
-        popup.setVisible(true);
+    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
+        int linha = tabelaAlunos.getSelectedRow();
+        int coluna = tabelaAlunos.getSelectedColumn();
+        if (linha < 0 || tabelaAlunos.getValueAt(linha, 0) == null) return;
+        if (coluna == 2) {
+            PopUpAlterar popup = new PopUpAlterar(this, true);
+            popup.setLocationRelativeTo(this);
+            popup.setVisible(true);
+        
     }
 }//GEN-LAST:event_tabelaAlunosMouseClicked
     /**
