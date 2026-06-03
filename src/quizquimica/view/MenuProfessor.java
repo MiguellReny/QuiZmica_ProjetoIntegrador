@@ -92,7 +92,13 @@ public class MenuProfessor extends javax.swing.JDialog {
         jButton3.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Dashboard");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 320, 60));
+    
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,12 +118,13 @@ public class MenuProfessor extends javax.swing.JDialog {
 
         private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
             Navegacao.irParaTelaJogar(this);
-
         }
-        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+            Navegacao.irParaDashboardProfessor(this);
+        }
+        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             Navegacao.irParaAlunosPesquisa(this);
-
-        }//GEN-LAST:event_jButton1ActionPerformed
+        }
 
     /**
      * @param args the command line arguments

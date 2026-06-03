@@ -11,29 +11,54 @@ import quizquimica.util.ValidadorEmail;
 
 public class AuthService {
 
+        // SINGLETON
+    private static AuthService instance;
+    public static AuthService getInstance() {
+        if (instance == null) {
+            instance = new AuthService();
+        }
+        return instance;
+    }
+
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     private final AlunoDAO alunoDAO = new AlunoDAO();
     private final ProfessorDAO professorDAO = new ProfessorDAO();
 
+        // USUARIO LOGADO
+    private Usuario usuarioLogado;
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
+
     public Usuario login(String login, String senha) {
 
+        // 1. Valida domínio do login
         if (!ValidadorEmail.emailValido(login)) {
             System.out.println("[AuthService] Login com domínio inválido: " + login);
             return null;
         }
 
+        // 2. Gera hash e confere com o banco
         String senhaHash = CadastrarSenha.hashSenha(senha);
         if (!usuarioDAO.autenticar(login, senhaHash)) {
             System.out.println("[AuthService] Credenciais inválidas para: " + login);
             return null;
         }
- 
+
+        // 3. Identifica o tipo e retorna o objeto correto
         String tipo = usuarioDAO.buscarTipo(login);
+        Usuario usuario;
         if ("professor".equals(tipo)) {
-            return professorDAO.buscarPorLogin(login);
+            usuario = professorDAO.buscarPorLogin(login);
+        } else {
+            usuario = alunoDAO.buscarPorLogin(login);
         }
-        return alunoDAO.buscarPorLogin(login);
-    }
+        usuarioLogado = usuario;
+        return usuario;
+        }
 
     public String[] cadastrarAluno(String nome, String turma, String senha) {
 
@@ -63,6 +88,7 @@ public class AuthService {
         return null;
     }
 
+    
     public boolean redefinirSenha(String loginAluno, String novaSenha) {
         if (!CadastrarSenha.senhaValida(novaSenha)) {
             System.out.println("[AuthService] Senha inválida — mínimo 6 caracteres.");

@@ -135,7 +135,7 @@ public class TelaLogin extends javax.swing.JFrame {
         Usuario usuario = authService.login(loginUsuario, senhaUsuario);
         if (usuario != null) {
             if (usuario instanceof Professor) {
-                TelaProfessor professor = new TelaProfessor();
+                DashboardProfessor professor = new DashboardProfessor();
                 professor.setVisible(true);
             } else {
                 DashboardAlunoNovo aluno = new DashboardAlunoNovo();

@@ -55,7 +55,27 @@ public class AlunoDAO {
         }
         return false;
     }
+    public boolean atualizar(String loginOriginal, String novoNome, String novoLogin, String novaSenha) {
+    String sql = novaSenha != null
+        ? "UPDATE usuario SET nome = ?, login = ?, senha = ? WHERE login = ? AND tipo = 'aluno'"
+        : "UPDATE usuario SET nome = ?, login = ? WHERE login = ? AND tipo = 'aluno'";
 
+    try (Connection conn = ConexaoDB.getConexao();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, novoNome);
+        ps.setString(2, novoLogin);
+        if (novaSenha != null) {
+            ps.setString(3, novaSenha);
+            ps.setString(4, loginOriginal);
+        } else {
+            ps.setString(3, loginOriginal);
+        }
+        return ps.executeUpdate() > 0;
+    } catch (SQLException e) {
+        System.out.println("[AlunoDAO] Erro ao atualizar aluno: " + e.getMessage());
+    }
+    return false;
+}
     public List<Aluno> listarPorTurma(String turma) {
         List<Aluno> alunos = new ArrayList<>();
         String sql = "SELECT * FROM usuario WHERE turma = ? AND tipo = 'aluno'";

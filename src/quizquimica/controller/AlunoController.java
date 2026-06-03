@@ -37,7 +37,6 @@ public class AlunoController {
        private void iniciarQuiz() {
        TelaQuiz telaQuiz = new TelaQuiz();
        new TelaQuizController(telaQuiz);
-
         telaQuiz.setVisible(true);
         view.dispose();
     }
@@ -47,4 +46,5 @@ public class AlunoController {
         TelaJogar tela = new TelaJogar();
         tela.setVisible(true);
     }
+}
 }

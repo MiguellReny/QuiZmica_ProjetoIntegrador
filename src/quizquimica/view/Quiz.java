@@ -1,3 +1,4 @@
+package quizquimica.view;
 
 public class Quiz extends javax.swing.JFrame {
 

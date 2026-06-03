@@ -39,15 +39,15 @@ public class PopUpAlterar extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(238, 243, 249));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(515, 400));
+        setPreferredSize(new java.awt.Dimension(515, 370));
         setResizable(false);
-        setSize(new java.awt.Dimension(515, 400));
+        setSize(new java.awt.Dimension(515, 370));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(350, 234));
-        jPanel1.setPreferredSize(new java.awt.Dimension(515, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(515, 370));
         jPanel1.setRequestFocusEnabled(false);
-        jPanel1.setSize(new java.awt.Dimension(515, 400));
+        jPanel1.setSize(new java.awt.Dimension(515, 370));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -150,11 +150,9 @@ public class PopUpAlterar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -162,7 +160,7 @@ public class PopUpAlterar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -182,20 +180,20 @@ public class PopUpAlterar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PopUpDica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PopUpDica dialog = new PopUpDica(new javax.swing.JFrame(), true);
+                PopUpAlterar dialog = new PopUpAlterar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -220,4 +218,10 @@ public class PopUpAlterar extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTextField getTxtNome()  { return jTextField1; }
+    public javax.swing.JTextField getTxtEmail() { return jTextField2; }
+    public javax.swing.JTextField getTxtSenha() { return jTextField3; }
+    public javax.swing.JButton getBtnAlterar()  { return jButton2; }
+    public javax.swing.JButton getBtnCancelar() { return jButton1; }
 }

@@ -1,14 +1,18 @@
 package quizquimica;
 
-import quizquimica.controller.AuthController;
-import quizquimica.model.Usuario;
+import quizquimica.view.AlunosPesquisa;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        AuthController auth = new AuthController();
+        java.awt.EventQueue.invokeLater(() -> {
 
-        Usuario prof = auth.realizarLogin("mariadosocorro@cps.sp.gov.br", "482951");
-        System.out.println(prof != null ? "Conectado ao Aiven! Login OK: " + prof.getNome() : "FALHOU");
+            AlunosPesquisa tela = new AlunosPesquisa();
+
+            tela.setVisible(true);
+
+        });
+
     }
 }

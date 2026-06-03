@@ -7,10 +7,14 @@ public class Navegacao {
         dialog.dispose();
         new TelaJogar().setVisible(true);
     }
-
     public static void irParaAlunosPesquisa(javax.swing.JDialog dialog) {
         if (dialog.getOwner() != null) dialog.getOwner().dispose();
         dialog.dispose();
         new AlunosPesquisa().setVisible(true);
+    }
+    public static void irParaDashboardProfessor(javax.swing.JDialog dialog) {
+        if (dialog.getOwner() != null) dialog.getOwner().dispose();
+        dialog.dispose();
+        new DashboardProfessor().setVisible(true);
     }
 }

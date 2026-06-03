@@ -1,3 +1,6 @@
+package quizquimica.view;
+
+import quizquimica.controller.AdicionarQuestaoController;
 
 public class AdicionarQuestao extends javax.swing.JFrame {
 
@@ -7,6 +10,7 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     public AdicionarQuestao() {
         initComponents();
         setLocationRelativeTo(null);
+        new AdicionarQuestaoController(this);
     }
 
     /**
@@ -19,7 +23,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -83,8 +86,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
@@ -394,16 +395,16 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         });
         jPanel5.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 480, 40));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
         jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 40));
 
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
         jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 30));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
         jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 40));
 
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
         jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 40));
 
         jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -499,20 +500,21 @@ public class AdicionarQuestao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarQuestao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarQuestao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarQuestao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarQuestao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardAluno().setVisible(true);
+                new AdicionarQuestao().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -534,7 +536,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -580,4 +581,20 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+
+    // getters 
+    public javax.swing.JTextArea getTxtEnunciado()       { return jTextArea2; }
+    public javax.swing.JTextArea getTxtDica()            { return jTextArea1; }
+    public javax.swing.JTextField getTxtAlternativaA()   { return jTextField7; }
+    public javax.swing.JTextField getTxtAlternativaB()   { return jTextField8; }
+    public javax.swing.JTextField getTxtAlternativaC()   { return jTextField9; }
+    public javax.swing.JTextField getTxtAlternativaD()   { return jTextField6; }
+    public javax.swing.JComboBox<String> getComboDificuldade()  { return jComboBox6; }
+    public javax.swing.JComboBox<String> getComboCategoria()    { return jComboBox5; }
+    public javax.swing.JComboBox<String> getComboResposta()     { return jComboBox1; }
+    public javax.swing.JComboBox<String> getComboPersonagem()   { return jComboBox3; }
+    public javax.swing.JButton getBtnSalvar()   { return jButton1; }
+    public javax.swing.JButton getBtnCancelar() { return jButton2; }
+    public javax.swing.JButton getBtnSair()     { return jButton10; }
+    public javax.swing.JLabel getLblContadorEnunciado() { return jLabel16; }
 }

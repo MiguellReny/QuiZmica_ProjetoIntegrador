@@ -341,7 +341,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         jToggleButton1.setBorder(null);
         jPanel20.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 0, 100, 60));
 
-        painelFundo.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
+        painelFundo.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 75));
 
         getContentPane().add(painelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
