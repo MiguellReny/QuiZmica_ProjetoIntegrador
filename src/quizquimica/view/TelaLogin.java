@@ -4,8 +4,8 @@ import javax.swing.JOptionPane;
 import quizquimica.model.Usuario;
 import quizquimica.service.AuthService;
 import quizquimica.view.DashboardAlunoNovo;
-import quizquimica.controller.DashboardAlunoNovoController;
 import quizquimica.model.Professor;
+import quizquimica.controller.LoginController;
 
 public class TelaLogin extends javax.swing.JFrame {
 
@@ -131,15 +131,14 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String loginUsuario = jTextField1.getText();
         String senhaUsuario = jTextField2.getText();
-        AuthService authService = new AuthService();
-        Usuario usuario = authService.login(loginUsuario, senhaUsuario);
+        LoginController controller = new LoginController();
+        Usuario usuario = controller.autenticar(loginUsuario, senhaUsuario);
         if (usuario != null) {
             if (usuario instanceof Professor) {
                 DashboardProfessor professor = new DashboardProfessor();
                 professor.setVisible(true);
             } else {
                 DashboardAlunoNovo aluno = new DashboardAlunoNovo();
-                new DashboardAlunoNovoController(aluno);
                 aluno.setVisible(true);
             }
             dispose();

@@ -82,8 +82,8 @@ public class PopUpDicaQuiz extends javax.swing.JDialog {
         painelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblImagemPersonagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/curie.png"))); // NOI18N
-        painelFundo.add(lblImagemPersonagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 150, 210));
+        lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/CurieRedimensionada.png"))); // NOI18N
+        painelFundo.add(lblImagemPersonagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 160, 210));
 
         painelDescricaoPersonagem.setBackground(new java.awt.Color(232, 232, 232));
         painelDescricaoPersonagem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

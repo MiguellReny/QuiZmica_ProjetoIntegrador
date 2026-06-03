@@ -8,17 +8,24 @@ public class DashboardAlunoNovoController {
 
     private final DashboardAlunoNovo view;
 
+    public static final String QUIZ_EXPERIMENTOS = "Experimentos Químicos";
+    public static final String QUIZ_MATERIAIS = "Materiais do laboratório";
+    public static final String QUIZ_SEGURANCA = "Equipamentos de segurança";
+
     public DashboardAlunoNovoController(DashboardAlunoNovo view) {
         this.view = view;
 
         configurarBarras();
         configurarEventos();
+        configurarBotoes();
     }
 
     private void configurarEventos() {
-        view.getBtnParticiparExperimentos().addActionListener(e -> iniciarQuiz("Experimentos Químicos"));
-        view.getBtnParticiparMateriaisLab().addActionListener(e -> iniciarQuiz("Materiais do laboratório"));
-        view.getBtnParticiparSeguranca().addActionListener(e -> iniciarQuiz("Equipamentos de segurança"));
+        view.getBtnParticiparExperimentos().addActionListener(e -> iniciarQuiz(QUIZ_EXPERIMENTOS));
+
+        view.getBtnParticiparMateriaisLab().addActionListener(e -> iniciarQuiz(QUIZ_MATERIAIS));
+
+        view.getBtnParticiparSeguranca().addActionListener(e -> iniciarQuiz(QUIZ_SEGURANCA));
 
         view.getBtnSair().addActionListener(e -> sair());
     }
@@ -37,15 +44,33 @@ public class DashboardAlunoNovoController {
         progressBar.setStringPainted(true);
     }
 
-    private void iniciarQuiz(String categoria) {
-        TelaQuiz telaQuiz = new TelaQuiz();
-        new TelaQuizController(telaQuiz);
+    private void configurarBotoes() {
+        view.getBtnParticiparExperimentos().setOpaque(true);
+        view.getBtnParticiparExperimentos().setBorderPainted(false);
+        view.getBtnParticiparExperimentos().setFocusPainted(false);
 
-        telaQuiz.setTitle("QuiZmica - " + categoria);
-        telaQuiz.setVisible(true);
+        view.getBtnParticiparMateriaisLab().setOpaque(true);
+        view.getBtnParticiparMateriaisLab().setBorderPainted(false);
+        view.getBtnParticiparMateriaisLab().setFocusPainted(false);
 
-        view.dispose();
+        view.getBtnParticiparSeguranca().setOpaque(true);
+        view.getBtnParticiparSeguranca().setBorderPainted(false);
+        view.getBtnParticiparSeguranca().setFocusPainted(false);
+
+        view.getBtnSair().setOpaque(true);
+        view.getBtnSair().setBorderPainted(false);
+        view.getBtnSair().setFocusPainted(false);
     }
+
+    private void iniciarQuiz(String categoria) {
+    TelaQuiz telaQuiz = new TelaQuiz(categoria);
+    new TelaQuizController(telaQuiz, categoria);
+
+    telaQuiz.setTitle("QuiZmica - " + categoria);
+    telaQuiz.setVisible(true);
+
+    view.dispose();
+}
 
     private void sair() {
         TelaLogin telaLogin = new TelaLogin();

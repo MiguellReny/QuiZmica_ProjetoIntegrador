@@ -1,8 +1,8 @@
 package quizquimica.controller;
 
+import quizquimica.view.TelaJogar;
 import quizquimica.view.TelaLogin;
 import quizquimica.view.TermodeUso;
-import quizquimica.view.TelaJogar;
 
 public class JogarController {
     private TelaJogar tela;

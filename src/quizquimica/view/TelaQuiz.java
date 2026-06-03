@@ -11,11 +11,21 @@ package quizquimica.view;
  */
 public class TelaQuiz extends javax.swing.JFrame {
 
+    private String categoriaQuiz;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaQuiz.class.getName());
 
     /** Creates new form TelaQuiz */
     public TelaQuiz() {
-        initComponents();
+    initComponents();
+    setLocationRelativeTo(null);
+    }
+
+    public TelaQuiz(String categoriaQuiz) {
+    initComponents();
+    setLocationRelativeTo(null);
+
+    this.categoriaQuiz = categoriaQuiz;
     }
 
     /** This method is called from within the constructor to

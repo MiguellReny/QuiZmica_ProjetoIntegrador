@@ -126,4 +126,12 @@ public class TelaJogar extends JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+
+    public static void main(String args[]) {
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new TelaJogar().setVisible(true);
+        }
+    });
+}
 }

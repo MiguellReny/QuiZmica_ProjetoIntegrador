@@ -4,6 +4,8 @@
  */
 package quizquimica.view;
 
+import quizquimica.controller.DashboardAlunoNovoController;
+
 /**
  *
  * @author Angela
@@ -16,7 +18,9 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
      * Creates new form DashboardAlunoNovo
      */
     public DashboardAlunoNovo() {
-        initComponents();
+    initComponents();
+    setLocationRelativeTo(null);
+    new DashboardAlunoNovoController(this);
     }
 
     /**
