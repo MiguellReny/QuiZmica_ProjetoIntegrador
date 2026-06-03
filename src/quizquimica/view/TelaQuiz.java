@@ -48,7 +48,7 @@ public class TelaQuiz extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnProxima = new javax.swing.JButton();
         btnDica = new javax.swing.JButton();
-        lblLogoEtec = new javax.swing.JLabel();
+        lblEtec = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica - Quiz");
@@ -62,8 +62,8 @@ public class TelaQuiz extends javax.swing.JFrame {
         painelFundo.setPreferredSize(new java.awt.Dimension(1366, 768));
         painelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quiZmicaSimplificado.png"))); // NOI18N
-        painelFundo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 360, 95));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/quizmicaS.png"))); // NOI18N
+        painelFundo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 310, 120));
 
         linhaTopo.setBackground(new java.awt.Color(179, 40, 36));
         painelFundo.add(linhaTopo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1366, 4));
@@ -176,8 +176,8 @@ public class TelaQuiz extends javax.swing.JFrame {
 
         painelFundo.add(cardQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 1240, 460));
 
-        lblLogoEtec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etecRedimensionada.png"))); // NOI18N
-        painelFundo.add(lblLogoEtec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 150, -1));
+        lblEtec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etecR.png"))); // NOI18N
+        painelFundo.add(lblEtec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
 
         getContentPane().add(painelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
@@ -271,9 +271,9 @@ public class TelaQuiz extends javax.swing.JFrame {
     private javax.swing.JLabel lblAlternativaC;
     private javax.swing.JLabel lblAlternativaD;
     private javax.swing.JLabel lblEnunciado;
+    private javax.swing.JLabel lblEtec;
     private javax.swing.JLabel lblImagemQuestao;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblLogoEtec;
     private javax.swing.JLabel lblProgresso;
     private javax.swing.JLabel lblQuestaoAtual;
     private javax.swing.JPanel linhaEnunciado;
