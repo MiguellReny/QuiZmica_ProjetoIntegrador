@@ -11,7 +11,6 @@ public class Constantes {
     public static final int pontoF = 10;
     public static final int pontoM = 20;
     public static final int pontoD = 30;
-    public static final int questoes = 10;
     public static final double pontuacaoMin = 0.7;
     public static final int maximoDicas = 3;
     public static final double descontoDica = 0.30;

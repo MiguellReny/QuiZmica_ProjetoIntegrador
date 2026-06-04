@@ -10,9 +10,8 @@ public class RespostaDAO {
 
     public boolean salvar(int idPartida, int idPergunta, int idAlternativa) {
         String sql = "INSERT INTO pergunta_partida (idPartida, idPerguntas, idAlternativa) VALUES (?, ?, ?)";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idPartida);
             ps.setInt(2, idPergunta);
             ps.setInt(3, idAlternativa);
@@ -27,12 +26,12 @@ public class RespostaDAO {
         String sql = "SELECT COUNT(*) FROM pergunta_partida pp " +
                      "JOIN alternativa a ON pp.idAlternativa = a.idAlternativa " +
                      "WHERE pp.idPartida = ? AND a.alternativaCorreta = 1";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idPartida);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) return rs.getInt(1);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println("[RespostaDAO] Erro ao contar acertos: " + e.getMessage());
         }
@@ -43,12 +42,12 @@ public class RespostaDAO {
         String sql = "SELECT COUNT(*) FROM pergunta_partida pp " +
                      "JOIN alternativa a ON pp.idAlternativa = a.idAlternativa " +
                      "WHERE pp.idPartida = ? AND a.alternativaCorreta = 0";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idPartida);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) return rs.getInt(1);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println("[RespostaDAO] Erro ao contar erros: " + e.getMessage());
         }
@@ -63,10 +62,9 @@ public class RespostaDAO {
                      "GROUP BY pp.idPerguntas " +
                      "ORDER BY totalErros DESC";
         Map<Integer, Integer> resultado = new HashMap<>();
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 resultado.put(rs.getInt("idPerguntas"), rs.getInt("totalErros"));
             }

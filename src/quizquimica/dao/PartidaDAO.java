@@ -12,18 +12,18 @@ public class PartidaDAO {
 
     public int salvar(Partida partida) {
         String sql = "INSERT INTO partida (pontuacao, data, nivel, dicasUsadas, usuario_idUsuario) VALUES (?, ?, ?, ?, ?)";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, partida.getPontuacao());
             ps.setDate(2, Date.valueOf(partida.getData()));
             ps.setString(3, partida.getNivel());
             ps.setInt(4, partida.getDicasUsadas());
             ps.setInt(5, partida.getIdUsuario());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1);
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
             }
         } catch (SQLException e) {
             System.out.println("[PartidaDAO] Erro ao salvar partida: " + e.getMessage());
@@ -33,9 +33,8 @@ public class PartidaDAO {
 
     public boolean atualizar(Partida partida) {
         String sql = "UPDATE partida SET pontuacao = ?, dicasUsadas = ? WHERE idPartida = ?";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, partida.getPontuacao());
             ps.setInt(2, partida.getDicasUsadas());
             ps.setInt(3, partida.getIdPartida());
@@ -49,20 +48,20 @@ public class PartidaDAO {
     public List<Partida> buscarPorAluno(int idUsuario) {
         String sql = "SELECT * FROM partida WHERE usuario_idUsuario = ?";
         List<Partida> lista = new ArrayList<>();
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idUsuario);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Partida partida = new Partida();
-                partida.setIdPartida(rs.getInt("idPartida"));
-                partida.setIdUsuario(rs.getInt("usuario_idUsuario"));
-                partida.setNivel(rs.getString("nivel"));
-                partida.setPontuacao(rs.getInt("pontuacao"));
-                partida.setData(rs.getDate("data").toLocalDate());
-                partida.setDicasUsadas(rs.getInt("dicasUsadas"));
-                lista.add(partida);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Partida partida = new Partida();
+                    partida.setIdPartida(rs.getInt("idPartida"));
+                    partida.setIdUsuario(rs.getInt("usuario_idUsuario"));
+                    partida.setNivel(rs.getString("nivel"));
+                    partida.setPontuacao(rs.getInt("pontuacao"));
+                    partida.setData(rs.getDate("data").toLocalDate());
+                    partida.setDicasUsadas(rs.getInt("dicasUsadas"));
+                    lista.add(partida);
+                }
             }
         } catch (SQLException e) {
             System.out.println("[PartidaDAO] Erro ao buscar partidas: " + e.getMessage());
@@ -72,13 +71,13 @@ public class PartidaDAO {
 
     public double calcularMedia(int idUsuario) {
         String sql = "SELECT AVG(pontuacao) FROM partida WHERE usuario_idUsuario = ?";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idUsuario);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getDouble(1);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble(1);
+                }
             }
         } catch (SQLException e) {
             System.out.println("[PartidaDAO] Erro ao calcular media: " + e.getMessage());
@@ -88,25 +87,41 @@ public class PartidaDAO {
 
     public String buscarNivelAtual(int idUsuario) {
         String sql = "SELECT nivel, pontuacao FROM partida WHERE usuario_idUsuario = ? ORDER BY idPartida DESC LIMIT 1";
-        Connection conn = ConexaoDB.getConexao();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (Connection conn = ConexaoDB.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idUsuario);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                String nivel = rs.getString("nivel");
-                int pontuacao = rs.getInt("pontuacao");
-                int totalPontosPossiveis = Constantes.questoes * Constantes.pontoF;
-                double aproveitamento = (double) pontuacao / totalPontosPossiveis;
-                if (aproveitamento >= Constantes.pontuacaoMin) {
-                    if (nivel.equals(Constantes.nivelFacil)) return Constantes.nivelMedio;
-                    if (nivel.equals(Constantes.nivelMedio)) return Constantes.nivelDificil;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String nivel = rs.getString("nivel");
+                    int pontuacao = rs.getInt("pontuacao");
+                    int totalPontosPossiveis = calcularMaximo(nivel);
+                    double aproveitamento = (double) pontuacao / totalPontosPossiveis;
+                    if (aproveitamento >= Constantes.pontuacaoMin) {
+                        if (nivel.equals(Constantes.nivelFacil))  return Constantes.nivelMedio;
+                        if (nivel.equals(Constantes.nivelMedio))  return Constantes.nivelDificil;
+                    }
+                    return nivel;
                 }
-                return nivel;
             }
         } catch (SQLException e) {
             System.out.println("[PartidaDAO] Erro ao buscar nivel: " + e.getMessage());
         }
         return Constantes.nivelFacil;
+    }
+
+    private int calcularMaximo(String nivel) {
+        if (nivel.equals(Constantes.nivelFacil)) {
+            return (Constantes.facilFaceis   * Constantes.pontoF)
+                 + (Constantes.facilMedias   * Constantes.pontoM)
+                 + (Constantes.facilDificeis * Constantes.pontoD);
+        }
+        if (nivel.equals(Constantes.nivelMedio)) {
+            return (Constantes.medioFaceis   * Constantes.pontoF)
+                 + (Constantes.medioMedias   * Constantes.pontoM)
+                 + (Constantes.medioDificeis * Constantes.pontoD);
+        }
+        return (Constantes.dificilFaceis   * Constantes.pontoF)
+             + (Constantes.dificilMedias   * Constantes.pontoM)
+             + (Constantes.dificilDificeis * Constantes.pontoD);
     }
 }

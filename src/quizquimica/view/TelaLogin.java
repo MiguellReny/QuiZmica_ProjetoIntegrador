@@ -2,10 +2,10 @@ package quizquimica.view;
 
 import javax.swing.JOptionPane;
 import quizquimica.model.Usuario;
-import quizquimica.service.AuthService;
 import quizquimica.view.DashboardAlunoNovo;
 import quizquimica.model.Professor;
-import quizquimica.controller.LoginController;
+import quizquimica.model.Sessao;
+import quizquimica.controller.AuthController;
 
 public class TelaLogin extends javax.swing.JFrame {
 
@@ -128,12 +128,15 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String loginUsuario = jTextField1.getText();
-        String senhaUsuario = jTextField2.getText();
-        LoginController controller = new LoginController();
-        Usuario usuario = controller.autenticar(loginUsuario, senhaUsuario);
-        if (usuario != null) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    String loginUsuario = jTextField1.getText();
+    String senhaUsuario = jTextField2.getText();
+
+    AuthController controller = new AuthController();
+    Usuario usuario = controller.realizarLogin(loginUsuario, senhaUsuario);
+
+    if (usuario != null) {
+        Sessao.setUsuarioLogado(usuario); 
             if (usuario instanceof Professor) {
                 DashboardProfessor professor = new DashboardProfessor();
                 professor.setVisible(true);
@@ -145,7 +148,7 @@ public class TelaLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Login ou senha inválidos");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

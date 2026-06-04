@@ -8,7 +8,6 @@ import java.util.Properties;
 
 public class ConexaoDB {
 
-    private static Connection instancia = null;
     private static String url;
     private static String user;
     private static String senha;
@@ -17,48 +16,28 @@ public class ConexaoDB {
         try (InputStream input = ConexaoDB.class
                 .getClassLoader()
                 .getResourceAsStream("config.properties")) {
-
             if (input == null) {
-                System.out.println("[DB] Arquivo config.properties nao encontrado!");
+                System.out.println("[DB] config.properties não encontrado!");
             } else {
                 Properties prop = new Properties();
                 prop.load(input);
-
-                url = prop.getProperty("db.url");
-                user = prop.getProperty("db.usuario");
+                url   = prop.getProperty("db.url");
+                user  = prop.getProperty("db.usuario");
                 senha = prop.getProperty("db.senha");
             }
-
         } catch (Exception e) {
-            System.out.println("[DB] Erro ao carregar configuracoes: " + e.getMessage());
+            System.out.println("[DB] Erro ao carregar configurações: " + e.getMessage());
         }
     }
 
     private ConexaoDB() {}
 
-    public static Connection getConexao() {
+    public static Connection getConexao() throws SQLException {
         try {
-            if (instancia == null || instancia.isClosed()) {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                instancia = DriverManager.getConnection(url, user, senha);
-                System.out.println("[DB] Conectado ao MySQL com sucesso.");
-            }
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("[DB] Driver MySQL nao encontrado: " + e.getMessage());
-        } catch (SQLException e) {
-            System.out.println("[DB] Erro ao conectar: " + e.getMessage());
+            throw new SQLException("Driver MySQL não encontrado: " + e.getMessage());
         }
-        return instancia;
-    }
-
-    public static void fecharConexao() {
-        try {
-            if (instancia != null && !instancia.isClosed()) {
-                instancia.close();
-                System.out.println("[DB] Conexao encerrada.");
-            }
-        } catch (SQLException e) {
-            System.out.println("[DB] Erro ao fechar conexao: " + e.getMessage());
-        }
+        return DriverManager.getConnection(url, user, senha);
     }
 }
