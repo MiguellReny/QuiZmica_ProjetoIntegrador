@@ -26,6 +26,12 @@ public class AlunosPesquisaController {
     }
 
     private void carregarAlunos() {
+        System.out.println(
+    "Turma professor = "
+    + AuthService.getInstance()
+        .getUsuarioLogado()
+        .getTurma()
+);
         String turma = AuthService.getInstance().getUsuarioLogado().getTurma();
         todosAlunos = alunoDAO.listarPorTurma(turma);
         preencherTabela(todosAlunos);

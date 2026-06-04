@@ -129,26 +129,33 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    String loginUsuario = jTextField1.getText();
-    String senhaUsuario = jTextField2.getText();
+    String loginUsuario = jTextField1.getText().trim();
+    String senhaUsuario = jTextField2.getText().trim();
+
+    System.out.println("LOGIN TELA: [" + loginUsuario + "]");
+    System.out.println("SENHA TELA: [" + senhaUsuario + "]");
 
     AuthController controller = new AuthController();
     Usuario usuario = controller.realizarLogin(loginUsuario, senhaUsuario);
 
     if (usuario != null) {
-        Sessao.setUsuarioLogado(usuario); 
-            if (usuario instanceof Professor) {
-                DashboardProfessor professor = new DashboardProfessor();
-                professor.setVisible(true);
-            } else {
-                DashboardAlunoNovo aluno = new DashboardAlunoNovo();
-                aluno.setVisible(true);
-            }
-            dispose();
+
+        System.out.println("[LOGIN OK] " + usuario.getNome());
+
+        Sessao.setUsuarioLogado(usuario);
+
+        if (usuario instanceof Professor) {
+            new DashboardProfessor().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Login ou senha inválidos");
+            new DashboardAlunoNovo().setVisible(true);
         }
+
+        dispose();
+
+    } else {
+        JOptionPane.showMessageDialog(null, "Login ou senha inválidos");
     }
+}
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

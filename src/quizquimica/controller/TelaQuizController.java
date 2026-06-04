@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import quizquimica.model.Alternativa;
+import quizquimica.model.Questao;
+import quizquimica.service.QuestaoService;
 import quizquimica.view.DashboardAlunoNovo;
 import quizquimica.view.PopUpDicaQuiz;
 import quizquimica.view.PopupQuizFinalizado;
@@ -14,11 +18,12 @@ public class TelaQuizController {
 
     private final TelaQuiz view;
     private final String categoriaQuiz;
+    private final QuestaoService service = new QuestaoService();
+
+    private List<Questao> questoes = new ArrayList<>();
+    private String[] respostasSelecionadas;
 
     private int indiceQuestaoAtual = 0;
-
-    private List<QuestaoQuiz> questoes;
-    private String[] respostasSelecionadas;
 
     private final Color COR_PADRAO = new Color(255, 255, 255);
     private final Color COR_SELECIONADA = new Color(179, 40, 36);
@@ -29,233 +34,107 @@ public class TelaQuizController {
         this.view = view;
         this.categoriaQuiz = categoriaQuiz;
 
-        carregarQuestoesPorCategoria();
+        carregarQuestoes();
         respostasSelecionadas = new String[questoes.size()];
 
         configurarEventos();
         carregarQuestaoAtual();
     }
 
-    private void configurarEventos() {
-        view.getBtnDica().addActionListener(e -> abrirDica());
+    private void carregarQuestoes() {
+        List<Questao> todas = service.listarTodas();
 
-        view.getBtnVoltar().addActionListener(e -> voltar());
-
-        view.getBtnProxima().addActionListener(e -> proximaQuestao());
-
-        view.getBtnAlternativaA().addActionListener(e -> selecionarAlternativa("A"));
-        view.getBtnAlternativaB().addActionListener(e -> selecionarAlternativa("B"));
-        view.getBtnAlternativaC().addActionListener(e -> selecionarAlternativa("C"));
-        view.getBtnAlternativaD().addActionListener(e -> selecionarAlternativa("D"));
-    }
-
-    private void carregarQuestoesPorCategoria() {
-        questoes = new ArrayList<>();
-
-        if (categoriaQuiz.equals("Experimentos Químicos")) {
-            questoes.add(new QuestaoQuiz(
-                    "Qual material é utilizado para aquecer sólidos?",
-                    "Bico de Bunsen",
-                    "Béquer",
-                    "Funil de decantação",
-                    "Tubo de ensaio",
-                    "A",
-                    "MARIE CURIE",
-                    "Pioneira da radioatividade",
-                    "“Esse material é usado para aquecer substâncias em laboratório.”"
-            ));
-
-            questoes.add(new QuestaoQuiz(
-                    "Em um experimento de filtração simples, qual material ajuda a separar sólido de líquido?",
-                    "Pipeta",
-                    "Funil com papel filtro",
-                    "Proveta",
-                    "Termômetro",
-                    "B",
-                    "LINUS PAULING",
-                    "Químico e pesquisador",
-                    "“Pense em um material que conduz a mistura e retém partículas sólidas.”"
-            ));
-
-        } else if (categoriaQuiz.equals("Materiais do laboratório")) {
-            questoes.add(new QuestaoQuiz(
-                    "Qual vidraria é mais indicada para medir volume com maior precisão?",
-                    "Béquer",
-                    "Erlenmeyer",
-                    "Proveta",
-                    "Placa de Petri",
-                    "C",
-                    "MENDELEEV",
-                    "Criador da tabela periódica",
-                    "“Procure a vidraria graduada usada para medir volumes.”"
-            ));
-
-            questoes.add(new QuestaoQuiz(
-                    "Qual material é usado para transferir pequenas quantidades de líquido?",
-                    "Pipeta",
-                    "Cadinho",
-                    "Tela de amianto",
-                    "Tripé",
-                    "A",
-                    "MARIE CURIE",
-                    "Pioneira da radioatividade",
-                    "“Esse instrumento permite manipular líquidos em pequenas quantidades.”"
-            ));
-
-        } else if (categoriaQuiz.equals("Equipamentos de segurança")) {
-            questoes.add(new QuestaoQuiz(
-                    "Qual equipamento protege os olhos contra respingos químicos?",
-                    "Jaleco",
-                    "Óculos de proteção",
-                    "Luva térmica",
-                    "Máscara de tecido",
-                    "B",
-                    "LINUS PAULING",
-                    "Químico e pesquisador",
-                    "“Pense na parte do corpo mais vulnerável a respingos durante um experimento.”"
-            ));
-
-            questoes.add(new QuestaoQuiz(
-                    "Qual item deve ser usado para proteger as mãos ao manusear substâncias químicas?",
-                    "Luva de proteção",
-                    "Funil",
-                    "Bastão de vidro",
-                    "Pisseta",
-                    "A",
-                    "MENDELEEV",
-                    "Criador da tabela periódica",
-                    "“Esse equipamento cria uma barreira entre sua pele e a substância.”"
-            ));
+        for (Questao q : todas) {
+            if (q.getTipo() != null && q.getTipo().equalsIgnoreCase(categoriaQuiz)) {
+                questoes.add(q);
+            }
         }
 
         if (questoes.isEmpty()) {
-            JOptionPane.showMessageDialog(
-                    view,
+            JOptionPane.showMessageDialog(view,
                     "Nenhuma questão encontrada para este quiz.",
                     "Aviso",
-                    JOptionPane.WARNING_MESSAGE
-            );
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    private void carregarQuestaoAtual() {
-        if (questoes == null || questoes.isEmpty()) {
-            return;
-        }
+    private void configurarEventos() {
 
-        QuestaoQuiz questao = questoes.get(indiceQuestaoAtual);
+        view.getBtnDica().addActionListener(e -> abrirDica());
+        view.getBtnVoltar().addActionListener(e -> voltar());
+        view.getBtnProxima().addActionListener(e -> proximaQuestao());
+
+        view.getBtnAlternativaA().addActionListener(e -> selecionar("A"));
+        view.getBtnAlternativaB().addActionListener(e -> selecionar("B"));
+        view.getBtnAlternativaC().addActionListener(e -> selecionar("C"));
+        view.getBtnAlternativaD().addActionListener(e -> selecionar("D"));
+    }
+
+    private void carregarQuestaoAtual() {
+
+        if (questoes.isEmpty()) return;
+
+        Questao q = questoes.get(indiceQuestaoAtual);
 
         view.getLblQuestaoAtual().setText("QUESTÃO " + (indiceQuestaoAtual + 1));
         view.getLblProgresso().setText((indiceQuestaoAtual + 1) + " / " + questoes.size());
 
-        view.getLblEnunciado().setText(questao.enunciado);
+        view.getLblEnunciado().setText(q.getEnunciado());
 
-        view.getBtnAlternativaA().setText(questao.alternativaA);
-        view.getBtnAlternativaB().setText(questao.alternativaB);
-        view.getBtnAlternativaC().setText(questao.alternativaC);
-        view.getBtnAlternativaD().setText(questao.alternativaD);
+        List<Alternativa> alts = q.getAlternativas();
 
-        restaurarAlternativaSelecionada();
+        if (alts.size() >= 4) {
+            view.getBtnAlternativaA().setText(alts.get(0).getAlternativa());
+            view.getBtnAlternativaB().setText(alts.get(1).getAlternativa());
+            view.getBtnAlternativaC().setText(alts.get(2).getAlternativa());
+            view.getBtnAlternativaD().setText(alts.get(3).getAlternativa());
+        }
 
-        atualizarTextoBotaoProxima();
-
+        restaurarSelecao();
+        atualizarBotaoProxima();
     }
 
-    private void atualizarTextoBotaoProxima() {
-     if (indiceQuestaoAtual == questoes.size() - 1) {
-         view.getBtnProxima().setText("FINALIZAR");
-     } else {
-         view.getBtnProxima().setText("PRÓXIMA");
-     }
-    }
+    private void selecionar(String letra) {
+        respostasSelecionadas[indiceQuestaoAtual] = letra;
 
-    private void selecionarAlternativa(String alternativa) {
-        respostasSelecionadas[indiceQuestaoAtual] = alternativa;
+        resetBotoes();
 
-        limparSelecaoAlternativas();
-
-        if (alternativa.equals("A")) {
-            destacarBotao(view.getBtnAlternativaA());
-        } else if (alternativa.equals("B")) {
-            destacarBotao(view.getBtnAlternativaB());
-        } else if (alternativa.equals("C")) {
-            destacarBotao(view.getBtnAlternativaC());
-        } else if (alternativa.equals("D")) {
-            destacarBotao(view.getBtnAlternativaD());
+        switch (letra) {
+            case "A" -> destacar(view.getBtnAlternativaA());
+            case "B" -> destacar(view.getBtnAlternativaB());
+            case "C" -> destacar(view.getBtnAlternativaC());
+            case "D" -> destacar(view.getBtnAlternativaD());
         }
     }
 
-    private void restaurarAlternativaSelecionada() {
-        limparSelecaoAlternativas();
+    private void restaurarSelecao() {
+        resetBotoes();
 
-        String resposta = respostasSelecionadas[indiceQuestaoAtual];
-
-        if (resposta == null) {
-            return;
-        }
-
-        if (resposta.equals("A")) {
-            destacarBotao(view.getBtnAlternativaA());
-        } else if (resposta.equals("B")) {
-            destacarBotao(view.getBtnAlternativaB());
-        } else if (resposta.equals("C")) {
-            destacarBotao(view.getBtnAlternativaC());
-        } else if (resposta.equals("D")) {
-            destacarBotao(view.getBtnAlternativaD());
-        }
+        String r = respostasSelecionadas[indiceQuestaoAtual];
+        if (r != null) selecionar(r);
     }
 
-    private void limparSelecaoAlternativas() {
-        resetarBotao(view.getBtnAlternativaA());
-        resetarBotao(view.getBtnAlternativaB());
-        resetarBotao(view.getBtnAlternativaC());
-        resetarBotao(view.getBtnAlternativaD());
+    private void resetBotoes() {
+        reset(view.getBtnAlternativaA());
+        reset(view.getBtnAlternativaB());
+        reset(view.getBtnAlternativaC());
+        reset(view.getBtnAlternativaD());
     }
 
-    private void resetarBotao(JButton botao) {
-        botao.setBackground(COR_PADRAO);
-        botao.setForeground(COR_TEXTO_PADRAO);
-        botao.setOpaque(true);
-        botao.setBorderPainted(true);
+    private void reset(JButton b) {
+        b.setBackground(COR_PADRAO);
+        b.setForeground(COR_TEXTO_PADRAO);
     }
 
-    private void destacarBotao(JButton botao) {
-        botao.setBackground(COR_SELECIONADA);
-        botao.setForeground(COR_TEXTO_SELECIONADO);
-        botao.setOpaque(true);
-        botao.setBorderPainted(false);
-    }
-
-    private void abrirDica() {
-        if (questoes == null || questoes.isEmpty()) {
-            return;
-        }
-
-        QuestaoQuiz questao = questoes.get(indiceQuestaoAtual);
-
-        PopUpDicaQuiz popup = new PopUpDicaQuiz(view, true);
-
-        popup.setDadosDica(
-                questao.nomePersonagem,
-                questao.descricaoPersonagem,
-                questao.textoDica
-        );
-
-        popup.setVisible(true);
+    private void destacar(JButton b) {
+        b.setBackground(COR_SELECIONADA);
+        b.setForeground(COR_TEXTO_SELECIONADO);
     }
 
     private void proximaQuestao() {
-        if (questoes == null || questoes.isEmpty()) {
-            return;
-        }
 
         if (respostasSelecionadas[indiceQuestaoAtual] == null) {
-            JOptionPane.showMessageDialog(
-                    view,
-                    "Selecione uma alternativa antes de continuar.",
-                    "Atenção",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(view, "Selecione uma alternativa.");
             return;
         }
 
@@ -263,113 +142,94 @@ public class TelaQuizController {
             indiceQuestaoAtual++;
             carregarQuestaoAtual();
         } else {
-            finalizarQuiz();
+            finalizar();
         }
     }
 
     private void voltar() {
-     if (indiceQuestaoAtual > 0) {
-        indiceQuestaoAtual--;
-        carregarQuestaoAtual();
-     } else {
-        int resposta = JOptionPane.showConfirmDialog(
-                view,
-                "Deseja sair do quiz?\nSeu progresso será perdido.",
-                "Sair do quiz",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE
-        );
 
-        if (resposta == JOptionPane.YES_OPTION) {
-            DashboardAlunoNovo dashboard = new DashboardAlunoNovo();
-            dashboard.setVisible(true);
+        if (indiceQuestaoAtual > 0) {
+            indiceQuestaoAtual--;
+            carregarQuestaoAtual();
+            return;
+        }
 
+        int r = JOptionPane.showConfirmDialog(view,
+                "Sair do quiz?",
+                "Sair",
+                JOptionPane.YES_NO_OPTION);
+
+        if (r == JOptionPane.YES_OPTION) {
+            new DashboardAlunoNovo().setVisible(true);
             view.dispose();
         }
-      }
     }
 
-    private void finalizarQuiz() {
-     int acertos = calcularAcertos();
-     int total = questoes.size();
-     int erros = total - acertos;
+    private void finalizar() {
 
-     PopupQuizFinalizado popup = new PopupQuizFinalizado(view, true);
-     popup.setDadosResultado(categoriaQuiz, acertos, erros);
-
-     popup.getBtnRefazerQuiz().addActionListener(e -> {
-        popup.dispose();
-        reiniciarQuiz();
-      });
-
-     popup.getBtnVoltar().addActionListener(e -> {
-        popup.dispose();
-
-        DashboardAlunoNovo dashboard = new DashboardAlunoNovo();
-        dashboard.setVisible(true);
-
-        view.dispose();
-     });
-
-     popup.setVisible(true);
-    }
-
-    private void reiniciarQuiz() {
-     indiceQuestaoAtual = 0;
-
-      for (int i = 0; i < respostasSelecionadas.length; i++) {
-        respostasSelecionadas[i] = null;
-      }
-
-      carregarQuestaoAtual();
-    }
-
-    private int calcularAcertos() {
         int acertos = 0;
 
         for (int i = 0; i < questoes.size(); i++) {
-            String respostaAluno = respostasSelecionadas[i];
-            String respostaCorreta = questoes.get(i).alternativaCorreta;
 
-            if (respostaAluno != null && respostaAluno.equals(respostaCorreta)) {
+            Questao q = questoes.get(i);
+            String respostaAluno = respostasSelecionadas[i];
+
+            List<Alternativa> alts = q.getAlternativas();
+
+            String correta = "";
+
+            if (!alts.isEmpty()) {
+                for (int j = 0; j < alts.size(); j++) {
+                    if (alts.get(j).isAlternativaCorreta()) {
+                        correta = switch (j) {
+                            case 0 -> "A";
+                            case 1 -> "B";
+                            case 2 -> "C";
+                            case 3 -> "D";
+                            default -> "";
+                        };
+                    }
+                }
+            }
+
+            if (respostaAluno != null && respostaAluno.equals(correta)) {
                 acertos++;
             }
         }
 
-        return acertos;
+        int erros = questoes.size() - acertos;
+
+        PopupQuizFinalizado popup = new PopupQuizFinalizado(view, true);
+        popup.setDadosResultado(categoriaQuiz, acertos, erros);
+
+        popup.getBtnVoltar().addActionListener(e -> {
+            popup.dispose();
+            new DashboardAlunoNovo().setVisible(true);
+            view.dispose();
+        });
+
+        popup.setVisible(true);
     }
 
-    private static class QuestaoQuiz {
-        String enunciado;
-        String alternativaA;
-        String alternativaB;
-        String alternativaC;
-        String alternativaD;
-        String alternativaCorreta;
-        String nomePersonagem;
-        String descricaoPersonagem;
-        String textoDica;
+    private void abrirDica() {
+        Questao q = questoes.get(indiceQuestaoAtual);
 
-        public QuestaoQuiz(
-                String enunciado,
-                String alternativaA,
-                String alternativaB,
-                String alternativaC,
-                String alternativaD,
-                String alternativaCorreta,
-                String nomePersonagem,
-                String descricaoPersonagem,
-                String textoDica
-        ) {
-            this.enunciado = enunciado;
-            this.alternativaA = alternativaA;
-            this.alternativaB = alternativaB;
-            this.alternativaC = alternativaC;
-            this.alternativaD = alternativaD;
-            this.alternativaCorreta = alternativaCorreta;
-            this.nomePersonagem = nomePersonagem;
-            this.descricaoPersonagem = descricaoPersonagem;
-            this.textoDica = textoDica;
+        PopUpDicaQuiz popup = new PopUpDicaQuiz(view, true);
+
+        popup.setDadosDica(
+                "Dica",
+                "Revisão do tema",
+                q.getDica() != null ? q.getDica() : "Sem dica disponível"
+        );
+
+        popup.setVisible(true);
+    }
+
+    private void atualizarBotaoProxima() {
+        if (indiceQuestaoAtual == questoes.size() - 1) {
+            view.getBtnProxima().setText("FINALIZAR");
+        } else {
+            view.getBtnProxima().setText("PRÓXIMA");
         }
     }
 }

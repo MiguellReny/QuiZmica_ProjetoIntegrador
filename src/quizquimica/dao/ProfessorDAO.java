@@ -17,7 +17,8 @@ public class ProfessorDAO {
                     rs.getInt("idUsuario"),
                     rs.getString("nome"),
                     rs.getString("login"),
-                    rs.getString("senha")
+                    rs.getString("senha"),
+                    rs.getString("turma")
                 );
             }
         } catch (SQLException e) {

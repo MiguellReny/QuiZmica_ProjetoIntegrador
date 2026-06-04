@@ -7,10 +7,20 @@ public class Professor extends Usuario {
         setTipo("professor");
     }
 
-    public Professor(int idUsuario, String nome, String login, String senha) {
-        super(idUsuario, nome, login, senha, "professor", null);
-    }
+    public Professor(int idUsuario,
+                 String nome,
+                 String login,
+                 String senha,
+                 String turma) {
 
+        super(idUsuario,
+            nome,
+            login,
+            senha,
+            "professor",
+            turma);
+    }
+    
     @Override
     public String toString() {
         return "Professor{id=" + getIdUsuario() + ", nome=" + getNome() + ", login=" + getLogin() + "}";

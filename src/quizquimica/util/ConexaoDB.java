@@ -1,6 +1,6 @@
 package quizquimica.util;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,31 +13,54 @@ public class ConexaoDB {
     private static String senha;
 
     static {
-        try (InputStream input = ConexaoDB.class
-                .getClassLoader()
-                .getResourceAsStream("config.properties")) {
-            if (input == null) {
-                System.out.println("[DB] config.properties não encontrado!");
-            } else {
-                Properties prop = new Properties();
-                prop.load(input);
-                url   = prop.getProperty("db.url");
-                user  = prop.getProperty("db.usuario");
-                senha = prop.getProperty("db.senha");
-            }
+
+        try {
+
+            Properties prop = new Properties();
+
+            FileInputStream input =
+                new FileInputStream("src/config.properties");
+
+            prop.load(input);
+
+            url = prop.getProperty("db.url");
+            user = prop.getProperty("db.usuario");
+            senha = prop.getProperty("db.senha");
+
+            input.close();
+
         } catch (Exception e) {
-            System.out.println("[DB] Erro ao carregar configurações: " + e.getMessage());
+
+            System.out.println(
+                "[DB] Erro ao carregar configurações: "
+                + e.getMessage()
+            );
         }
     }
 
     private ConexaoDB() {}
 
-    public static Connection getConexao() throws SQLException {
+    public static Connection getConexao()
+            throws SQLException {
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Class.forName(
+                "com.mysql.cj.jdbc.Driver"
+            );
+
         } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver MySQL não encontrado: " + e.getMessage());
+
+            throw new SQLException(
+                "Driver MySQL não encontrado: "
+                + e.getMessage()
+            );
         }
-        return DriverManager.getConnection(url, user, senha);
+
+        return DriverManager.getConnection(
+            url,
+            user,
+            senha
+        );
     }
 }
