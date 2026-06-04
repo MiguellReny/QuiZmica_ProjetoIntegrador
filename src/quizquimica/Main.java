@@ -1,18 +1,11 @@
 package quizquimica;
-
-import quizquimica.view.AlunosPesquisa;
+import quizquimica.view.TelaLogin;
 
 public class Main {
-
     public static void main(String[] args) {
-
         java.awt.EventQueue.invokeLater(() -> {
-
-            AlunosPesquisa tela = new AlunosPesquisa();
-
+            TelaLogin tela = new TelaLogin();
             tela.setVisible(true);
-
         });
-
     }
 }

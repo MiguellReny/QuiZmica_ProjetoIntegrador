@@ -17,6 +17,8 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jButton1.setOpaque(true);
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
+        jButton1.setBorder(null);    
+
 
         jToggleButton1.setOpaque(true);
         jToggleButton1.setBorderPainted(false);
@@ -24,12 +26,6 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jToggleButton1.setContentAreaFilled(false);
         jToggleButton1.setBorder(null);    
 
-
-        jToggleButton1.addActionListener(e -> {
-    MenuProfessor menu = new MenuProfessor(this, true);
-    menu.setLocationRelativeTo(this);
-    menu.setVisible(true);
-});
 
         // Placeholder do campo de busca
 jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -60,6 +56,12 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
     @SuppressWarnings("unchecked")
         
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+
+            private Runnable controllerCallback;
+
+public void setControllerCallback(Runnable r) {
+    this.controllerCallback = r;
+}
     private void initComponents() {
 
         jPanel6 = new javax.swing.JPanel();
@@ -161,6 +163,17 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         jLabel14.setText("Melhor Média");
         jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
+        jButton1.setBackground(new java.awt.Color(179, 40, 36));
+        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 30)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Adicionar Aluno");
+        jPanel10.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 340, 50));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setText("Resumo da Turma");
         jPanel10.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
@@ -172,7 +185,7 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         jPanel2.setBackground(new java.awt.Color(179, 40, 36));
         jPanel10.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 330));
 
-        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 480, 480));
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 480, 550));
         jPanel6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, -30, -1, -1));
 
         jPanel20.setBackground(new java.awt.Color(179, 40, 36));
@@ -192,6 +205,7 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         jPanel20.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 0, 100, 60));
 
         jPanel6.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 75));
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 480, 550));
 
         jPanel11.setBackground(new java.awt.Color(179, 40, 36));
         jPanel6.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 190, 2));
@@ -204,6 +218,14 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        PopUpAdicionarAluno popup = new PopUpAdicionarAluno(this, true);
+        popup.setLocationRelativeTo(this);
+        popup.setVisible(true);
+        if (controllerCallback != null) controllerCallback.run();
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
 private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
     int linha = tabelaAlunos.getSelectedRow();
     int coluna = tabelaAlunos.getSelectedColumn();
@@ -279,7 +301,7 @@ private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
     private javax.swing.JLabel labelQuiz;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTable tabelaAlunos;
-    // End of variables declaration//GEN-END:variables
+        // End of variables declaration//GEN-END:variables
 
     // Getters para o controller
     public javax.swing.JLabel getLabelTotal()            { return labelTotal; }
@@ -288,7 +310,7 @@ private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
     public javax.swing.JLabel getLabelMelhor()           { return labelMelhor; }
     public javax.swing.JTextField getCampoBusca()        { return jTextField1; }
     public javax.swing.JTable getTabelaAlunos()          { return tabelaAlunos; }
-    public javax.swing.JButton getBtnRelatorios()        { return jButton1; }
+    public javax.swing.JButton getjButton1()        { return jButton1; }
     public javax.swing.JToggleButton getjToggleButton1() { return jToggleButton1; }
 
 }

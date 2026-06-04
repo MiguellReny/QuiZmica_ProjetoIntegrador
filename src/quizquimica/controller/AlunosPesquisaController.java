@@ -6,10 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import quizquimica.dao.AlunoDAO;
 import quizquimica.dao.PartidaDAO;
 import quizquimica.model.Aluno;
+import quizquimica.model.Usuario;
 import quizquimica.service.AuthService;
 import quizquimica.view.AlunosPesquisa;
 import quizquimica.view.MenuProfessor;
 import quizquimica.view.PopUpAlterar;
+import quizquimica.view.PopUpAdicionarAluno;
 
 public class AlunosPesquisaController {
 
@@ -26,14 +28,21 @@ public class AlunosPesquisaController {
     }
 
     private void carregarAlunos() {
-        System.out.println(
-    "Turma professor = "
-    + AuthService.getInstance()
-        .getUsuarioLogado()
-        .getTurma()
-);
-        String turma = AuthService.getInstance().getUsuarioLogado().getTurma();
-        todosAlunos = alunoDAO.listarPorTurma(turma);
+        Usuario usuarioLogado = AuthService.getInstance().getUsuarioLogado();
+
+        if (usuarioLogado == null) {
+            System.out.println("Nenhum usuário logado!");
+            return;
+        }
+
+        String turma = usuarioLogado.getTurma();
+
+        if (turma != null && !turma.isBlank()) {
+            todosAlunos = alunoDAO.listarPorTurma(turma);
+        } else {
+            todosAlunos = alunoDAO.listarTodos();
+        }
+
         preencherTabela(todosAlunos);
     }
 
@@ -79,7 +88,6 @@ public class AlunosPesquisaController {
                 filtrarAlunos(view.getCampoBusca().getText().trim());
             }
         });
-
         view.getCampoBusca().addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
@@ -92,18 +100,22 @@ public class AlunosPesquisaController {
                     view.getCampoBusca().setText("Buscar aluno...");
             }
         });
-
         view.getjToggleButton1().addActionListener(e -> {
             MenuProfessor menu = new MenuProfessor(view, true);
             menu.setLocationRelativeTo(view.getjToggleButton1());
             menu.setVisible(true);
         });
-
         view.getTabelaAlunos().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tratarCliqueTabela();
             }
+        });
+
+        // callback para recarregar tabela após adicionar aluno
+        view.setControllerCallback(() -> {
+            carregarAlunos();
+            carregarResumo();
         });
     }
 
@@ -147,11 +159,11 @@ public class AlunosPesquisaController {
         popup.getTxtNome().setText(nome);
         popup.getTxtEmail().setText(login);
 
-for (java.awt.event.ActionListener al : popup.getBtnAlterar().getActionListeners()) {
-    popup.getBtnAlterar().removeActionListener(al);
-}
+        for (java.awt.event.ActionListener al : popup.getBtnAlterar().getActionListeners()) {
+            popup.getBtnAlterar().removeActionListener(al);
+        }
 
-popup.getBtnAlterar().addActionListener(e -> {
+        popup.getBtnAlterar().addActionListener(e -> {
             String novoNome  = popup.getTxtNome().getText().trim();
             String novoLogin = popup.getTxtEmail().getText().trim();
             String novaSenha = popup.getTxtSenha().getText().trim();

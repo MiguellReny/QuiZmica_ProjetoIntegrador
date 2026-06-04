@@ -97,4 +97,24 @@ public class AlunoDAO {
         }
         return alunos;
     }
+    public List<Aluno> listarTodos() {
+    List<Aluno> alunos = new ArrayList<>();
+    String sql = "SELECT * FROM usuario WHERE tipo = 'aluno'";
+    try (Connection conn = ConexaoDB.getConexao();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            alunos.add(new Aluno(
+                rs.getInt("idUsuario"),
+                rs.getString("nome"),
+                rs.getString("login"),
+                rs.getString("senha"),
+                rs.getString("turma")
+            ));
+        }
+    } catch (SQLException e) {
+        System.out.println("[AlunoDAO] Erro ao listar todos os alunos: " + e.getMessage());
+    }
+    return alunos;
+}
 }

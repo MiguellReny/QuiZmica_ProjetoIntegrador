@@ -4,6 +4,9 @@
  */
 
 package quizquimica.view;
+
+import quizquimica.controller.AlunosPesquisaController;
+
 public class MenuProfessor extends javax.swing.JDialog {
 
 
@@ -114,17 +117,36 @@ public class MenuProfessor extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-        private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-            Navegacao.irParaTelaJogar(this);
-        }
-        private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-            Navegacao.irParaDashboardProfessor(this);
-        }
-        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-            Navegacao.irParaAlunosPesquisa(this);
-        }
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Alunos
+    if (getOwner() != null) getOwner().dispose();
+    dispose();
+    AlunosPesquisa tela = new AlunosPesquisa();
+    new quizquimica.controller.AlunosPesquisaController(tela);
+    tela.setLocationRelativeTo(null);
+    tela.setVisible(true);
+}
+
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Sair
+    if (getOwner() != null) getOwner().dispose();
+    dispose();
+    TelaJogar tela = new TelaJogar();
+    tela.setLocationRelativeTo(null);
+    tela.setVisible(true);
+}
+
+private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Dashboard
+    if (getOwner() != null) getOwner().dispose();
+    dispose();
+    DashboardProfessor tela = new DashboardProfessor();
+    tela.setLocationRelativeTo(null);
+    tela.setVisible(true);
+}
 
     /**
      * @param args the command line arguments
