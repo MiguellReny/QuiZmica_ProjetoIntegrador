@@ -6,12 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import quizquimica.dao.AlunoDAO;
 import quizquimica.dao.PartidaDAO;
 import quizquimica.model.Aluno;
-import quizquimica.model.Usuario;
-import quizquimica.service.AuthService;
 import quizquimica.view.AlunosPesquisa;
 import quizquimica.view.MenuProfessor;
 import quizquimica.view.PopUpAlterar;
 import quizquimica.view.PopUpAdicionarAluno;
+import quizquimica.view.PopUpDeleteAluno;
 
 public class AlunosPesquisaController {
 
@@ -28,21 +27,7 @@ public class AlunosPesquisaController {
     }
 
     private void carregarAlunos() {
-        Usuario usuarioLogado = AuthService.getInstance().getUsuarioLogado();
-
-        if (usuarioLogado == null) {
-            System.out.println("Nenhum usuário logado!");
-            return;
-        }
-
-        String turma = usuarioLogado.getTurma();
-
-        if (turma != null && !turma.isBlank()) {
-            todosAlunos = alunoDAO.listarPorTurma(turma);
-        } else {
-            todosAlunos = alunoDAO.listarTodos();
-        }
-
+        todosAlunos = alunoDAO.listarPorTurma("1A");
         preencherTabela(todosAlunos);
     }
 
@@ -79,6 +64,7 @@ public class AlunosPesquisaController {
                 "Remover"
             });
         }
+        view.getTabelaAlunos().clearSelection();
     }
 
     private void configurarEventos() {
@@ -102,20 +88,23 @@ public class AlunosPesquisaController {
         });
         view.getjToggleButton1().addActionListener(e -> {
             MenuProfessor menu = new MenuProfessor(view, true);
-            menu.setLocationRelativeTo(view.getjToggleButton1());
+            menu.setLocationRelativeTo(view);
             menu.setVisible(true);
+        });
+        view.getjButton1().addActionListener(e -> {
+            PopUpAdicionarAluno popup = new PopUpAdicionarAluno(view, true);
+            popup.setAcaoAdicionar(() -> {
+                carregarAlunos();
+                carregarResumo();
+            });
+            popup.setLocationRelativeTo(view);
+            popup.setVisible(true);
         });
         view.getTabelaAlunos().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tratarCliqueTabela();
             }
-        });
-
-        // callback para recarregar tabela após adicionar aluno
-        view.setControllerCallback(() -> {
-            carregarAlunos();
-            carregarResumo();
         });
     }
 
@@ -155,10 +144,14 @@ public class AlunosPesquisaController {
     }
 
     private void editarAluno(String nome, String login) {
-        PopUpAlterar popup = new PopUpAlterar(view, true);
+        // Usa java.awt.Window — funciona com qualquer tipo de janela pai
+        java.awt.Window parent = javax.swing.SwingUtilities.getWindowAncestor(view);
+
+        PopUpAlterar popup = new PopUpAlterar(parent, true);
         popup.getTxtNome().setText(nome);
         popup.getTxtEmail().setText(login);
 
+        // Remove listeners do botão (garantia de que não há listener residual)
         for (java.awt.event.ActionListener al : popup.getBtnAlterar().getActionListeners()) {
             popup.getBtnAlterar().removeActionListener(al);
         }
@@ -204,21 +197,21 @@ public class AlunosPesquisaController {
     }
 
     private void removerAluno(String login, String nome) {
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(
-            view,
-            "Deseja remover o aluno \"" + nome + "\"?",
-            "Confirmar Remoção",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+        int linha = view.getTabelaAlunos().getSelectedRow();
+
+        PopUpDeleteAluno popup = new PopUpDeleteAluno(view, true, linha, view.getTabelaAlunos());
+
+        popup.getBtnDeletar().addActionListener(e -> {
             boolean ok = alunoDAO.remover(login);
             if (ok) {
-                javax.swing.JOptionPane.showMessageDialog(view, "Aluno removido com sucesso!");
+                popup.dispose();
                 carregarAlunos();
                 carregarResumo();
             } else {
-                javax.swing.JOptionPane.showMessageDialog(view, "Erro ao remover o aluno.");
+                javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao remover aluno.");
             }
-        }
+        });
+        popup.setLocationRelativeTo(view);
+        popup.setVisible(true);
     }
 }

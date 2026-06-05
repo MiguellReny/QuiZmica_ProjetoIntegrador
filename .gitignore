@@ -20,7 +20,7 @@ nbproject/private/
 .netbeans_update_resources
 
 # Configurações locais
-src/config.properties
+
 nbproject/private/config.properties
 build/classes/config.properties
 

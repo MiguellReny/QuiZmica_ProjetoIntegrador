@@ -20,6 +20,16 @@ public class EditarQuestao extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         new EditarQuestaoController(this, questao);
+
+        jButton1.setOpaque(true);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+
+        jButton2.setOpaque(true);
+        jButton2.setBorderPainted(true);
+
+        jButton10.setOpaque(true);
+        jButton10.setBorderPainted(true);
     }
 
     /**

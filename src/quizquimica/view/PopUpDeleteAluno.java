@@ -12,17 +12,18 @@ public class PopUpDeleteAluno extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        // Corrige SoftBevelBorder com null que quebra no Java 21
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(
-            javax.swing.border.BevelBorder.RAISED,
-            new java.awt.Color(230, 230, 230),
-            new java.awt.Color(204, 204, 204)
-        ));
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(
-            javax.swing.border.BevelBorder.RAISED,
-            new java.awt.Color(200, 80, 76),
-            new java.awt.Color(204, 204, 204)
-        ));
+        jButton2.setOpaque(true);
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setContentAreaFilled(true);
+        jButton2.setBackground(new java.awt.Color(179, 40, 36));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+
+        jButton1.setOpaque(true);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.setContentAreaFilled(true);
+
 
         this.linha = linha;
         this.tabela = tabela;
@@ -154,4 +155,6 @@ public class PopUpDeleteAluno extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnDeletar() { return jButton2; }
 }

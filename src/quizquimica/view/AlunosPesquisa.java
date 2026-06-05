@@ -26,7 +26,6 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         jToggleButton1.setContentAreaFilled(false);
         jToggleButton1.setBorder(null);    
 
-
         // Placeholder do campo de busca
 jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
     @Override
@@ -226,29 +225,9 @@ public void setControllerCallback(Runnable r) {
         if (controllerCallback != null) controllerCallback.run();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-    int linha = tabelaAlunos.getSelectedRow();
-    int coluna = tabelaAlunos.getSelectedColumn();
-    if (linha < 0 || tabelaAlunos.getValueAt(linha, 0) == null) return;
+    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
 
-    if (coluna == 2) {
-        PopUpAlterar popup = new PopUpAlterar(this, true);
-        popup.setLocationRelativeTo(this);
-        popup.setVisible(true);
-    }
-    else if (coluna == 3) {
-        String nomeAluno = tabelaAlunos.getValueAt(linha, 0).toString();
-        DesempenhoAluno tela = new DesempenhoAluno(this, nomeAluno);
-        tela.setLocationRelativeTo(this);
-        dispose();
-        tela.setVisible(true);
-    }
-    else if (coluna == 4) {
-        PopUpDeleteAluno popup = new PopUpDeleteAluno(this, true, linha, tabelaAlunos);
-        popup.setLocationRelativeTo(this);
-        popup.setVisible(true);
-    }
-}//GEN-LAST:event_tabelaAlunosMouseClicked
+    }//GEN-LAST:event_tabelaAlunosMouseClicked
     /**
      * @param args the command line arguments
      */

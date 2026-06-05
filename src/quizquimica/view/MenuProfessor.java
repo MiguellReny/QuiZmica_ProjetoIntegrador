@@ -121,9 +121,12 @@ public class MenuProfessor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-    // Alunos
-    if (getOwner() != null) getOwner().dispose();
+    java.awt.Window owner = getOwner();
     dispose();
+    if (owner instanceof AlunosPesquisa) {
+        return;
+    }
+    if (owner != null) owner.dispose();
     AlunosPesquisa tela = new AlunosPesquisa();
     new quizquimica.controller.AlunosPesquisaController(tela);
     tela.setLocationRelativeTo(null);
@@ -131,19 +134,19 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-    // Sair
-    if (getOwner() != null) getOwner().dispose();
+    java.awt.Window owner = getOwner();
     dispose();
+    if (owner != null) owner.dispose();
     TelaJogar tela = new TelaJogar();
     tela.setLocationRelativeTo(null);
     tela.setVisible(true);
 }
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-    // Dashboard
-    if (getOwner() != null) getOwner().dispose();
-    dispose();
+    java.awt.Window owner = getOwner();
     DashboardProfessor tela = new DashboardProfessor();
+    dispose();
+    if (owner != null) owner.dispose();
     tela.setLocationRelativeTo(null);
     tela.setVisible(true);
 }

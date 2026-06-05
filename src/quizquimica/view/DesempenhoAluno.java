@@ -100,7 +100,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         btnVoltar.setContentAreaFilled(false);
         btnVoltar.setFocusPainted(false);
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
-        painelFundo.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 150, 130, 35));
+        painelFundo.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 150, 160, 35));
 
         lblTitutloPagina.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lblTitutloPagina.setForeground(new java.awt.Color(20, 25, 45));
@@ -349,9 +349,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        dispose();
-        AlunosPesquisa tela = new AlunosPesquisa();
-        tela.setVisible(true);
+
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
@@ -381,31 +379,25 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     public javax.swing.JButton getBtnVoltar() {
       return btnVoltar;
     }
-
     public javax.swing.JLabel getLblAvatar() {
        return lblAvatar;
     }
-    
+
     public javax.swing.JLabel getLblNomeAluno() {
        return lblNomeAluno;
     }
-
     public javax.swing.JLabel getLblTurmaAluno() {
        return lblTurmaAluno;
     }
-
     public javax.swing.JLabel getLblQuizzesConcluidos() {
        return lblQuizzesConcluidos;
     }
-
     public javax.swing.JLabel getLblMediaGeral() {
        return lblMediaGeral;
     }
-
     public javax.swing.JLabel getLblMelhorPontuacao() {
        return lblMelhorPontuacao;
     }
-
     public javax.swing.JLabel getLblAcertosTotais() {
        return lblAcertosTotais;
     }

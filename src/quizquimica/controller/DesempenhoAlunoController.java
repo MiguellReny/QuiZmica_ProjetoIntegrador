@@ -78,7 +78,6 @@ public class DesempenhoAlunoController {
     private void voltarParaAlunos() {
         AlunosPesquisa telaAlunos = new AlunosPesquisa();
         new AlunosPesquisaController(telaAlunos);
-
         telaAlunos.setVisible(true);
         view.dispose();
     }

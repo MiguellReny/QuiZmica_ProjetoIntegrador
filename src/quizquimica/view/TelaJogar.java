@@ -14,7 +14,6 @@ public class TelaJogar extends JFrame {
     BotaoJogar.setBorderPainted(false);
     BotaoJogar.setFocusPainted(false);
  
-
     BotaoProfessor.setOpaque(true);
     BotaoProfessor.setBorderPainted(false);
     BotaoProfessor.setFocusPainted(false);

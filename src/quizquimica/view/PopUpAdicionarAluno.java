@@ -157,7 +157,7 @@ public class PopUpAdicionarAluno extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
- private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
     String nome  = jTextField1.getText().trim();
     String email = jTextField2.getText().trim();
     String senha = jTextField3.getText().trim();
@@ -166,15 +166,15 @@ public class PopUpAdicionarAluno extends javax.swing.JDialog {
         javax.swing.JOptionPane.showMessageDialog(this, "Todos os campos são obrigatórios.");
         return;
     }
-    String turma = "1A";
 
     quizquimica.dao.AlunoDAO alunoDAO = new quizquimica.dao.AlunoDAO();
-    quizquimica.model.Aluno novoAluno = new quizquimica.model.Aluno(0, nome, email, senha, turma);
+    quizquimica.model.Aluno novoAluno = new quizquimica.model.Aluno(0, nome, email, senha, "1A"); // turma fixa
     boolean ok = alunoDAO.inserir(novoAluno);
 
     if (ok) {
         javax.swing.JOptionPane.showMessageDialog(this, "Aluno adicionado com sucesso!");
         dispose();
+        if (acaoAdicionar != null) acaoAdicionar.run(); // dispara o reload
     } else {
         javax.swing.JOptionPane.showMessageDialog(this, "Erro ao adicionar aluno.");
     }
