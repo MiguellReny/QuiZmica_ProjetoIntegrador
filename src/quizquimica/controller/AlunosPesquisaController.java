@@ -21,23 +21,33 @@ public class AlunosPesquisaController {
 
     public AlunosPesquisaController(AlunosPesquisa view) {
         this.view = view;
-        carregarAlunos();
-        carregarResumo();
         configurarEventos();
+        carregarDadosAsync();
+    }
+
+    private void carregarDadosAsync() {
+        new Thread(() -> {
+            carregarAlunos();
+            carregarResumo();
+        }).start();
     }
 
     private void carregarAlunos() {
-        todosAlunos = alunoDAO.listarPorTurma("1A");
-        preencherTabela(todosAlunos);
+        List<Aluno> lista = alunoDAO.listarTodos();
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            todosAlunos = lista;
+            preencherTabela(todosAlunos);
+        });
     }
 
     private void carregarResumo() {
-        int total = todosAlunos.size();
+        List<Aluno> lista = new ArrayList<>(todosAlunos);
+        int total = lista.size();
         int quizzesConcluidos = 0;
         double somaMedias = 0;
         double melhorMedia = 0;
 
-        for (Aluno aluno : todosAlunos) {
+        for (Aluno aluno : lista) {
             int partidas = partidaDAO.buscarPorAluno(aluno.getIdUsuario()).size();
             quizzesConcluidos += partidas;
             double media = partidaDAO.calcularMedia(aluno.getIdUsuario());
@@ -46,10 +56,15 @@ public class AlunosPesquisaController {
         }
 
         double mediaGeral = total > 0 ? somaMedias / total : 0;
-        view.getLabelTotal().setText(String.valueOf(total));
-        view.getLabelQuiz().setText(String.valueOf(quizzesConcluidos));
-        view.getLabelMedia().setText(String.format("%.1f", mediaGeral));
-        view.getLabelMelhor().setText(String.format("%.1f", melhorMedia));
+        int qc = quizzesConcluidos;
+        double mg = mediaGeral, mm = melhorMedia;
+
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            view.getLabelTotal().setText(String.valueOf(total));
+            view.getLabelQuiz().setText(String.valueOf(qc));
+            view.getLabelMedia().setText(String.format("%.1f", mg));
+            view.getLabelMelhor().setText(String.format("%.1f", mm));
+        });
     }
 
     private void preencherTabela(List<Aluno> alunos) {
@@ -74,6 +89,7 @@ public class AlunosPesquisaController {
                 filtrarAlunos(view.getCampoBusca().getText().trim());
             }
         });
+
         view.getCampoBusca().addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
@@ -86,20 +102,55 @@ public class AlunosPesquisaController {
                     view.getCampoBusca().setText("Buscar aluno...");
             }
         });
+
         view.getjToggleButton1().addActionListener(e -> {
             MenuProfessor menu = new MenuProfessor(view, true);
             menu.setLocationRelativeTo(view);
             menu.setVisible(true);
         });
+
         view.getjButton1().addActionListener(e -> {
             PopUpAdicionarAluno popup = new PopUpAdicionarAluno(view, true);
-            popup.setAcaoAdicionar(() -> {
-                carregarAlunos();
-                carregarResumo();
+            popup.getBtnAlterar().setOpaque(true);
+            popup.getBtnAlterar().setBorderPainted(false);
+            popup.getBtnAlterar().setFocusPainted(false);
+            popup.getBtnAlterar().addActionListener(ev -> {
+                String nome  = popup.getTxtNome().getText().trim();
+                String email = popup.getTxtEmail().getText().trim();
+                String senha = popup.getTxtSenha().getText().trim();
+
+                if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                    javax.swing.JOptionPane.showMessageDialog(popup, "Todos os campos são obrigatórios.");
+                    return;
+                }
+
+                String turma = javax.swing.JOptionPane.showInputDialog(
+                    popup, "Informe a turma do aluno:", "Turma",
+                    javax.swing.JOptionPane.QUESTION_MESSAGE
+                );
+                if (turma == null || turma.isBlank()) {
+                    javax.swing.JOptionPane.showMessageDialog(popup, "A turma é obrigatória.");
+                    return;
+                }
+
+                Aluno novoAluno = new Aluno(0, nome, email, senha, turma.trim());
+                boolean ok = alunoDAO.inserir(novoAluno);
+
+                if (ok) {
+                    javax.swing.JOptionPane.showMessageDialog(popup, "Aluno adicionado com sucesso!");
+                    popup.dispose();
+                    new Thread(() -> {
+                        carregarAlunos();
+                        carregarResumo();
+                    }).start();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao adicionar aluno.");
+                }
             });
             popup.setLocationRelativeTo(view);
             popup.setVisible(true);
         });
+
         view.getTabelaAlunos().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -139,19 +190,15 @@ public class AlunosPesquisaController {
         } else if (coluna == 3) {
             consultarAluno(login);
         } else if (coluna == 4) {
-            removerAluno(login, nome);
+            removerAluno(login, nome, linha);
         }
     }
 
     private void editarAluno(String nome, String login) {
-        // Usa java.awt.Window — funciona com qualquer tipo de janela pai
-        java.awt.Window parent = javax.swing.SwingUtilities.getWindowAncestor(view);
-
-        PopUpAlterar popup = new PopUpAlterar(parent, true);
+        PopUpAlterar popup = new PopUpAlterar(view, true);
         popup.getTxtNome().setText(nome);
         popup.getTxtEmail().setText(login);
 
-        // Remove listeners do botão (garantia de que não há listener residual)
         for (java.awt.event.ActionListener al : popup.getBtnAlterar().getActionListeners()) {
             popup.getBtnAlterar().removeActionListener(al);
         }
@@ -172,8 +219,10 @@ public class AlunosPesquisaController {
             if (ok) {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Aluno atualizado com sucesso!");
                 popup.dispose();
-                carregarAlunos();
-                carregarResumo();
+                new Thread(() -> {
+                    carregarAlunos();
+                    carregarResumo();
+                }).start();
             } else {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao atualizar aluno.");
             }
@@ -196,21 +245,22 @@ public class AlunosPesquisaController {
         view.dispose();
     }
 
-    private void removerAluno(String login, String nome) {
-        int linha = view.getTabelaAlunos().getSelectedRow();
-
+    private void removerAluno(String login, String nome, int linha) {
         PopUpDeleteAluno popup = new PopUpDeleteAluno(view, true, linha, view.getTabelaAlunos());
 
         popup.getBtnDeletar().addActionListener(e -> {
             boolean ok = alunoDAO.remover(login);
             if (ok) {
                 popup.dispose();
-                carregarAlunos();
-                carregarResumo();
+                new Thread(() -> {
+                    carregarAlunos();
+                    carregarResumo();
+                }).start();
             } else {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao remover aluno.");
             }
         });
+
         popup.setLocationRelativeTo(view);
         popup.setVisible(true);
     }

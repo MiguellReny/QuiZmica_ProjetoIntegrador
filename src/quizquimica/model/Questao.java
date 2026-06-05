@@ -11,8 +11,12 @@ public class Questao {
     private String dica;
     private List<Alternativa> alternativas;
     private String tipo;
+    private String personagem;
 
     public Questao() {}
+
+    public String getPersonagem() { return personagem; }
+    public void setPersonagem(String personagem) { this.personagem = personagem; }
 
     public Questao(int idQuestao, String enunciado, String imagemUrl, String dificuldade, String dica, String tipo) {
         this.idQuestao = idQuestao;

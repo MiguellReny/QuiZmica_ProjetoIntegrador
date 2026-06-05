@@ -16,9 +16,9 @@ public class Navegacao {
         if (dialog.getOwner() != null) dialog.getOwner().dispose();
         dialog.dispose();
         AlunosPesquisa tela = new AlunosPesquisa();
-        tela.setVisible(true);
+        new AlunosPesquisaController(tela);  // ← antes do setVisible
         tela.setLocationRelativeTo(null);
-        new AlunosPesquisaController(tela);
+        tela.setVisible(true);
     }
 
     public static void irParaDashboardProfessor(javax.swing.JDialog dialog) {

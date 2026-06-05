@@ -271,13 +271,13 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         tabelaQuestoes.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tabelaQuestoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Questão 1", "Editar", 1},
-                {"Questão 2", "Editar", 2},
-                {"Questão 3", "Editar", 3},
-                {"Questão 4", "Editar", 4}
+                {"Questão 1", "Editar", "Remover", 1},
+                {"Questão 2", "Editar", "Remover", 2},
+                {"Questão 3", "Editar", "Remover", 3},
+                {"Questão 4", "Editar", "Remover", 4}
             },
             new String [] {
-                "Questão", "Ação", "ID"
+                "Questão", "Ação", "Remover", "ID"
             }
         ));
         jScrollPane1.setViewportView(tabelaQuestoes);

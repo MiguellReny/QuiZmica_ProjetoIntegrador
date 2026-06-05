@@ -214,4 +214,5 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
     public javax.swing.JTextField getTxtSenha() { return jTextField3; }
     public javax.swing.JButton getBtnAdicionar()  { return jButton2; }
     public javax.swing.JButton getBtnCancelar() { return jButton1; }
+    public javax.swing.JButton getBtnAlterar()  { return jButton2; }
 }

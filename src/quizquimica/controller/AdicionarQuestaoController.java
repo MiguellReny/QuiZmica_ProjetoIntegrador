@@ -6,13 +6,22 @@ import javax.swing.JOptionPane;
 import quizquimica.model.Alternativa;
 import quizquimica.model.Questao;
 import quizquimica.service.QuestaoService;
+import quizquimica.util.ConversorImagemUrl;
 import quizquimica.view.AdicionarQuestao;
 import quizquimica.view.DashboardProfessor;
+import quizquimica.view.PopUpImagem;
 
 public class AdicionarQuestaoController {
 
     private final AdicionarQuestao view;
     private final QuestaoService questaoService = new QuestaoService();
+
+    // URLs das imagens coletadas pelos botões
+    private String imagemEnunciadoUrl = null;
+    private String imagemAltAUrl      = null;
+    private String imagemAltBUrl      = null;
+    private String imagemAltCUrl      = null;
+    private String imagemAltDUrl      = null;
 
     public AdicionarQuestaoController(AdicionarQuestao view) {
         this.view = view;
@@ -35,6 +44,95 @@ public class AdicionarQuestaoController {
             public void removeUpdate(javax.swing.event.DocumentEvent e)  { atualizarContador(); }
             public void changedUpdate(javax.swing.event.DocumentEvent e) { atualizarContador(); }
         });
+
+        // ── Botões de imagem ────────────────────────────────────────────────────
+
+        // Imagem do enunciado
+        view.getLblImagemEnunciado().setCursor(
+                java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        view.getLblImagemEnunciado().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                String url = pedirUrlImagem("Imagem do Enunciado");
+                if (url != null) {
+                    imagemEnunciadoUrl = url;
+                    mostrarAvisoImagem();
+                }
+            }
+        });
+
+        // Imagem da Alternativa A
+        view.getLblImagemAltA().setCursor(
+                java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        view.getLblImagemAltA().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                String url = pedirUrlImagem("Imagem da Alternativa A");
+                if (url != null) {
+                    imagemAltAUrl = url;
+                    mostrarAvisoImagem();
+                }
+            }
+        });
+
+        // Imagem da Alternativa B
+        view.getLblImagemAltB().setCursor(
+                java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        view.getLblImagemAltB().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                String url = pedirUrlImagem("Imagem da Alternativa B");
+                if (url != null) {
+                    imagemAltBUrl = url;
+                    mostrarAvisoImagem();
+                }
+            }
+        });
+
+        // Imagem da Alternativa C
+        view.getLblImagemAltC().setCursor(
+                java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        view.getLblImagemAltC().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                String url = pedirUrlImagem("Imagem da Alternativa C");
+                if (url != null) {
+                    imagemAltCUrl = url;
+                    mostrarAvisoImagem();
+                }
+            }
+        });
+
+        // Imagem da Alternativa D
+        view.getLblImagemAltD().setCursor(
+                java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        view.getLblImagemAltD().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                String url = pedirUrlImagem("Imagem da Alternativa D");
+                if (url != null) {
+                    imagemAltDUrl = url;
+                    mostrarAvisoImagem();
+                }
+            }
+        });
+    }
+
+    /** Abre um JOptionPane para o professor colar a URL da imagem. */
+    private String pedirUrlImagem(String titulo) {
+        String url = JOptionPane.showInputDialog(
+                view,
+                "Cole aqui o link público da imagem (Google Drive, Imgur, etc.):",
+                titulo,
+                JOptionPane.PLAIN_MESSAGE);
+        return (url != null && !url.isBlank()) ? url.trim() : null;
+    }
+
+    /** Exibe o PopUpImagem com o aviso sobre manter o arquivo no Google Drive. */
+    private void mostrarAvisoImagem() {
+        java.awt.Frame frame = (java.awt.Frame)
+                javax.swing.SwingUtilities.getWindowAncestor(view);
+        new PopUpImagem(frame, true).setVisible(true);
     }
 
     private void atualizarContador() {
@@ -62,15 +160,13 @@ public class AdicionarQuestaoController {
     }
 
     private void salvarQuestao() {
-        String enunciado  = view.getTxtEnunciado().getText().trim();
-        String dica       = view.getTxtDica().getText().trim();
+        String enunciado   = view.getTxtEnunciado().getText().trim();
+        String dica        = view.getTxtDica().getText().trim();
         String dificuldade = (String) view.getComboDificuldade().getSelectedItem();
         String altA = view.getTxtAlternativaA().getText().trim();
         String altB = view.getTxtAlternativaB().getText().trim();
         String altC = view.getTxtAlternativaC().getText().trim();
         String altD = view.getTxtAlternativaD().getText().trim();
-
-        // Qual alternativa foi marcada como correta no combo (ex: "Alternativa A")
         String corretaSelecionada = (String) view.getComboResposta().getSelectedItem();
 
         // --- Validações ---
@@ -86,13 +182,28 @@ public class AdicionarQuestaoController {
             return;
         }
 
-        // --- Monta a lista de Alternativa ---
-        // true = correta, false = incorreta
+        // --- Monta as alternativas com imagens ---
         List<Alternativa> alternativas = new ArrayList<>();
-        Alternativa a1 = new Alternativa(); a1.setAlternativa(altA); a1.setAlternativaCorreta(corretaSelecionada.equals("Alternativa A"));
-        Alternativa a2 = new Alternativa(); a2.setAlternativa(altB); a2.setAlternativaCorreta(corretaSelecionada.equals("Alternativa B"));
-        Alternativa a3 = new Alternativa(); a3.setAlternativa(altC); a3.setAlternativaCorreta(corretaSelecionada.equals("Alternativa C"));
-        Alternativa a4 = new Alternativa(); a4.setAlternativa(altD); a4.setAlternativaCorreta(corretaSelecionada.equals("Alternativa D"));
+        Alternativa a1 = new Alternativa();
+        a1.setAlternativa(altA);
+        a1.setAlternativaCorreta(corretaSelecionada.equals("Alternativa A"));
+        a1.setAlternativaImagem(ConversorImagemUrl.converter(imagemAltAUrl));
+
+        Alternativa a2 = new Alternativa();
+        a2.setAlternativa(altB);
+        a2.setAlternativaCorreta(corretaSelecionada.equals("Alternativa B"));
+        a2.setAlternativaImagem(ConversorImagemUrl.converter(imagemAltBUrl));
+
+        Alternativa a3 = new Alternativa();
+        a3.setAlternativa(altC);
+        a3.setAlternativaCorreta(corretaSelecionada.equals("Alternativa C"));
+        a3.setAlternativaImagem(ConversorImagemUrl.converter(imagemAltCUrl));
+
+        Alternativa a4 = new Alternativa();
+        a4.setAlternativa(altD);
+        a4.setAlternativaCorreta(corretaSelecionada.equals("Alternativa D"));
+        a4.setAlternativaImagem(ConversorImagemUrl.converter(imagemAltDUrl));
+
         alternativas.add(a1);
         alternativas.add(a2);
         alternativas.add(a3);
@@ -104,8 +215,10 @@ public class AdicionarQuestaoController {
         q.setDificuldade(dificuldade);
         q.setDica(dica.isBlank() ? " " : dica);
         q.setTipo("textual");
-        q.setImagemUrl(null);
+        q.setImagemUrl(ConversorImagemUrl.converter(imagemEnunciadoUrl)); // converte link do Drive automaticamente
         q.setAlternativas(alternativas);
+        // Nota: personagem é apenas visual na tela (combo decorativo);
+        // o modelo Questao não possui campo personagem, então não é persistido.
 
         boolean ok = questaoService.salvarQuestao(q);
         if (ok) {

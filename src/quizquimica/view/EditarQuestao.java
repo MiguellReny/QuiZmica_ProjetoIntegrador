@@ -606,4 +606,9 @@ public class EditarQuestao extends javax.swing.JFrame {
     public javax.swing.JButton getBtnCancelar() { return jButton2; }
     public javax.swing.JButton getBtnSair()     { return jButton10; }
     public javax.swing.JLabel getLblContadorEnunciado() { return jLabel16; }
+    public javax.swing.JLabel getLblImagemEnunciado()    { return jLabel6;  }
+    public javax.swing.JLabel getLblImagemAltA()         { return jLabel10; }
+    public javax.swing.JLabel getLblImagemAltB()         { return jLabel11; }
+    public javax.swing.JLabel getLblImagemAltC()         { return jLabel14; }
+    public javax.swing.JLabel getLblImagemAltD()         { return jLabel8;  }
 }
