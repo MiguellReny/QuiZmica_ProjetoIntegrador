@@ -1,10 +1,10 @@
 package quizquimica;
-import quizquimica.view.TelaLogin;
+import quizquimica.view.TermodeUso;
 
 public class Main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
-            TelaLogin tela = new TelaLogin();
+            TermodeUso tela = new TermodeUso();
             tela.setVisible(true);
         });
     }

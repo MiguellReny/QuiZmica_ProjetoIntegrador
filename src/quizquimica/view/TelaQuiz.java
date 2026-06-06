@@ -28,6 +28,34 @@ public class TelaQuiz extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.categoriaQuiz = categoriaQuiz;
 
+        btnProxima.setOpaque(true);
+        btnProxima.setBorderPainted(false);
+        btnProxima.setFocusPainted(false);
+
+        btnDica.setOpaque(true);
+        btnDica.setBorderPainted(false);
+        btnDica.setFocusPainted(false);
+
+        btnVoltar.setOpaque(true);
+        btnVoltar.setBorderPainted(false);
+        btnVoltar.setFocusPainted(false);
+        
+        btnAlternativaA.setOpaque(true);
+        btnAlternativaA.setBorderPainted(false);
+        btnAlternativaA.setFocusPainted(false);
+        
+        btnAlternativaB.setOpaque(true);
+        btnAlternativaB.setBorderPainted(false);
+        btnAlternativaB.setFocusPainted(false);
+        
+        btnAlternativaC.setOpaque(true);
+        btnAlternativaC.setBorderPainted(false);
+        btnAlternativaC.setFocusPainted(false);
+        
+        btnAlternativaD.setOpaque(true);
+        btnAlternativaD.setBorderPainted(false);
+        btnAlternativaD.setFocusPainted(false);
+
         // Remove o listener do botão dica SOMENTE se existir
         if (btnDica.getActionListeners().length > 0) {
             btnDica.removeActionListener(btnDica.getActionListeners()[0]);
