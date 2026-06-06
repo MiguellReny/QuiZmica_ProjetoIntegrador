@@ -109,38 +109,39 @@ public class QuestaoService {
 
     public boolean editarQuestao(Questao questao) {
         if (questao == null) {
-            System.out.println("[QuestaoService] Questão nula — objeto não foi criado corretamente");
+            System.out.println("[SERVICE] questão nula");
             return false;
         }
 
         if (questaoDAO.buscarPorId(questao.getIdQuestao()) == null) {
-            System.out.println("[QuestaoService] Id da questão não existe");
+            System.out.println("[SERVICE] id não existe: " + questao.getIdQuestao());
             return false;
         }
+
         if (questao.getEnunciado().isBlank()) {
-            System.out.println("[QuestaoService] Enunciado não pode ficar vazio");
+            System.out.println("[SERVICE] enunciado vazio");
             return false;
         }
 
         if (!questao.getDificuldade().equals(Constantes.nivelFacil) && 
-        !questao.getDificuldade().equals(Constantes.nivelMedio) && 
-        !questao.getDificuldade().equals(Constantes.nivelDificil)) {
-        System.out.println("[QuestaoService] Dificuldade inválida");
-        return false;
+            !questao.getDificuldade().equals(Constantes.nivelMedio) && 
+            !questao.getDificuldade().equals(Constantes.nivelDificil)) {
+            System.out.println("[SERVICE] dificuldade inválida: " + questao.getDificuldade());
+            return false;
         }
 
         if (!questao.getTipo().equals("textual") && !questao.getTipo().equals("imagem")) {
-            System.out.println("[QuestaoService] Tipo inválido: " + questao.getTipo());
+            System.out.println("[SERVICE] tipo inválido: " + questao.getTipo());
             return false;
         }
 
-        if(questao.getDica().isBlank()){
-            System.out.println("[QuestaoService] Dica não pode ficar vazia");
+        if (questao.getDica().isBlank()) {
+            System.out.println("[SERVICE] dica vazia");
             return false;
         }
 
+        System.out.println("[SERVICE] chegou no DAO, personagem: " + questao.getPersonagem());
         questao.setImagemUrl(ConversorImagemUrl.converter(questao.getImagemUrl()));
-
         return questaoDAO.atualizar(questao);
     }
 

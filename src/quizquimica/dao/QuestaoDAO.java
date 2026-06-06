@@ -95,7 +95,7 @@ public class QuestaoDAO {
             ps.setString(3, questao.getDificuldade());
             ps.setString(4, questao.getDica());
             ps.setString(5, questao.getTipo());
-            ps.setString(6, questao.getPersonagem() != null ? questao.getPersonagem() : "Dmitri Mendeleev");
+            ps.setString(6, questao.getPersonagem() != null ? questao.getPersonagem() : "mendeleev");
             int linhasAfetadas = ps.executeUpdate();
             if (linhasAfetadas == 0) {
                 return false;
@@ -149,7 +149,7 @@ public class QuestaoDAO {
             ps.setString(3, questao.getDificuldade());
             ps.setString(4, questao.getDica());
             ps.setString(5, questao.getTipo());
-            ps.setString(6, questao.getPersonagem() != null ? questao.getPersonagem() : "Dmitri Mendeleev");
+            ps.setString(6, questao.getPersonagem() != null ? questao.getPersonagem() : "mendeleev");
             ps.setInt(7, questao.getIdQuestao());
             int atualizado = ps.executeUpdate();
             if (atualizado == 0) {

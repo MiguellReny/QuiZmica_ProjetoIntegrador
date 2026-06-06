@@ -159,15 +159,29 @@ public class AdicionarQuestaoController {
         });
     }
 
+    private String converterParaBanco(String exibido) {
+        switch (exibido) {
+            case "Dmitri Mendeleev":  return "mendeleev";
+            case "Ernest Rutherford": return "rutherford";
+            case "Marie Curie":       return "curie";
+            case "Rosalind Franklin": return "franklin";
+            default:                  return "mendeleev";
+        }
+    }
+
+
     private void salvarQuestao() {
         String enunciado   = view.getTxtEnunciado().getText().trim();
         String dica        = view.getTxtDica().getText().trim();
-        String dificuldade = (String) view.getComboDificuldade().getSelectedItem();
+        String dificuldade = converterDificuldade((String) view.getComboDificuldade().getSelectedItem());
         String altA = view.getTxtAlternativaA().getText().trim();
         String altB = view.getTxtAlternativaB().getText().trim();
         String altC = view.getTxtAlternativaC().getText().trim();
         String altD = view.getTxtAlternativaD().getText().trim();
         String corretaSelecionada = (String) view.getComboResposta().getSelectedItem();
+        String personagemExibido  = (String) view.getComboPersonagem().getSelectedItem();
+        String personagem = converterParaBanco(personagemExibido);
+        System.out.println("[DEBUG] personagem a salvar: " + personagem);
 
         // --- Validações ---
         if (enunciado.isBlank()) {
@@ -182,7 +196,7 @@ public class AdicionarQuestaoController {
             return;
         }
 
-        // --- Monta as alternativas com imagens ---
+        // --- Monta as alternativas ---
         List<Alternativa> alternativas = new ArrayList<>();
         Alternativa a1 = new Alternativa();
         a1.setAlternativa(altA);
@@ -215,12 +229,11 @@ public class AdicionarQuestaoController {
         q.setDificuldade(dificuldade);
         q.setDica(dica.isBlank() ? " " : dica);
         q.setTipo("textual");
-        q.setImagemUrl(ConversorImagemUrl.converter(imagemEnunciadoUrl)); // converte link do Drive automaticamente
+        q.setImagemUrl(ConversorImagemUrl.converter(imagemEnunciadoUrl));
         q.setAlternativas(alternativas);
-        // Nota: personagem é apenas visual na tela (combo decorativo);
-        // o modelo Questao não possui campo personagem, então não é persistido.
+        q.setPersonagem(personagem); // 👈 agora q já existe
 
-        boolean ok = questaoService.salvarQuestao(q);
+        boolean ok = questaoService.adicionarQuestao(q);
         if (ok) {
             JOptionPane.showMessageDialog(view, "Questão adicionada com sucesso!");
             voltarDashboard();
@@ -232,5 +245,14 @@ public class AdicionarQuestaoController {
     private void voltarDashboard() {
         new DashboardProfessor().setVisible(true);
         view.dispose();
+    }
+
+    private String converterDificuldade(String exibido) {
+        switch (exibido) {
+            case "Fácil":  return "FACIL";
+            case "Médio":  return "MEDIO";
+            case "Dificil": return "DIFICIL";
+            default:       return "FACIL";
+        }
     }
 }

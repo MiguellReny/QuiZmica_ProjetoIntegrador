@@ -37,3 +37,4 @@ build/classes/config.properties
 # JVM crash logs
 hs_err_pid*
 replay_pid*src/config.properties
+src/config.properties
