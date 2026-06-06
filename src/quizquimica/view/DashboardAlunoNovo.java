@@ -19,6 +19,7 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
      */
     public DashboardAlunoNovo() {
     initComponents();
+    adicionarBotaoDesempenho();
     setLocationRelativeTo(null);
     new DashboardAlunoNovoController(this);
     }
@@ -287,6 +288,26 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new DashboardAlunoNovo().setVisible(true));
     }
     
+    // Botão adicionado programaticamente — fora do bloco GEN para não ser sobrescrito pelo Form Editor
+    private javax.swing.JButton btnVerDesempenho;
+
+    private void adicionarBotaoDesempenho() {
+        btnVerDesempenho = new javax.swing.JButton("📊 Ver meu desempenho");
+        btnVerDesempenho.setBackground(new java.awt.Color(5, 68, 75));
+        btnVerDesempenho.setForeground(java.awt.Color.WHITE);
+        btnVerDesempenho.setFont(new java.awt.Font("Segoe UI Symbol", java.awt.Font.PLAIN, 16));
+        btnVerDesempenho.setOpaque(true);
+        btnVerDesempenho.setBorderPainted(false);
+        btnVerDesempenho.setFocusPainted(false);
+        // Posicionado abaixo do cardDesempenho (cardDesempenho y=245, altura=390 → base y=635)
+        painelFundo.add(btnVerDesempenho,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 648, 500, 40));
+    }
+
+    public javax.swing.JButton getBtnVerDesempenho() {
+        return btnVerDesempenho;
+    }
+
     public javax.swing.JButton getBtnParticiparExperimentos() {
     return btnParticiparExperimentos;
     }

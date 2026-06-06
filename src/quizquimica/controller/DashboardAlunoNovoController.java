@@ -7,8 +7,13 @@ import javax.swing.JOptionPane;
 import quizquimica.dao.PartidaDAO;
 import quizquimica.model.Partida;
 import quizquimica.model.Sessao;
+import quizquimica.model.Usuario;
 import quizquimica.util.Constantes;
+import quizquimica.dao.AlunoDAO;
+import quizquimica.model.Aluno;
 import quizquimica.view.DashboardAlunoNovo;
+import quizquimica.view.DesempenhoAluno;
+import quizquimica.controller.DesempenhoAlunoController;
 import quizquimica.view.PopupNivelDesbloqueado;
 import quizquimica.view.TelaLogin;
 import quizquimica.view.TelaQuiz;
@@ -22,12 +27,18 @@ public class DashboardAlunoNovoController {
     public static final String QUIZ_MATERIAIS    = "Materiais do laboratório";
     public static final String QUIZ_SEGURANCA    = "Equipamentos de segurança";
 
+    // FIX 4: textos originais dos botões guardados para restaurar quando desbloquear
+    private static final String TEXTO_MATERIAIS = "▷ Participar";
+    private static final String TEXTO_SEGURANCA = "▷ Participar";
+    private static final java.awt.Color COR_BTN_MATERIAIS = new java.awt.Color(5, 68, 75);
+    private static final java.awt.Color COR_BTN_SEGURANCA = new java.awt.Color(5, 68, 75);
+
     public DashboardAlunoNovoController(DashboardAlunoNovo view) {
         this.view = view;
         configurarBotoes();
         configurarEventos();
         carregarDesempenho();
-        aplicarBloqueios(); 
+        aplicarBloqueios();
     }
 
     private void configurarEventos() {
@@ -35,9 +46,10 @@ public class DashboardAlunoNovoController {
         view.getBtnParticiparMateriaisLab().addActionListener(e -> iniciarQuiz(QUIZ_MATERIAIS));
         view.getBtnParticiparSeguranca().addActionListener(e -> iniciarQuiz(QUIZ_SEGURANCA));
         view.getBtnSair().addActionListener(e -> sair());
+        view.getBtnVerDesempenho().addActionListener(e -> abrirDesempenho());
     }
 
-    // Verifica aproveitamento e habilita/desabilita botões
+    // FIX 4: aplica o estado correto (bloqueado ou desbloqueado) para os dois níveis
     private void aplicarBloqueios() {
         int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
 
@@ -47,23 +59,27 @@ public class DashboardAlunoNovoController {
         boolean medioBloqueado   = aprovFacil < Constantes.pontuacaoMin;
         boolean dificilBloqueado = aprovMedio < Constantes.pontuacaoMin;
 
-        // Médio — visual de bloqueado mas clicável
         if (medioBloqueado) {
             view.getBtnParticiparMateriaisLab().setBackground(new java.awt.Color(150, 150, 150));
             view.getBtnParticiparMateriaisLab().setText("🔒 Bloqueado");
+        } else {
+            // Restaura visual correto caso tenha desbloqueado após a última sessão
+            view.getBtnParticiparMateriaisLab().setBackground(COR_BTN_MATERIAIS);
+            view.getBtnParticiparMateriaisLab().setText(TEXTO_MATERIAIS);
         }
 
-        // Difícil — visual de bloqueado mas clicável
         if (dificilBloqueado) {
             view.getBtnParticiparSeguranca().setBackground(new java.awt.Color(150, 150, 150));
             view.getBtnParticiparSeguranca().setText("🔒 Bloqueado");
+        } else {
+            view.getBtnParticiparSeguranca().setBackground(COR_BTN_SEGURANCA);
+            view.getBtnParticiparSeguranca().setText(TEXTO_SEGURANCA);
         }
     }
 
-   private void iniciarQuiz(String categoria) {
+    private void iniciarQuiz(String categoria) {
         int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
 
-        // Verifica se o nível está bloqueado antes de iniciar
         if (categoria.equals(QUIZ_MATERIAIS)) {
             double aprovFacil = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
             if (aprovFacil < Constantes.pontuacaoMin) {
@@ -97,7 +113,6 @@ public class DashboardAlunoNovoController {
         view.dispose();
     }
 
-    
     public static String resolverDificuldade(String categoria) {
         switch (categoria) {
             case QUIZ_EXPERIMENTOS: return Constantes.nivelFacil;
@@ -107,25 +122,25 @@ public class DashboardAlunoNovoController {
         }
     }
 
+    // FIX 2: popup dispara quando cruza 70% nesta partida, não quando count==1
     public static void verificarDesbloqueio(
             java.awt.Frame parent, int idUsuario, String nivelJogado) {
 
         PartidaDAO dao = new PartidaDAO();
 
         if (nivelJogado.equals(Constantes.nivelFacil)) {
-            double aprovAtual = dao.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
-            int aprovadas = dao.contarPartidasAprovadas(idUsuario, Constantes.nivelFacil);
+            double aprovAntes = dao.aproveitamentoAnteriorNoNivel(idUsuario, Constantes.nivelFacil);
+            double aprovAgora = dao.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
 
-            // Mostra popup só na primeira vez que passa de 70%
-            if (aprovAtual >= Constantes.pontuacaoMin && aprovadas == 1) {
+            if (aprovAntes < Constantes.pontuacaoMin && aprovAgora >= Constantes.pontuacaoMin) {
                 new PopupNivelDesbloqueado(parent, "Médio").setVisible(true);
             }
 
         } else if (nivelJogado.equals(Constantes.nivelMedio)) {
-            double aprovAtual = dao.aproveitamentoNoNivel(idUsuario, Constantes.nivelMedio);
-            int aprovadas = dao.contarPartidasAprovadas(idUsuario, Constantes.nivelMedio);
+            double aprovAntes = dao.aproveitamentoAnteriorNoNivel(idUsuario, Constantes.nivelMedio);
+            double aprovAgora = dao.aproveitamentoNoNivel(idUsuario, Constantes.nivelMedio);
 
-            if (aprovAtual >= Constantes.pontuacaoMin && aprovadas == 1) {
+            if (aprovAntes < Constantes.pontuacaoMin && aprovAgora >= Constantes.pontuacaoMin) {
                 new PopupNivelDesbloqueado(parent, "Difícil").setVisible(true);
             }
         }
@@ -142,7 +157,6 @@ public class DashboardAlunoNovoController {
             return;
         }
 
-        // Usa o melhor aproveitamento no nível fácil como referência de acertos
         double melhorAprov = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
 
         int acertos   = (int) Math.round(melhorAprov * 100);
@@ -178,6 +192,23 @@ public class DashboardAlunoNovoController {
         view.getBtnSair().setOpaque(true);
         view.getBtnSair().setBorderPainted(false);
         view.getBtnSair().setFocusPainted(false);
+    }
+
+    private void abrirDesempenho() {
+        Usuario usuario = Sessao.getUsuarioLogado();
+        // Constrói um Aluno a partir do usuário logado
+        Aluno aluno = new Aluno(
+            usuario.getIdUsuario(),
+            usuario.getNome(),
+            usuario.getLogin(),
+            usuario.getSenha(),
+            usuario.getTurma() != null ? usuario.getTurma() : ""
+        );
+        DesempenhoAluno tela = new DesempenhoAluno(null, aluno.getNome());
+        new DesempenhoAlunoController(tela, aluno, "aluno");
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
+        view.dispose();
     }
 
     private void sair() {

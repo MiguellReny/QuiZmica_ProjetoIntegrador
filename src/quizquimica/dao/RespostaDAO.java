@@ -5,6 +5,8 @@ import quizquimica.util.ConexaoDB;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import quizquimica.dao.RespostaDAO;
+import java.util.Map;
 
 public class RespostaDAO {
 

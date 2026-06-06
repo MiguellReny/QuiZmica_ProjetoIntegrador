@@ -2,6 +2,7 @@ package quizquimica.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import quizquimica.dao.AlunoDAO;
 import quizquimica.dao.PartidaDAO;
@@ -15,56 +16,61 @@ import quizquimica.view.PopUpDeleteAluno;
 public class AlunosPesquisaController {
 
     private final AlunosPesquisa view;
-    private final AlunoDAO alunoDAO = new AlunoDAO();
+    private final AlunoDAO   alunoDAO   = new AlunoDAO();
     private final PartidaDAO partidaDAO = new PartidaDAO();
-    private List<Aluno> todosAlunos = new ArrayList<>();
+    private List<Aluno> todosAlunos     = new ArrayList<>();
 
     public AlunosPesquisaController(AlunosPesquisa view) {
         this.view = view;
         configurarEventos();
-        carregarDadosAsync();
+        carregarTudo();
     }
 
-    private void carregarDadosAsync() {
-        new Thread(() -> {
-            carregarAlunos();
-            carregarResumo();
-        }).start();
-    }
+    // Carrega alunos e resumo em sequência, em background
+    private void carregarTudo() {
+        new SwingWorker<Void, Void>() {
+            List<Aluno> lista;
+            int    total;
+            int    quizzesConcluidos;
+            double mediaGeral;
+            double melhorMedia;
 
-    private void carregarAlunos() {
-        List<Aluno> lista = alunoDAO.listarTodos();
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            todosAlunos = lista;
-            preencherTabela(todosAlunos);
-        });
-    }
+            @Override
+            protected Void doInBackground() {
+                // 1. Busca alunos
+                lista = alunoDAO.listarTodos();
 
-    private void carregarResumo() {
-        List<Aluno> lista = new ArrayList<>(todosAlunos);
-        int total = lista.size();
-        int quizzesConcluidos = 0;
-        double somaMedias = 0;
-        double melhorMedia = 0;
+                // 2. Calcula resumo sobre a mesma lista — sem race condition
+                total             = lista.size();
+                quizzesConcluidos = 0;
+                double somaMedias = 0;
+                melhorMedia       = 0;
 
-        for (Aluno aluno : lista) {
-            int partidas = partidaDAO.buscarPorAluno(aluno.getIdUsuario()).size();
-            quizzesConcluidos += partidas;
-            double media = partidaDAO.calcularMedia(aluno.getIdUsuario());
-            somaMedias += media;
-            if (media > melhorMedia) melhorMedia = media;
-        }
+                for (Aluno aluno : lista) {
+                    int partidas = partidaDAO.buscarPorAluno(aluno.getIdUsuario()).size();
+                    quizzesConcluidos += partidas;
+                    double media = partidaDAO.calcularMedia(aluno.getIdUsuario());
+                    somaMedias += media;
+                    if (media > melhorMedia) melhorMedia = media;
+                }
 
-        double mediaGeral = total > 0 ? somaMedias / total : 0;
-        int qc = quizzesConcluidos;
-        double mg = mediaGeral, mm = melhorMedia;
+                mediaGeral = total > 0 ? somaMedias / total : 0;
+                return null;
+            }
 
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            view.getLabelTotal().setText(String.valueOf(total));
-            view.getLabelQuiz().setText(String.valueOf(qc));
-            view.getLabelMedia().setText(String.format("%.1f", mg));
-            view.getLabelMelhor().setText(String.format("%.1f", mm));
-        });
+            @Override
+            protected void done() {
+                // Atualiza tabela
+                todosAlunos = lista;
+                preencherTabela(todosAlunos);
+
+                // Atualiza resumo
+                view.getLabelTotal().setText(String.valueOf(total));
+                view.getLabelQuiz().setText(String.valueOf(quizzesConcluidos));
+                view.getLabelMedia().setText(String.format("%.1f", mediaGeral));
+                view.getLabelMelhor().setText(String.format("%.1f", melhorMedia));
+            }
+        }.execute();
     }
 
     private void preencherTabela(List<Aluno> alunos) {
@@ -134,16 +140,13 @@ public class AlunosPesquisaController {
                 }
 
                 String senhaHash = quizquimica.util.CadastrarSenha.hashSenha(senha);
-                Aluno novoAluno = new Aluno(0, nome, email, senhaHash, turma.trim());
-                boolean ok = alunoDAO.inserir(novoAluno);
+                Aluno novoAluno  = new Aluno(0, nome, email, senhaHash, turma.trim());
+                boolean ok       = alunoDAO.inserir(novoAluno);
 
                 if (ok) {
                     javax.swing.JOptionPane.showMessageDialog(popup, "Aluno adicionado com sucesso!");
                     popup.dispose();
-                    new Thread(() -> {
-                        carregarAlunos();
-                        carregarResumo();
-                    }).start();
+                    carregarTudo();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao adicionar aluno.");
                 }
@@ -220,10 +223,7 @@ public class AlunosPesquisaController {
             if (ok) {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Aluno atualizado com sucesso!");
                 popup.dispose();
-                new Thread(() -> {
-                    carregarAlunos();
-                    carregarResumo();
-                }).start();
+                carregarTudo();
             } else {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao atualizar aluno.");
             }
@@ -253,10 +253,7 @@ public class AlunosPesquisaController {
             boolean ok = alunoDAO.remover(login);
             if (ok) {
                 popup.dispose();
-                new Thread(() -> {
-                    carregarAlunos();
-                    carregarResumo();
-                }).start();
+                carregarTudo();
             } else {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Erro ao remover aluno.");
             }

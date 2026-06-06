@@ -1,4 +1,3 @@
-
 package quizquimica.view;
 
 import quizquimica.controller.AdicionarQuestaoController;
@@ -9,57 +8,53 @@ public class DashboardProfessor extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardProfessor.class.getName());
 
-    /**
-     * Creates new form DashboardAlunoNovo
-     */
     public DashboardProfessor() {
         initComponents();
         new ProfessorController(this);
 
         btnNovaQuestao.addActionListener(new java.awt.event.ActionListener() {
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnNovaQuestaoActionPerformed(evt);
-    }
-});
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovaQuestaoActionPerformed(evt);
+            }
+        });
 
         tabelaQuestoes.setDefaultEditor(Object.class, null);
 
         btnNovaQuestao.setOpaque(true);
         btnNovaQuestao.setBorderPainted(false);
         btnNovaQuestao.setFocusPainted(false);
-        
 
         jToggleButton1.setOpaque(true);
         jToggleButton1.setBorderPainted(false);
         jToggleButton1.setFocusPainted(false);
         jToggleButton1.setContentAreaFilled(false);
-        jToggleButton1.setBorder(null);    
+        jToggleButton1.setBorder(null);
 
         jToggleButton1.addActionListener(e -> {
-    MenuProfessor menu = new MenuProfessor(this, true);
-    menu.setLocationRelativeTo(this);
-    menu.setVisible(true);
-});
+            MenuProfessor menu = new MenuProfessor(this, true);
+            menu.setLocationRelativeTo(this);
+            menu.setVisible(true);
+        });
 
-jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
-    @Override
-    public void focusGained(java.awt.event.FocusEvent e) {
-        if (jTextField1.getText().equals("Buscar questões...")) {
-            jTextField1.setText("");
-            jTextField1.setForeground(java.awt.Color.BLACK);
-        }
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (jTextField1.getText().equals("Buscar questões...")) {
+                    jTextField1.setText("");
+                    jTextField1.setForeground(java.awt.Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (jTextField1.getText().isBlank()) {
+                    jTextField1.setText("Buscar questões...");
+                    jTextField1.setForeground(new java.awt.Color(102, 102, 102));
+                }
+            }
+        });
     }
-    @Override
-    public void focusLost(java.awt.event.FocusEvent e) {
-        if (jTextField1.getText().isBlank()) {
-            jTextField1.setText("Buscar questões...");
-            jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        }
-    }
-    });
-    
-}
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -188,7 +183,7 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         lblQuestoesErros.setBackground(new java.awt.Color(255, 255, 255));
         lblQuestoesErros.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblQuestoesErros.setForeground(new java.awt.Color(35, 45, 60));
-        lblQuestoesErros.setText("1. O que um catalizador?");
+        lblQuestoesErros.setText("—");
         cardDesempenho.add(lblQuestoesErros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 510, 35));
         cardDesempenho.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 470, 20));
         cardDesempenho.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 470, 20));
@@ -196,14 +191,14 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         lblQuestoesErros1.setBackground(new java.awt.Color(255, 255, 255));
         lblQuestoesErros1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblQuestoesErros1.setForeground(new java.awt.Color(35, 45, 60));
-        lblQuestoesErros1.setText("1. O que um catalizador?");
+        lblQuestoesErros1.setText("—");
         cardDesempenho.add(lblQuestoesErros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 510, 35));
         cardDesempenho.add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 470, 20));
 
         lblQuestoesErros2.setBackground(new java.awt.Color(255, 255, 255));
         lblQuestoesErros2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblQuestoesErros2.setForeground(new java.awt.Color(35, 45, 60));
-        lblQuestoesErros2.setText("1. O que um catalizador?");
+        lblQuestoesErros2.setText("—");
         cardDesempenho.add(lblQuestoesErros2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 510, 35));
 
         jPanel2.setBackground(new java.awt.Color(245, 244, 249));
@@ -270,14 +265,9 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
 
         tabelaQuestoes.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tabelaQuestoes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Questão 1", "Editar", "Remover", 1},
-                {"Questão 2", "Editar", "Remover", 2},
-                {"Questão 3", "Editar", "Remover", 3},
-                {"Questão 4", "Editar", "Remover", 4}
-            },
+            new Object [][] {},
             new String [] {
-                "Questão", "Ação", "Remover", "ID"
+                "Questão", "Editar", "Remover", "ID"
             }
         ));
         jScrollPane1.setViewportView(tabelaQuestoes);
@@ -287,16 +277,13 @@ jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void btnNovaQuestaoActionPerformed(java.awt.event.ActionEvent evt) {
-    AdicionarQuestao tela = new AdicionarQuestao();
-    tela.setLocationRelativeTo(null);
-    tela.setVisible(true);
-    dispose();
-}
+    private void btnNovaQuestaoActionPerformed(java.awt.event.ActionEvent evt) {
+        AdicionarQuestao tela = new AdicionarQuestao();
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
+        dispose();
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -308,12 +295,9 @@ private void btnNovaQuestaoActionPerformed(java.awt.event.ActionEvent evt) {
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new DashboardProfessor().setVisible(true));
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardDesempenho;
@@ -347,15 +331,15 @@ private void btnNovaQuestaoActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JTable tabelaQuestoes;
     // End of variables declaration//GEN-END:variables
 
-        // Getters para o controller
-    public javax.swing.JButton getBtnNovaQuestao()        { return btnNovaQuestao; }
-    public javax.swing.JProgressBar getProgressBar1()             { return jProgressBar1; }
-    public javax.swing.JProgressBar getProgressBar2()             { return jProgressBar2; }
-    public javax.swing.JProgressBar getProgressBar3()             { return jProgressBar3; }
-    public javax.swing.JTextField getCampoBusca()        { return jTextField1; }
-    public javax.swing.JTable getTabelaQuestoes()          { return tabelaQuestoes; }
-    public javax.swing.JLabel getLblQuestoesErros() { return lblQuestoesErros; }
-    public javax.swing.JLabel getLblQuestoesErros1() { return lblQuestoesErros1; }
-    public javax.swing.JLabel getLblQuestoesErros2() { return lblQuestoesErros2; }
-    public javax.swing.JToggleButton getjToggleButton1() { return jToggleButton1; }
+    // Getters para o controller
+    public javax.swing.JButton getBtnNovaQuestao()           { return btnNovaQuestao; }
+    public javax.swing.JProgressBar getProgressBar1()        { return jProgressBar1; }
+    public javax.swing.JProgressBar getProgressBar2()        { return jProgressBar2; }
+    public javax.swing.JProgressBar getProgressBar3()        { return jProgressBar3; }
+    public javax.swing.JTextField getCampoBusca()            { return jTextField1; }
+    public javax.swing.JTable getTabelaQuestoes()            { return tabelaQuestoes; }
+    public javax.swing.JLabel getLblQuestoesErros()          { return lblQuestoesErros; }
+    public javax.swing.JLabel getLblQuestoesErros1()         { return lblQuestoesErros1; }
+    public javax.swing.JLabel getLblQuestoesErros2()         { return lblQuestoesErros2; }
+    public javax.swing.JToggleButton getjToggleButton1()     { return jToggleButton1; }
 }

@@ -2,8 +2,12 @@ package quizquimica.controller;
 
 import java.awt.Color;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import quizquimica.dao.RespostaDAO;
 import quizquimica.model.Questao;
 import quizquimica.service.QuestaoService;
 import quizquimica.util.Constantes;
@@ -17,6 +21,7 @@ public class ProfessorController {
 
     private final DashboardProfessor view;
     private final QuestaoService questaoService = new QuestaoService();
+    private TableRowSorter<DefaultTableModel> sorter;
 
     public ProfessorController(DashboardProfessor view) {
         this.view = view;
@@ -31,12 +36,12 @@ public class ProfessorController {
         view.getTabelaQuestoes().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int linhaView = view.getTabelaQuestoes().rowAtPoint(evt.getPoint());
+                int linhaView  = view.getTabelaQuestoes().rowAtPoint(evt.getPoint());
                 int colunaView = view.getTabelaQuestoes().columnAtPoint(evt.getPoint());
 
                 if (linhaView < 0) return;
 
-                int linhaModel = view.getTabelaQuestoes().convertRowIndexToModel(linhaView);
+                int linhaModel  = view.getTabelaQuestoes().convertRowIndexToModel(linhaView);
                 int colunaModel = view.getTabelaQuestoes().convertColumnIndexToModel(colunaView);
 
                 Object idObj = view.getTabelaQuestoes().getModel().getValueAt(linhaModel, 3);
@@ -74,6 +79,10 @@ public class ProfessorController {
             });
         }
 
+        // Configura o sorter para filtro em memória (sem banco)
+        sorter = new TableRowSorter<>(model);
+        view.getTabelaQuestoes().setRowSorter(sorter);
+
         // Oculta coluna ID (índice 3)
         var colID = view.getTabelaQuestoes().getColumnModel().getColumn(3);
         colID.setMinWidth(0);
@@ -84,20 +93,16 @@ public class ProfessorController {
     }
 
     private void filtrarQuestoes(String texto) {
-        if (texto.equals("Buscar questões...")) return;
-        List<Questao> lista = questaoService.listarTodas();
-        DefaultTableModel model = (DefaultTableModel) view.getTabelaQuestoes().getModel();
-        model.setRowCount(0);
-        for (Questao q : lista) {
-            if (q.getEnunciado().toLowerCase().contains(texto.toLowerCase())) {
-                model.addRow(new Object[]{
-                    q.getEnunciado(),
-                    "Editar",
-                    "Remover",
-                    q.getIdQuestao()
-                });
-            }
+        if (sorter == null) return;
+
+        String placeholder = "Buscar questões...";
+        if (texto.isEmpty() || texto.equals(placeholder)) {
+            sorter.setRowFilter(null); // mostra tudo
+            return;
         }
+
+        // Filtra apenas na coluna 0 (enunciado), case-insensitive, sem banco
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(texto), 0));
     }
 
     private void abrirAdicionarQuestao() {
@@ -135,22 +140,52 @@ public class ProfessorController {
     }
 
     private void carregarEstatisticas() {
-        view.getProgressBar1().setValue(73);
-        view.getProgressBar2().setValue(62);
-        view.getProgressBar3().setValue(58);
+        RespostaDAO respostaDAO = new RespostaDAO();
+        Map<Integer, Integer> erros = respostaDAO.questoesMaisErradas();
 
-        view.getProgressBar1().setForeground(Color.RED);
-        view.getProgressBar2().setForeground(Color.ORANGE);
-        view.getProgressBar3().setForeground(Color.YELLOW);
+        List<Map.Entry<Integer, Integer>> top3 = erros.entrySet()
+                .stream()
+                .limit(3)
+                .collect(java.util.stream.Collectors.toList());
 
-        view.getLblQuestoesErros().setText("1. O que é um catalisador?");
-        view.getLblQuestoesErros1().setText("2. Qual o nome do material?");
-        view.getLblQuestoesErros2().setText("3. Qual material é usado na filtração?");
+        int totalErros = erros.values().stream().mapToInt(Integer::intValue).sum();
+
+        javax.swing.JLabel[] labels = {
+            view.getLblQuestoesErros(),
+            view.getLblQuestoesErros1(),
+            view.getLblQuestoesErros2()
+        };
+        javax.swing.JProgressBar[] bars = {
+            view.getProgressBar1(),
+            view.getProgressBar2(),
+            view.getProgressBar3()
+        };
+        Color[] cores = { Color.RED, Color.ORANGE, Color.YELLOW };
+
+        for (int i = 0; i < top3.size(); i++) {
+            int idQuestao = top3.get(i).getKey();
+            int qtdErros  = top3.get(i).getValue();
+
+            Questao q = questaoService.buscarPorId(idQuestao);
+            String enunciado = (q != null) ? q.getEnunciado() : "Questão #" + idQuestao;
+            if (enunciado.length() > 50) enunciado = enunciado.substring(0, 47) + "...";
+
+            int percentual = (totalErros > 0) ? (qtdErros * 100 / totalErros) : 0;
+
+            labels[i].setText((i + 1) + ". " + enunciado);
+            bars[i].setValue(percentual);
+            bars[i].setForeground(cores[i]);
+        }
+
+        for (int i = top3.size(); i < 3; i++) {
+            labels[i].setText("—");
+            bars[i].setValue(0);
+        }
     }
 
     private Color corDificuldade(String dificuldade) {
-        if (Constantes.nivelFacil.equals(dificuldade)) return new Color(34, 139, 34);
-        if (Constantes.nivelMedio.equals(dificuldade)) return new Color(200, 140, 0);
+        if (Constantes.nivelFacil.equals(dificuldade))   return new Color(34, 139, 34);
+        if (Constantes.nivelMedio.equals(dificuldade))   return new Color(200, 140, 0);
         if (Constantes.nivelDificil.equals(dificuldade)) return new Color(179, 40, 36);
         return Color.GRAY;
     }

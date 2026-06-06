@@ -1,10 +1,15 @@
 package quizquimica.controller;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -25,62 +30,50 @@ public class TelaQuizController {
     private final PartidaService partidaService = new PartidaService();
 
     private List<Questao> questoes = new ArrayList<>();
+
+    // Alternativas embaralhadas uma única vez por questão — índice A/B/C/D fixo
+    private List<List<Alternativa>> alternativasEmbaralhadas = new ArrayList<>();
+
     private String[] respostasSelecionadas;
     private boolean[] usouDica;
     private int dicasUsadasTotal = 0;
-
     private int indiceQuestaoAtual = 0;
 
-    private final Color COR_PADRAO = new Color(255, 255, 255);
-    private final Color COR_SELECIONADA = new Color(179, 40, 36);
-    private final Color COR_TEXTO_PADRAO = new Color(20, 25, 45);
+    private final Color COR_PADRAO            = new Color(255, 255, 255);
+    private final Color COR_SELECIONADA       = new Color(179, 40, 36);
+    private final Color COR_TEXTO_PADRAO      = new Color(20, 25, 45);
     private final Color COR_TEXTO_SELECIONADO = new Color(255, 255, 255);
 
     public TelaQuizController(TelaQuiz view, String nivel) {
-        this.view = view;
+        this.view  = view;
         this.nivel = nivel;
 
-        // 1. Inicia a partida PRIMEIRO (isso monta as questões internamente)
         int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
         partidaService.iniciarPartida(idUsuario, nivel);
 
-        // 2. Agora busca a lista já montada
+        // FIX 3: PartidaService já embaralha internamente — não embaralha de novo
         questoes = new ArrayList<>(partidaService.getQuestoesDaPartida());
-        Collections.shuffle(questoes);
 
         if (questoes.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Nenhuma questão encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(view,
+                "Nenhuma questão encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
 
-        // 3. Aloca arrays com tamanho correto
         respostasSelecionadas = new String[questoes.size()];
-        usouDica = new boolean[questoes.size()];
+        usouDica              = new boolean[questoes.size()];
+
+        // FIX 1: embaralha alternativas uma vez por questão e guarda a ordem fixa
+        for (Questao q : questoes) {
+            List<Alternativa> copia = new ArrayList<>(q.getAlternativas());
+            Collections.shuffle(copia);
+            alternativasEmbaralhadas.add(copia);
+        }
 
         configurarEventos();
         carregarQuestaoAtual();
     }
 
-        private void abrirDica() {
-            if (dicasUsadasTotal >= Constantes.maximoDicas) {
-                JOptionPane.showMessageDialog(view, "Você já usou todas as suas dicas!");
-                return;
-            }
-
-            usouDica[indiceQuestaoAtual] = true;
-            dicasUsadasTotal++;
-
-            Questao q = questoes.get(indiceQuestaoAtual);
-            PopUpDicaQuiz popup = new PopUpDicaQuiz(view, true);
-            popup.setDadosDica(
-                    q.getPersonagem() != null ? q.getPersonagem() : "mendeleev",
-                    q.getDica() != null ? q.getDica() : "Sem dica disponível"
-            );
-            popup.setVisible(true);
-        }
-
-
     private void configurarEventos() {
-
         view.getBtnDica().addActionListener(e -> abrirDica());
         view.getBtnVoltar().addActionListener(e -> voltar());
         view.getBtnProxima().addActionListener(e -> proximaQuestao());
@@ -95,83 +88,126 @@ public class TelaQuizController {
         if (questoes.isEmpty()) return;
 
         Questao q = questoes.get(indiceQuestaoAtual);
-        System.out.println("[DEBUG] questão: " + q.getIdQuestao() + " - " + q.getEnunciado());
-
         view.getLblQuestaoAtual().setText("QUESTÃO " + (indiceQuestaoAtual + 1));
         view.getLblProgresso().setText((indiceQuestaoAtual + 1) + " / " + questoes.size());
         view.getLblEnunciado().setText(q.getEnunciado());
 
-        carregarImagemEnunciado(q.getImagemUrl());
+        // FIX 2: imagem do enunciado em thread separada para não travar a UI
+        carregarImagemEnunciadoAsync(q.getImagemUrl());
 
-        List<Alternativa> alts = q.getAlternativas();
-        for (Alternativa a : alts) {
-            System.out.println("[DEBUG] alt: " + a.getIdAlternativa()
-                    + " - " + a.getAlternativa()
-                    + " - idQuestao: " + a.getIdQuestao());
-        }
+        List<Alternativa> alts = alternativasEmbaralhadas.get(indiceQuestaoAtual);
+
+        JButton[] btns = {
+            view.getBtnAlternativaA(),
+            view.getBtnAlternativaB(),
+            view.getBtnAlternativaC(),
+            view.getBtnAlternativaD()
+        };
 
         if (alts.size() >= 4) {
-            view.getBtnAlternativaA().setText(alts.get(0).getAlternativa());
-            view.getBtnAlternativaB().setText(alts.get(1).getAlternativa());
-            view.getBtnAlternativaC().setText(alts.get(2).getAlternativa());
-            view.getBtnAlternativaD().setText(alts.get(3).getAlternativa());
+            for (int i = 0; i < 4; i++) {
+                Alternativa alt   = alts.get(i);
+                String textoAlt   = alt.getAlternativa();
+                String imgUrl     = alt.getAlternativaImagem();
+
+                // FIX — imagem da alternativa: carrega do banco ou mostra texto
+                if (imgUrl != null && !imgUrl.isBlank()) {
+                    btns[i].setText("");
+                    carregarImagemBotaoAsync(btns[i], imgUrl);
+                } else {
+                    btns[i].setIcon(null);
+                    btns[i].setText(textoAlt != null ? textoAlt : "");
+                }
+            }
         }
 
         restaurarSelecao();
         atualizarBotaoProxima();
     }
 
-    private void carregarImagemEnunciado(String urlImagem) {
-        if (urlImagem != null && !urlImagem.isBlank()) {
+    // FIX 2: download da imagem do enunciado fora da EDT
+    private void carregarImagemEnunciadoAsync(String urlImagem) {
+        // Limpa imagem anterior imediatamente
+        javax.swing.SwingUtilities.invokeLater(() ->
+            view.getLblImagemQuestao().setIcon(null));
+
+        if (urlImagem == null || urlImagem.isBlank()) {
+            javax.swing.SwingUtilities.invokeLater(this::exibirLogoNoLugarDaImagem);
+            return;
+        }
+
+        new Thread(() -> {
             try {
-                java.net.URL url = java.net.URI.create(urlImagem).toURL();
-                java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+                URL url = URI.create(urlImagem).toURL();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("User-Agent",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
                 conn.setConnectTimeout(5000);
                 conn.setReadTimeout(5000);
                 conn.setInstanceFollowRedirects(true);
-                java.net.HttpURLConnection.setFollowRedirects(true);
+                HttpURLConnection.setFollowRedirects(true);
 
-                int status = conn.getResponseCode();
-                System.out.println("[DEBUG] HTTP status imagem: " + status + " | url: " + urlImagem);
-
-                if (status == 200) {
+                if (conn.getResponseCode() == 200) {
                     byte[] bytes = conn.getInputStream().readAllBytes();
-                    System.out.println("[DEBUG] bytes recebidos: " + bytes.length);
                     java.awt.image.BufferedImage buffered =
-                        javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(bytes));
+                        ImageIO.read(new java.io.ByteArrayInputStream(bytes));
                     if (buffered != null) {
-                        java.awt.Image img = buffered.getScaledInstance(410, 250, java.awt.Image.SCALE_SMOOTH);
-                        view.getLblImagemQuestao().setIcon(new javax.swing.ImageIcon(img));
-                        view.getLblImagemQuestao().setVisible(true);
+                        Image img = buffered.getScaledInstance(410, 250, Image.SCALE_SMOOTH);
+                        javax.swing.SwingUtilities.invokeLater(() -> {
+                            view.getLblImagemQuestao().setIcon(new ImageIcon(img));
+                            view.getLblImagemQuestao().setVisible(true);
+                        });
                         return;
                     }
                 }
             } catch (Exception ex) {
-                System.out.println("[DEBUG] Erro ao carregar imagem: " + ex.getMessage());
+                System.out.println("[DEBUG] Erro ao carregar imagem enunciado: " + ex.getMessage());
             }
-        }
-        exibirLogoNoLugarDaImagem();
-        view.getLblImagemQuestao().setVisible(true);
+            javax.swing.SwingUtilities.invokeLater(this::exibirLogoNoLugarDaImagem);
+        }).start();
     }
 
-        private void exibirLogoNoLugarDaImagem() {
-        // ← substitua este aqui
-        javax.swing.ImageIcon logo = new javax.swing.ImageIcon(
-            getClass().getResource("/quizquimica/images/quizmica.png")
-        );
-        java.awt.Image img = logo.getImage().getScaledInstance(
-                410, 250, java.awt.Image.SCALE_SMOOTH
-        );
-        view.getLblImagemQuestao().setIcon(new javax.swing.ImageIcon(img));
+    private void carregarImagemBotaoAsync(JButton btn, String urlStr) {
+        new Thread(() -> {
+            try {
+                URL url = URI.create(urlStr).toURL();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setInstanceFollowRedirects(true);
+                HttpURLConnection.setFollowRedirects(true);
+
+                if (conn.getResponseCode() == 200) {
+                    byte[] bytes = conn.getInputStream().readAllBytes();
+                    java.awt.image.BufferedImage buffered =
+                        ImageIO.read(new java.io.ByteArrayInputStream(bytes));
+                    if (buffered != null) {
+                        Image img = buffered.getScaledInstance(120, 70, Image.SCALE_SMOOTH);
+                        javax.swing.SwingUtilities.invokeLater(() ->
+                            btn.setIcon(new ImageIcon(img)));
+                        return;
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("[DEBUG] Erro imagem alternativa: " + ex.getMessage());
+            }
+            javax.swing.SwingUtilities.invokeLater(() -> btn.setIcon(null));
+        }).start();
+    }
+
+    private void exibirLogoNoLugarDaImagem() {
+        ImageIcon logo = new ImageIcon(
+            getClass().getResource("/quizquimica/images/quizmica.png"));
+        Image img = logo.getImage().getScaledInstance(410, 250, Image.SCALE_SMOOTH);
+        view.getLblImagemQuestao().setIcon(new ImageIcon(img));
+        view.getLblImagemQuestao().setVisible(true);
     }
 
     private void selecionar(String letra) {
         respostasSelecionadas[indiceQuestaoAtual] = letra;
-
         resetBotoes();
-
         switch (letra) {
             case "A" -> destacar(view.getBtnAlternativaA());
             case "B" -> destacar(view.getBtnAlternativaB());
@@ -182,7 +218,6 @@ public class TelaQuizController {
 
     private void restaurarSelecao() {
         resetBotoes();
-
         String r = respostasSelecionadas[indiceQuestaoAtual];
         if (r != null) selecionar(r);
     }
@@ -204,13 +239,27 @@ public class TelaQuizController {
         b.setForeground(COR_TEXTO_SELECIONADO);
     }
 
-    private void proximaQuestao() {
+    private void abrirDica() {
+        if (dicasUsadasTotal >= Constantes.maximoDicas) {
+            JOptionPane.showMessageDialog(view, "Você já usou todas as suas dicas!");
+            return;
+        }
+        usouDica[indiceQuestaoAtual] = true;
+        dicasUsadasTotal++;
+        Questao q = questoes.get(indiceQuestaoAtual);
+        PopUpDicaQuiz popup = new PopUpDicaQuiz(view, true);
+        popup.setDadosDica(
+            q.getPersonagem() != null ? q.getPersonagem() : "mendeleev",
+            q.getDica()       != null ? q.getDica()       : "Sem dica disponível"
+        );
+        popup.setVisible(true);
+    }
 
+    private void proximaQuestao() {
         if (respostasSelecionadas[indiceQuestaoAtual] == null) {
             JOptionPane.showMessageDialog(view, "Selecione uma alternativa.");
             return;
         }
-
         if (indiceQuestaoAtual < questoes.size() - 1) {
             indiceQuestaoAtual++;
             carregarQuestaoAtual();
@@ -220,18 +269,13 @@ public class TelaQuizController {
     }
 
     private void voltar() {
-
         if (indiceQuestaoAtual > 0) {
             indiceQuestaoAtual--;
             carregarQuestaoAtual();
             return;
         }
-
-        int r = JOptionPane.showConfirmDialog(view,
-                "Sair do quiz?",
-                "Sair",
-                JOptionPane.YES_NO_OPTION);
-
+        int r = JOptionPane.showConfirmDialog(view, "Sair do quiz?", "Sair",
+            JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
             new DashboardAlunoNovo().setVisible(true);
             view.dispose();
@@ -245,7 +289,8 @@ public class TelaQuizController {
         for (int i = 0; i < questoes.size(); i++) {
             Questao q = questoes.get(i);
             String respostaAluno = respostasSelecionadas[i];
-            List<Alternativa> alts = q.getAlternativas();
+            // FIX 1: usa lista embaralhada, não q.getAlternativas()
+            List<Alternativa> alts = alternativasEmbaralhadas.get(i);
 
             if (respostaAluno != null) {
                 int idx = switch (respostaAluno) {
@@ -263,12 +308,14 @@ public class TelaQuizController {
         }
 
         partidaService.finalizarPartida();
+        int pontuacao = partidaService.getPontuacao();
 
         int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
         DashboardAlunoNovoController.verificarDesbloqueio(view, idUsuario, nivel);
 
         PopupQuizFinalizado popup = new PopupQuizFinalizado(view, true);
-        popup.setDadosResultado(nivel, acertos, erros);
+        // FIX 5: passa pontuação real para o popup
+        popup.setDadosResultado(nivel, acertos, erros, pontuacao);
         popup.getBtnVoltar().addActionListener(e -> {
             popup.dispose();
             new DashboardAlunoNovo().setVisible(true);

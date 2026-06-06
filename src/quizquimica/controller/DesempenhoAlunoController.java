@@ -6,6 +6,7 @@ import quizquimica.dao.PartidaDAO;
 import quizquimica.model.Aluno;
 import quizquimica.model.Partida;
 import quizquimica.view.AlunosPesquisa;
+import quizquimica.view.DashboardAlunoNovo;
 import quizquimica.view.DesempenhoAluno;
 
 public class DesempenhoAlunoController {
@@ -14,9 +15,19 @@ public class DesempenhoAlunoController {
     private final Aluno aluno;
     private final PartidaDAO partidaDAO = new PartidaDAO();
 
+    // origem: "professor" (volta para AlunosPesquisa) ou "aluno" (volta para DashboardAlunoNovo)
+    private final String origem;
+
+    // Construtor padrão — chamado pelo professor
     public DesempenhoAlunoController(DesempenhoAluno view, Aluno aluno) {
-        this.view = view;
-        this.aluno = aluno;
+        this(view, aluno, "professor");
+    }
+
+    // Construtor com origem — usado pelo próprio aluno
+    public DesempenhoAlunoController(DesempenhoAluno view, Aluno aluno, String origem) {
+        this.view   = view;
+        this.aluno  = aluno;
+        this.origem = origem;
 
         carregarDadosAluno();
         carregarHistorico();
@@ -76,9 +87,13 @@ public class DesempenhoAlunoController {
     }
 
     private void voltarParaAlunos() {
-        AlunosPesquisa telaAlunos = new AlunosPesquisa();
-        new AlunosPesquisaController(telaAlunos);
-        telaAlunos.setVisible(true);
+        if ("aluno".equals(origem)) {
+            new DashboardAlunoNovo().setVisible(true);
+        } else {
+            AlunosPesquisa telaAlunos = new AlunosPesquisa();
+            new AlunosPesquisaController(telaAlunos);
+            telaAlunos.setVisible(true);
+        }
         view.dispose();
     }
 
