@@ -128,7 +128,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
     }
     if (owner != null) owner.dispose();
     AlunosPesquisa tela = new AlunosPesquisa();
-    new quizquimica.controller.AlunosPesquisaController(tela);  // ← antes do setVisible
+    new quizquimica.controller.AlunosPesquisaController(tela); 
     tela.setLocationRelativeTo(null);
     tela.setVisible(true);
 }

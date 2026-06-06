@@ -124,4 +124,64 @@ public class PartidaDAO {
              + (Constantes.dificilMedias   * Constantes.pontoM)
              + (Constantes.dificilDificeis * Constantes.pontoD);
     }
+
+    public double aproveitamentoNoNivel(int idUsuario, String nivel) {
+        String sql = "SELECT MAX(pontuacao) AS pontuacao FROM partida " +
+                    "WHERE usuario_idUsuario = ? AND nivel = ?";
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idUsuario);
+            ps.setString(2, nivel);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int pontuacao = rs.getInt("pontuacao");
+                    int maximo = calcularMaximo(nivel);
+                    return maximo > 0 ? (double) pontuacao / maximo : 0.0;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("[PartidaDAO] Erro ao buscar aproveitamento: " + e.getMessage());
+        }
+        return 0.0;
+    }
+
+    public int contarPartidasAprovadas(int idUsuario, String nivel) {
+        int minimo = (int)(calcularMaximo(nivel) * Constantes.pontuacaoMin);
+        String sql = "SELECT COUNT(*) FROM partida " +
+                    "WHERE usuario_idUsuario = ? AND nivel = ? AND pontuacao >= ?";
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idUsuario);
+            ps.setString(2, nivel);
+            ps.setInt(3, minimo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("[PartidaDAO] Erro ao contar partidas aprovadas: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    
+    public double aproveitamentoAnteriorNoNivel(int idUsuario, String nivel) {
+        String sql = "SELECT pontuacao FROM partida " +
+                    "WHERE usuario_idUsuario = ? AND nivel = ? " +
+                    "ORDER BY idPartida DESC LIMIT 1 OFFSET 1"; // ← pula a última
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idUsuario);
+            ps.setString(2, nivel);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int pontuacao = rs.getInt("pontuacao");
+                    int maximo = calcularMaximo(nivel);
+                    return maximo > 0 ? (double) pontuacao / maximo : 0.0;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("[PartidaDAO] Erro ao buscar aproveitamento anterior: " + e.getMessage());
+        }
+        return 0.0; // só jogou uma vez = é a primeira vez
+    }
 }

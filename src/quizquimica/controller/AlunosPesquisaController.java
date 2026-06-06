@@ -133,7 +133,8 @@ public class AlunosPesquisaController {
                     return;
                 }
 
-                Aluno novoAluno = new Aluno(0, nome, email, senha, turma.trim());
+                String senhaHash = quizquimica.util.CadastrarSenha.hashSenha(senha);
+                Aluno novoAluno = new Aluno(0, nome, email, senhaHash, turma.trim());
                 boolean ok = alunoDAO.inserir(novoAluno);
 
                 if (ok) {
@@ -214,7 +215,7 @@ public class AlunosPesquisaController {
             }
 
             boolean ok = alunoDAO.atualizar(login, novoNome, novoLogin,
-                novaSenha.isEmpty() ? null : novaSenha);
+                novaSenha.isEmpty() ? null : quizquimica.util.CadastrarSenha.hashSenha(novaSenha));
 
             if (ok) {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Aluno atualizado com sucesso!");

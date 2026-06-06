@@ -45,10 +45,41 @@ public class PopUpDicaQuiz extends javax.swing.JDialog {
     btnFechar.addActionListener(e -> dispose());
     }
 
-    public void setDadosDica(String nomePersonagem, String descricaoPersonagem, String textoDica) {
-    lblNomePersonagem.setText(nomePersonagem);
-    lblDescricaoPersonagem.setText(descricaoPersonagem);
-    txtDica.setText(textoDica);
+    public void setDadosDica(String personagem, String textoDica) {
+        txtDica.setText(textoDica);
+
+        switch (personagem) {
+            case "mendeleev" -> {
+                lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(
+                    getClass().getResource("/quizquimica/images/Mendeleev.png")));
+                lblNomePersonagem.setText("DMITRI MENDELEEV");
+                lblDescricaoPersonagem.setText("Pai da tabela periódica");
+            }
+            case "curie" -> {
+                lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(
+                    getClass().getResource("/quizquimica/images/CurieRedimensionada.png")));
+                lblNomePersonagem.setText("MARIE CURIE");
+                lblDescricaoPersonagem.setText("Pioneira da radioatividade");
+            }
+            case "rutherford" -> {
+                lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(
+                    getClass().getResource("/quizquimica/images/Rutherford.png")));
+                lblNomePersonagem.setText("ERNEST RUTHERFORD");
+                lblDescricaoPersonagem.setText("Pai da física nuclear");
+            }
+            case "franklin" -> {
+                lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(
+                    getClass().getResource("/quizquimica/images/Franklin.png")));
+                lblNomePersonagem.setText("ROSALIND FRANKLIN");
+                lblDescricaoPersonagem.setText("Pioneira da cristalografia");
+            }
+            default -> {
+                lblImagemPersonagem.setIcon(new javax.swing.ImageIcon(
+                    getClass().getResource("/quizquimica/images/Mendeleev.png")));
+                lblNomePersonagem.setText("DMITRI MENDELEEV");
+                lblDescricaoPersonagem.setText("Pai da tabela periódica");
+            }
+        }
     }
 
     /**

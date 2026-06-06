@@ -16,7 +16,7 @@ public class Navegacao {
         if (dialog.getOwner() != null) dialog.getOwner().dispose();
         dialog.dispose();
         AlunosPesquisa tela = new AlunosPesquisa();
-        new AlunosPesquisaController(tela);  // ← antes do setVisible
+        new AlunosPesquisaController(tela); 
         tela.setLocationRelativeTo(null);
         tela.setVisible(true);
     }

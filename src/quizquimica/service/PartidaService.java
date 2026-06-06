@@ -3,7 +3,6 @@ package quizquimica.service;
 import quizquimica.dao.PartidaDAO;
 import quizquimica.dao.QuestaoDAO;
 import quizquimica.dao.RespostaDAO;
-import quizquimica.model.Alternativa;
 import quizquimica.model.Partida;
 import quizquimica.model.Questao;
 import quizquimica.util.Constantes;
@@ -27,9 +26,9 @@ public class PartidaService {
     private int idUsuario;
     private int idPartidaAtual;
 
-    public boolean iniciarPartida(int idUsuario) {
+    public boolean iniciarPartida(int idUsuario, String nivel) {
         this.idUsuario = idUsuario;
-        this.nivel = partidaDAO.buscarNivelAtual(idUsuario);
+        this.nivel = nivel;
         this.pontuacao = 0;
         this.dicasUsadas = 0;
         this.questaoAtual = 0;
@@ -46,20 +45,25 @@ public class PartidaService {
         return idPartidaAtual != -1;
     }
 
+    // ✅ NOVO: expõe montarQuestoes para o TelaQuizController usar
+    public List<Questao> montarQuestoesPorNivel(String nivel) {
+        return montarQuestoes(nivel);
+    }
+
     private List<Questao> montarQuestoes(String nivel) {
         List<Questao> lista = new ArrayList<>();
 
         if (nivel.equals(Constantes.nivelFacil)) {
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil, Constantes.facilFaceis));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio, Constantes.facilMedias));
+            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil,   Constantes.facilFaceis));
+            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio,   Constantes.facilMedias));
             lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelDificil, Constantes.facilDificeis));
         } else if (nivel.equals(Constantes.nivelMedio)) {
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil, Constantes.medioFaceis));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio, Constantes.medioMedias));
+            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil,   Constantes.medioFaceis));
+            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio,   Constantes.medioMedias));
             lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelDificil, Constantes.medioDificeis));
         } else {
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil, Constantes.dificilFaceis));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio, Constantes.dificilMedias));
+            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil,   Constantes.dificilFaceis));
+            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio,   Constantes.dificilMedias));
             lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelDificil, Constantes.dificilDificeis));
         }
 
@@ -74,33 +78,25 @@ public class PartidaService {
         return null;
     }
 
-    public boolean responder(int idAlternativa, boolean usouDica) {
-        Questao questao = getQuestaoAtual();
+    public boolean responder(int idQuestao, int idAlternativa, boolean usouDica) {
+        // busca a questão pelo id, não pelo índice
+        Questao questao = questoesDaPartida.stream()
+            .filter(q -> q.getIdQuestao() == idQuestao)
+            .findFirst().orElse(null);
+
         if (questao == null) return false;
 
-        boolean acertou = false;
-        for (Alternativa alt : questao.getAlternativas()) {
-            if (alt.getIdAlternativa() == idAlternativa && alt.isAlternativaCorreta()) {
-                acertou = true;
-                break;
-            }
-        }
+        boolean acertou = questao.getAlternativas().stream()
+            .anyMatch(a -> a.getIdAlternativa() == idAlternativa && a.isAlternativaCorreta());
 
         if (acertou) {
             int pontos = getPontosPorDificuldade(questao.getDificuldade());
-            if (usouDica) {
-                pontos = (int) (pontos * (1 - Constantes.descontoDica));
-            }
+            if (usouDica) pontos = (int)(pontos * (1 - Constantes.descontoDica));
             pontuacao += pontos;
         }
 
-        if (usouDica) {
-            dicasUsadas++;
-        }
-
+        if (usouDica) dicasUsadas++;
         respostaDAO.salvar(idPartidaAtual, questao.getIdQuestao(), idAlternativa);
-
-        questaoAtual++;
         return acertou;
     }
 
@@ -115,18 +111,17 @@ public class PartidaService {
     }
 
     public String getDicaAtual() {
-        if (!podePedirDica()) {
-            return null;
-        }
+        if (!podePedirDica()) return null;
         Questao questao = getQuestaoAtual();
-        if (questao != null) {
-            return questao.getDica();
-        }
-        return null;
+        return questao != null ? questao.getDica() : null;
     }
 
     public boolean partidaEncerrada() {
         return questaoAtual >= Constantes.totalQuestoes;
+    }
+
+    public List<Questao> getQuestoesDaPartida() {
+        return questoesDaPartida;
     }
 
     public Partida finalizarPartida() {
@@ -137,13 +132,11 @@ public class PartidaService {
         partida.setPontuacao(pontuacao);
         partida.setData(LocalDate.now());
         partida.setDicasUsadas(dicasUsadas);
-
         partidaDAO.atualizar(partida);
-
         return partida;
     }
 
-    public int getPontuacao() { return pontuacao; }
-    public int getDicasUsadas() { return dicasUsadas; }
+    public int getPontuacao()          { return pontuacao; }
+    public int getDicasUsadas()        { return dicasUsadas; }
     public int getQuestaoAtualNumero() { return questaoAtual + 1; }
 }

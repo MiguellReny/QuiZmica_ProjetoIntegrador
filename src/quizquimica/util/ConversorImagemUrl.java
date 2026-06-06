@@ -10,6 +10,16 @@ public class ConversorImagemUrl {
             return "https://drive.google.com/uc?export=view&id=" + id;
         }
 
-        return url;
+        if (url.contains("imgur.com/") && !url.contains("i.imgur.com")) {
+            String id = url.substring(url.lastIndexOf("/") + 1);
+            return "https://i.imgur.com/" + id + ".png";
+        }
+        
+        if (url.contains("imgur.com/") && !url.contains("i.imgur.com")) {
+            String id = url.substring(url.lastIndexOf("/") + 1);
+            return "https://i.imgur.com/" + id + ".png";
+        }
+
+        return url; 
     }
 }

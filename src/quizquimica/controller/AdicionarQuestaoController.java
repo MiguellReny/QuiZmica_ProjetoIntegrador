@@ -231,7 +231,7 @@ public class AdicionarQuestaoController {
         q.setTipo("textual");
         q.setImagemUrl(ConversorImagemUrl.converter(imagemEnunciadoUrl));
         q.setAlternativas(alternativas);
-        q.setPersonagem(personagem); // 👈 agora q já existe
+        q.setPersonagem(personagem); 
 
         boolean ok = questaoService.adicionarQuestao(q);
         if (ok) {

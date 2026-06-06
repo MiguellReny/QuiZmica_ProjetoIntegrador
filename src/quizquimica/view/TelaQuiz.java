@@ -5,6 +5,8 @@
 
 package quizquimica.view;
 
+import quizquimica.controller.TelaQuizController;
+
 /**
  *
  * @author Angela
@@ -22,10 +24,16 @@ public class TelaQuiz extends javax.swing.JFrame {
     }
 
     public TelaQuiz(String categoriaQuiz) {
-    initComponents();
-    setLocationRelativeTo(null);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.categoriaQuiz = categoriaQuiz;
 
-    this.categoriaQuiz = categoriaQuiz;
+        // Remove o listener do botão dica SOMENTE se existir
+        if (btnDica.getActionListeners().length > 0) {
+            btnDica.removeActionListener(btnDica.getActionListeners()[0]);
+        }
+
+        new TelaQuizController(this, categoriaQuiz);
     }
 
     /** This method is called from within the constructor to
