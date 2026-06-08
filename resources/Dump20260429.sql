@@ -14,17 +14,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure 
---
 DROP TABLE IF EXISTS `pergunta_partida`;
 DROP TABLE IF EXISTS `partida`;
 DROP TABLE IF EXISTS `alternativa`;
 DROP TABLE IF EXISTS `perguntas`;
 DROP TABLE IF EXISTS `usuario`;
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alternativa` (
   `idAlternativa` int NOT NULL,
   `alternativaCorreta` tinyint(1) NOT NULL,
@@ -35,15 +30,7 @@ CREATE TABLE `alternativa` (
   KEY `fk_Alternativa_Perguntas1_idx` (`perguntas_idPerguntas`),
   CONSTRAINT `fk_Alternativa_Perguntas1` FOREIGN KEY (`perguntas_idPerguntas`) REFERENCES `perguntas` (`idPerguntas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `alternativa` WRITE;
-/*!40000 ALTER TABLE `alternativa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `alternativa` ENABLE KEYS */;
-UNLOCK TABLES;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `perguntas` (
   `idPerguntas` int NOT NULL AUTO_INCREMENT,
   `enunciado` text,
@@ -51,17 +38,10 @@ CREATE TABLE `perguntas` (
   `dificuldade` enum('FACIL','MEDIO','DIFICIL') NOT NULL,
   `dica` varchar(255) NOT NULL,
   `tipo` enum('textual','imagem') NOT NULL DEFAULT 'textual',
+  `personagem` enum('mendeleev','rutherford','curie','franklin') NOT NULL DEFAULT 'curie',
   PRIMARY KEY (`idPerguntas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `perguntas` WRITE;
-/*!40000 ALTER TABLE `perguntas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `perguntas` ENABLE KEYS */;
-UNLOCK TABLES;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
   `idUsuario` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) NOT NULL,
@@ -72,15 +52,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `login_UNIQUE` (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
-UNLOCK TABLES;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `partida` (
   `idPartida` int NOT NULL AUTO_INCREMENT,
   `pontuacao` int NOT NULL,
@@ -92,15 +64,7 @@ CREATE TABLE `partida` (
   KEY `fk_Partida_usuario1_idx` (`usuario_idUsuario`),
   CONSTRAINT `fk_Partida_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `partida` WRITE;
-/*!40000 ALTER TABLE `partida` DISABLE KEYS */;
-/*!40000 ALTER TABLE `partida` ENABLE KEYS */;
-UNLOCK TABLES;
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pergunta_partida` (
   `idPerguntaPartida` int NOT NULL AUTO_INCREMENT,
   `idPartida` int NOT NULL,
@@ -112,45 +76,29 @@ CREATE TABLE `pergunta_partida` (
   KEY `fk_pergunta_partida_Alternativa1_idx` (`idAlternativa`),
   CONSTRAINT `fk_pergunta_partida_Partida1` FOREIGN KEY (`idPartida`) REFERENCES `partida` (`idPartida`),
   CONSTRAINT `fk_pergunta_partida_Perguntas1` FOREIGN KEY (`idPerguntas`) REFERENCES `perguntas` (`idPerguntas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-LOCK TABLES `pergunta_partida` WRITE;
-/*!40000 ALTER TABLE `pergunta_partida` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pergunta_partida` ENABLE KEYS */;
-UNLOCK TABLES;
-
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2026-04-29 20:01:50
-
-INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica, tipo) VALUES
-('O que é uma bureta?', NULL, 'FACIL', 'É usada para medir volumes variáveis de líquidos.', 'textual'),
-('O que é um béquer?', NULL, 'FACIL', 'É um recipiente cilíndrico usado para conter líquidos.', 'textual'),
-('Para que serve um funil de separação?', NULL, 'FACIL', 'É usado para separar líquidos imiscíveis.', 'textual'),
-('O que é um erlenmeyer?', NULL, 'FACIL', 'É um frasco cônico usado em titulações.', 'textual'),
-('Para que serve uma pipeta?', NULL, 'FACIL', 'É usada para transferir volumes precisos de líquidos.', 'textual'),
-('O que é um bastão de vidro?', NULL, 'FACIL', 'É usado para agitar soluções.', 'textual'),
-('Para que serve um vidro de relógio?', NULL, 'FACIL', 'É usado para cobrir béqueres ou pesar substâncias.', 'textual'),
-('O que é uma proveta?', NULL, 'FACIL', 'É usada para medir volumes aproximados de líquidos.', 'textual'),
-('Para que serve um cadinho?', NULL, 'FACIL', 'É usado para aquecer substâncias em altas temperaturas.','textual'),
-('O que é um funil de vidro simples?', NULL, 'FACIL', 'É usado para transferir líquidos ou filtrar.', 'textual'),
-('Para que serve o tripé de laboratório?', NULL, 'FACIL', 'É usado para apoiar vidrarias durante o aquecimento.','textual'),
-('O que é uma tela de amianto?', NULL, 'FACIL', 'É usada para distribuir o calor uniformemente.', 'textual'),
-('Para que serve o suporte universal?', NULL, 'FACIL', 'É usado para fixar e suportar equipamentos de laboratório.','textual'),
-('O que é um balão volumétrico?', NULL, 'FACIL', 'É usado para preparar soluções de concentração exata.', 'textual'),
-('O que é uma centrífuga?', NULL, 'MEDIO', 'É usada para separar substâncias por diferença de densidade.', 'textual'),
-('Para que serve um condensador?', NULL, 'MEDIO', 'É usado para resfriar vapores e convertê-los em líquido.', 'textual'),
-('O que é um dessecador?', NULL, 'MEDIO', 'É usado para armazenar substâncias sem umidade.','textual'),
-('O que é uma mufla?', NULL, 'MEDIO', 'É um forno usado para calcinar substâncias.','textual'),
-('O que é um espectrofotômetro?', NULL, 'DIFICIL', 'É usado para medir a absorção de luz por uma solução.', 'textual'),
-('O que é uma coluna cromatográfica?', NULL, 'DIFICIL', 'É usada para separar componentes de uma mistura.', 'textual');
+INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica, tipo, personagem) VALUES
+('O que é uma bureta?', NULL, 'FACIL', 'É usada para medir volumes variáveis de líquidos.', 'textual', 'curie'),
+('O que é um béquer?', NULL, 'FACIL', 'É um recipiente cilíndrico usado para conter líquidos.', 'textual', 'curie'),
+('Para que serve um funil de separação?', NULL, 'FACIL', 'É usado para separar líquidos imiscíveis.', 'textual', 'curie'),
+('O que é um erlenmeyer?', NULL, 'FACIL', 'É um frasco cônico usado em titulações.', 'textual', 'curie'),
+('Para que serve uma pipeta?', NULL, 'FACIL', 'É usada para transferir volumes precisos de líquidos.', 'textual', 'curie'),
+('O que é um bastão de vidro?', NULL, 'FACIL', 'É usado para agitar soluções.', 'textual', 'curie'),
+('Para que serve um vidro de relógio?', NULL, 'FACIL', 'É usado para cobrir béqueres ou pesar substâncias.', 'textual', 'curie'),
+('O que é uma proveta?', NULL, 'FACIL', 'É usada para medir volumes aproximados de líquidos.', 'textual', 'curie'),
+('Para que serve um cadinho?', NULL, 'FACIL', 'É usado para aquecer substâncias em altas temperaturas.', 'textual', 'curie'),
+('O que é um funil de vidro simples?', NULL, 'FACIL', 'É usado para transferir líquidos ou filtrar.', 'textual', 'curie'),
+('Para que serve o tripé de laboratório?', NULL, 'FACIL', 'É usado para apoiar vidrarias durante o aquecimento.', 'textual', 'curie'),
+('O que é uma tela de amianto?', NULL, 'FACIL', 'É usada para distribuir o calor uniformemente.', 'textual', 'curie'),
+('Para que serve o suporte universal?', NULL, 'FACIL', 'É usado para fixar e suportar equipamentos de laboratório.', 'textual', 'curie'),
+('O que é um balão volumétrico?', NULL, 'FACIL', 'É usado para preparar soluções de concentração exata.', 'textual', 'curie'),
+('O que é uma centrífuga?', NULL, 'MEDIO', 'É usada para separar substâncias por diferença de densidade.', 'textual', 'curie'),
+('Para que serve um condensador?', NULL, 'MEDIO', 'É usado para resfriar vapores e convertê-los em líquido.', 'textual', 'curie'),
+('O que é um dessecador?', NULL, 'MEDIO', 'É usado para armazenar substâncias sem umidade.', 'textual', 'curie'),
+('O que é uma mufla?', NULL, 'MEDIO', 'É um forno usado para calcinar substâncias.', 'textual', 'curie'),
+('O que é um espectrofotômetro?', NULL, 'DIFICIL', 'É usado para medir a absorção de luz por uma solução.', 'textual', 'curie'),
+('O que é uma coluna cromatográfica?', NULL, 'DIFICIL', 'É usada para separar componentes de uma mistura.', 'textual', 'curie');
 
 INSERT INTO alternativa (idAlternativa, alternativaCorreta, alternativa, perguntas_idPerguntas) VALUES
 (1, 1, 'Instrumento para medir volumes variáveis', 1),
@@ -237,8 +185,15 @@ INSERT INTO alternativa (idAlternativa, alternativaCorreta, alternativa, pergunt
 INSERT INTO usuario (nome, login, senha, tipo) VALUES (
   'Maria do Socorro',
   'mariadosocorro@cps.sp.gov.br',
-  'b68939004065e85da9ce2976cf4839c2a75dd7a8d706351a8becc301b743fd35',
+  '482951',
   'professor'
 );
 
-SHOW TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

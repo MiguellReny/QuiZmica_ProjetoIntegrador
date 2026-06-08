@@ -3,6 +3,7 @@ package quizquimica.controller;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import quizquimica.dao.PartidaDAO;
+import quizquimica.dao.RespostaDAO;
 import quizquimica.model.Aluno;
 import quizquimica.model.Partida;
 import quizquimica.view.AlunosPesquisa;
@@ -14,6 +15,7 @@ public class DesempenhoAlunoController {
     private final DesempenhoAluno view;
     private final Aluno aluno;
     private final PartidaDAO partidaDAO = new PartidaDAO();
+    
 
     // origem: "professor" (volta para AlunosPesquisa) ou "aluno" (volta para DashboardAlunoNovo)
     private final String origem;
@@ -40,22 +42,32 @@ public class DesempenhoAlunoController {
         int quizzesRealizados = partidas.size();
         int melhorPontuacao = calcularMelhorPontuacao(partidas);
         double media = partidaDAO.calcularMedia(aluno.getIdUsuario());
+        RespostaDAO respostaDAO = new RespostaDAO();
 
-        int acertosEstimados = calcularAcertosEstimados(partidas);
-        int errosEstimados = calcularErrosEstimados(partidas);
-        int taxaAcerto = (int) Math.round(media);
+        int acertos = respostaDAO.contarAcertos(aluno.getIdUsuario());
+        int erros = respostaDAO.contarErros(aluno.getIdUsuario());
+
+        double taxaAcerto = 0;
+
+        if (acertos + erros > 0) {
+            taxaAcerto = (acertos * 100.0) / (acertos + erros);
+        }
 
         view.getLblAvatar().setText(gerarIniciais(aluno.getNome()));
         view.getLblNomeAluno().setText(aluno.getNome());
         view.getLblTurmaAluno().setText("Turma: " + aluno.getTurma());
 
         view.getLblQuizzesConcluidos().setText(String.valueOf(quizzesRealizados));
-        view.getLblMediaGeral().setText(String.format("%.0f %%", media));
+        view.getLblMediaGeral().setText(
+            String.format("%.1f %%", media)
+        );
         view.getLblMelhorPontuacao().setText(melhorPontuacao + " %");
 
-        view.getLblAcertosTotais().setText(String.valueOf(acertosEstimados));
-        view.getLblErrosTotais().setText(String.valueOf(errosEstimados));
-        view.getLblTaxaAcerto().setText(taxaAcerto + " %");
+        view.getLblAcertosTotais().setText(String.valueOf(acertos));
+        view.getLblErrosTotais().setText(String.valueOf(erros));
+        view.getLblTaxaAcerto().setText(
+            String.format("%.1f %%", taxaAcerto)
+        );
         view.getLblQuizzesRealizados().setText(String.valueOf(quizzesRealizados));
     }
 
@@ -126,32 +138,25 @@ public class DesempenhoAlunoController {
     }
 
     private int calcularMelhorPontuacao(List<Partida> partidas) {
-        int melhor = 0;
+
+        double melhor = 0;
 
         for (Partida partida : partidas) {
-            if (partida.getPontuacao() > melhor) {
-                melhor = partida.getPontuacao();
+
+            int maximo = partidaDAO.calcularMaximo(partida.getNivel());
+
+            if (maximo > 0) {
+
+                double percentual =
+                    (partida.getPontuacao() * 100.0) / maximo;
+
+                if (percentual > melhor) {
+                    melhor = percentual;
+                }
             }
         }
 
-        return melhor;
-    }
-
-    private int calcularAcertosEstimados(List<Partida> partidas) {
-        int total = 0;
-
-        for (Partida partida : partidas) {
-            total += Math.round(partida.getPontuacao() / 10.0);
-        }
-
-        return total;
-    }
-
-    private int calcularErrosEstimados(List<Partida> partidas) {
-        int totalQuestoesEstimado = partidas.size() * 10;
-        int acertosEstimados = calcularAcertosEstimados(partidas);
-
-        return Math.max(0, totalQuestoesEstimado - acertosEstimados);
+        return (int)Math.round(melhor);
     }
 
     private String gerarIniciais(String nome) {

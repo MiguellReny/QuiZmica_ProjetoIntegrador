@@ -15,7 +15,6 @@ import quizquimica.view.AdicionarQuestao;
 import quizquimica.view.DashboardProfessor;
 import quizquimica.view.EditarQuestao;
 import quizquimica.view.PopUpDeleteQuiz;
-import quizquimica.view.TelaJogar;
 
 public class ProfessorController {
 

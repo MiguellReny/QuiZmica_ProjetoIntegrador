@@ -31,13 +31,15 @@ public class TelaQuizController {
 
     private List<Questao> questoes = new ArrayList<>();
 
-    // Alternativas embaralhadas uma única vez por questão — índice A/B/C/D fixo
     private List<List<Alternativa>> alternativasEmbaralhadas = new ArrayList<>();
 
     private String[] respostasSelecionadas;
     private boolean[] usouDica;
     private int dicasUsadasTotal = 0;
     private int indiceQuestaoAtual = 0;
+    private boolean[] questaoCorrigida;
+    private final Color COR_ACERTO = new Color(46, 204, 113);
+    private final Color COR_ERRO = new Color(231, 76, 60);
 
     private final Color COR_PADRAO            = new Color(255, 255, 255);
     private final Color COR_SELECIONADA       = new Color(179, 40, 36);
@@ -51,8 +53,9 @@ public class TelaQuizController {
         int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
         partidaService.iniciarPartida(idUsuario, nivel);
 
-        // FIX 3: PartidaService já embaralha internamente — não embaralha de novo
         questoes = new ArrayList<>(partidaService.getQuestoesDaPartida());
+
+        questaoCorrigida = new boolean[questoes.size()];
 
         if (questoes.isEmpty()) {
             JOptionPane.showMessageDialog(view,
@@ -112,11 +115,16 @@ public class TelaQuizController {
 
                 // FIX — imagem da alternativa: carrega do banco ou mostra texto
                 if (imgUrl != null && !imgUrl.isBlank()) {
-                    btns[i].setText("");
-                    carregarImagemBotaoAsync(btns[i], imgUrl);
-                } else {
+
                     btns[i].setIcon(null);
-                    btns[i].setText(textoAlt != null ? textoAlt : "");
+                    btns[i].setText(textoAlt);
+
+                    carregarImagemBotaoAsync(btns[i], imgUrl);
+
+                } else {
+
+                    btns[i].setIcon(null);
+                    btns[i].setText(textoAlt);
                 }
             }
         }
@@ -168,32 +176,81 @@ public class TelaQuizController {
     }
 
     private void carregarImagemBotaoAsync(JButton btn, String urlStr) {
+
         new Thread(() -> {
+
             try {
+
                 URL url = URI.create(urlStr).toURL();
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestProperty("User-Agent",
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+
+                HttpURLConnection conn =
+                    (HttpURLConnection) url.openConnection();
+
+                conn.setRequestProperty(
+                    "User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                );
+
                 conn.setConnectTimeout(5000);
                 conn.setReadTimeout(5000);
                 conn.setInstanceFollowRedirects(true);
+
                 HttpURLConnection.setFollowRedirects(true);
 
                 if (conn.getResponseCode() == 200) {
+
                     byte[] bytes = conn.getInputStream().readAllBytes();
+
                     java.awt.image.BufferedImage buffered =
-                        ImageIO.read(new java.io.ByteArrayInputStream(bytes));
+                        ImageIO.read(
+                            new java.io.ByteArrayInputStream(bytes)
+                        );
+
                     if (buffered != null) {
-                        Image img = buffered.getScaledInstance(120, 70, Image.SCALE_SMOOTH);
-                        javax.swing.SwingUtilities.invokeLater(() ->
-                            btn.setIcon(new ImageIcon(img)));
+
+                        int larguraMax = 150;
+                        int alturaMax = 50;
+
+                        int larguraOriginal = buffered.getWidth();
+                        int alturaOriginal = buffered.getHeight();
+
+                        double proporcao = Math.min(
+                            (double) larguraMax / larguraOriginal,
+                            (double) alturaMax / alturaOriginal
+                        );
+
+                        int novaLargura =
+                            (int) (larguraOriginal * proporcao);
+
+                        int novaAltura =
+                            (int) (alturaOriginal * proporcao);
+
+                        Image img = buffered.getScaledInstance(
+                            novaLargura,
+                            novaAltura,
+                            Image.SCALE_SMOOTH
+                        );
+
+                        javax.swing.SwingUtilities.invokeLater(() -> {
+                            btn.setIcon(new ImageIcon(img));
+                        });
+
                         return;
                     }
                 }
+
             } catch (Exception ex) {
-                System.out.println("[DEBUG] Erro imagem alternativa: " + ex.getMessage());
+
+                System.out.println(
+                    "[DEBUG] Erro imagem alternativa: "
+                    + ex.getMessage()
+                );
             }
-            javax.swing.SwingUtilities.invokeLater(() -> btn.setIcon(null));
+
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                btn.setIcon(null);
+            });
+
         }).start();
     }
 
@@ -206,6 +263,10 @@ public class TelaQuizController {
     }
 
     private void selecionar(String letra) {
+        if (questaoCorrigida[indiceQuestaoAtual]) {
+            return;
+        }
+
         respostasSelecionadas[indiceQuestaoAtual] = letra;
         resetBotoes();
         switch (letra) {
@@ -255,16 +316,83 @@ public class TelaQuizController {
         popup.setVisible(true);
     }
 
-    private void proximaQuestao() {
+   private void proximaQuestao() {
         if (respostasSelecionadas[indiceQuestaoAtual] == null) {
-            JOptionPane.showMessageDialog(view, "Selecione uma alternativa.");
+            JOptionPane.showMessageDialog(
+                view,
+                "Selecione uma alternativa."
+            );
             return;
         }
+
+        if (!questaoCorrigida[indiceQuestaoAtual]) {
+
+            corrigirQuestaoAtual();
+
+            questaoCorrigida[indiceQuestaoAtual] = true;
+
+            return;
+        }
+
         if (indiceQuestaoAtual < questoes.size() - 1) {
+
             indiceQuestaoAtual++;
             carregarQuestaoAtual();
+
         } else {
+
             finalizar();
+        }
+    }
+
+    private void corrigirQuestaoAtual() {
+
+        String resposta = respostasSelecionadas[indiceQuestaoAtual];
+
+        int indiceAlternativa = switch (resposta) {
+            case "A" -> 0;
+            case "B" -> 1;
+            case "C" -> 2;
+            case "D" -> 3;
+            default -> -1;
+        };
+
+        List<Alternativa> alts =
+            alternativasEmbaralhadas.get(indiceQuestaoAtual);
+
+        Alternativa escolhida = alts.get(indiceAlternativa);
+
+                JButton[] botoes = {
+            view.getBtnAlternativaA(),
+            view.getBtnAlternativaB(),
+            view.getBtnAlternativaC(),
+            view.getBtnAlternativaD()
+        };
+
+        if (escolhida.isAlternativaCorreta()) {
+
+            botoes[indiceAlternativa].setBackground(COR_ACERTO);
+
+            JOptionPane.showMessageDialog(
+                view,
+                "✅ Você acertou!"
+            );
+
+        } else {
+
+            botoes[indiceAlternativa].setBackground(COR_ERRO);
+
+            for (int i = 0; i < alts.size(); i++) {
+                if (alts.get(i).isAlternativaCorreta()) {
+                    botoes[i].setBackground(COR_ACERTO);
+                    break;
+                }
+            }
+
+            JOptionPane.showMessageDialog(
+                view,
+                "❌ Você errou!"
+            );
         }
     }
 

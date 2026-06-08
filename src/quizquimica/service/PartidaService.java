@@ -45,7 +45,6 @@ public class PartidaService {
         return idPartidaAtual != -1;
     }
 
-    // ✅ NOVO: expõe montarQuestoes para o TelaQuizController usar
     public List<Questao> montarQuestoesPorNivel(String nivel) {
         return montarQuestoes(nivel);
     }

@@ -70,19 +70,25 @@ public class PartidaDAO {
     }
 
     public double calcularMedia(int idUsuario) {
-        String sql = "SELECT AVG(pontuacao) FROM partida WHERE usuario_idUsuario = ?";
-        try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, idUsuario);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getDouble(1);
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("[PartidaDAO] Erro ao calcular media: " + e.getMessage());
+
+        List<Partida> partidas = buscarPorAluno(idUsuario);
+
+        if (partidas.isEmpty()) {
+            return 0;
         }
-        return 0;
+
+        double soma = 0;
+
+        for (Partida partida : partidas) {
+
+            int maximo = calcularMaximo(partida.getNivel());
+
+            if (maximo > 0) {
+                soma += (partida.getPontuacao() * 100.0) / maximo;
+            }
+        }
+
+        return soma / partidas.size();
     }
 
     public String buscarNivelAtual(int idUsuario) {
@@ -148,31 +154,50 @@ public class PartidaDAO {
     }
 
     public double aproveitamentoAnteriorNoNivel(int idUsuario, String nivel) {
-        String sql = "SELECT pontuacao FROM partida " +
-                     "WHERE usuario_idUsuario = ? AND nivel = ? " +
-                     "ORDER BY idPartida DESC LIMIT 1 OFFSET 1";
+
+        String sql =
+            "SELECT MAX(pontuacao) AS pontuacao " +
+            "FROM partida " +
+            "WHERE usuario_idUsuario = ? " +
+            "AND nivel = ? " +
+            "AND idPartida <> (" +
+            "   SELECT MAX(idPartida) " +
+            "   FROM partida " +
+            "   WHERE usuario_idUsuario = ? " +
+            "   AND nivel = ?" +
+            ")";
+
         try (Connection conn = ConexaoDB.getConexao();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setInt(1, idUsuario);
             ps.setString(2, nivel);
+            ps.setInt(3, idUsuario);
+            ps.setString(4, nivel);
+
             try (ResultSet rs = ps.executeQuery()) {
+
                 if (rs.next()) {
+
                     int pontuacao = rs.getInt("pontuacao");
-                    int maximo    = calcularMaximo(nivel);
-                    return maximo > 0 ? (double) pontuacao / maximo : 0.0;
+                    int maximo = calcularMaximo(nivel);
+
+                    return maximo > 0
+                            ? (double) pontuacao / maximo
+                            : 0.0;
                 }
             }
+
         } catch (SQLException e) {
-            System.out.println("[PartidaDAO] Erro ao buscar aproveitamento anterior: " + e.getMessage());
+            System.out.println(
+                "[PartidaDAO] Erro ao buscar aproveitamento anterior: "
+                + e.getMessage()
+            );
         }
+
         return 0.0;
     }
 
-    // -----------------------------------------------------------------------
-    // Métodos para o Dashboard do Professor
-    // -----------------------------------------------------------------------
-
-    /** Retorna o total de partidas jogadas por todos os alunos. */
     public int contarTotalPartidas() {
         String sql = "SELECT COUNT(*) FROM partida";
         try (Connection conn = ConexaoDB.getConexao();
@@ -185,7 +210,6 @@ public class PartidaDAO {
         return 0;
     }
 
-    /** Retorna o percentual médio de acertos de toda a turma (0.0 a 100.0). */
     public double calcularMediaGeralAcertos() {
         String sql = "SELECT " +
                      "  SUM(CASE WHEN a.alternativaCorreta = 1 THEN 1 ELSE 0 END) AS acertos, " +
@@ -206,9 +230,7 @@ public class PartidaDAO {
         return 0.0;
     }
 
-    // -----------------------------------------------------------------------
-
-    private int calcularMaximo(String nivel) {
+    public int calcularMaximo(String nivel) {
         if (nivel.equals(Constantes.nivelFacil)) {
             return (Constantes.facilFaceis   * Constantes.pontoF)
                  + (Constantes.facilMedias   * Constantes.pontoM)

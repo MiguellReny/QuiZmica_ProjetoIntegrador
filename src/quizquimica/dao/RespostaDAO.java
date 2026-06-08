@@ -6,7 +6,6 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import quizquimica.dao.RespostaDAO;
-import java.util.Map;
 
 public class RespostaDAO {
 
@@ -74,5 +73,65 @@ public class RespostaDAO {
             System.out.println("[RespostaDAO] Erro ao buscar questoes mais erradas: " + e.getMessage());
         }
         return resultado;
+    }
+
+    public int contarAcertos(int idUsuario) {
+
+        String sql =
+            "SELECT COUNT(*) " +
+            "FROM pergunta_partida pp " +
+            "INNER JOIN alternativa a " +
+            "ON pp.idAlternativa = a.idAlternativa " +
+            "INNER JOIN partida p " +
+            "ON pp.idPartida = p.idPartida " +
+            "WHERE p.usuario_idUsuario = ? " +
+            "AND a.alternativaCorreta = 1";
+
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("[RespostaDAO] Erro ao contar acertos: " + e.getMessage());
+        }
+
+        return 0;
+    }
+
+   public int contarErros(int idUsuario) {
+
+        String sql =
+            "SELECT COUNT(*) " +
+            "FROM pergunta_partida pp " +
+            "INNER JOIN alternativa a " +
+            "ON pp.idAlternativa = a.idAlternativa " +
+            "INNER JOIN partida p " +
+            "ON pp.idPartida = p.idPartida " +
+            "WHERE p.usuario_idUsuario = ? " +
+            "AND a.alternativaCorreta = 0";
+
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("[RespostaDAO] Erro ao contar erros: " + e.getMessage());
+        }
+
+        return 0;
     }
 }

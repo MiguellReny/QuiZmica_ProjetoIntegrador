@@ -9,11 +9,9 @@ import quizquimica.model.Partida;
 import quizquimica.model.Sessao;
 import quizquimica.model.Usuario;
 import quizquimica.util.Constantes;
-import quizquimica.dao.AlunoDAO;
 import quizquimica.model.Aluno;
 import quizquimica.view.DashboardAlunoNovo;
 import quizquimica.view.DesempenhoAluno;
-import quizquimica.controller.DesempenhoAlunoController;
 import quizquimica.view.PopupNivelDesbloqueado;
 import quizquimica.view.TelaLogin;
 import quizquimica.view.TelaQuiz;
@@ -122,25 +120,26 @@ public class DashboardAlunoNovoController {
         }
     }
 
-    // FIX 2: popup dispara quando cruza 70% nesta partida, não quando count==1
     public static void verificarDesbloqueio(
             java.awt.Frame parent, int idUsuario, String nivelJogado) {
 
         PartidaDAO dao = new PartidaDAO();
 
         if (nivelJogado.equals(Constantes.nivelFacil)) {
-            double aprovAntes = dao.aproveitamentoAnteriorNoNivel(idUsuario, Constantes.nivelFacil);
-            double aprovAgora = dao.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
 
-            if (aprovAntes < Constantes.pontuacaoMin && aprovAgora >= Constantes.pontuacaoMin) {
+            int aprovadas =
+                dao.contarPartidasAprovadas(idUsuario, Constantes.nivelFacil);
+
+            if (aprovadas == 1) {
                 new PopupNivelDesbloqueado(parent, "Médio").setVisible(true);
             }
 
         } else if (nivelJogado.equals(Constantes.nivelMedio)) {
-            double aprovAntes = dao.aproveitamentoAnteriorNoNivel(idUsuario, Constantes.nivelMedio);
-            double aprovAgora = dao.aproveitamentoNoNivel(idUsuario, Constantes.nivelMedio);
 
-            if (aprovAntes < Constantes.pontuacaoMin && aprovAgora >= Constantes.pontuacaoMin) {
+            int aprovadas =
+                dao.contarPartidasAprovadas(idUsuario, Constantes.nivelMedio);
+
+            if (aprovadas == 1) {
                 new PopupNivelDesbloqueado(parent, "Difícil").setVisible(true);
             }
         }
