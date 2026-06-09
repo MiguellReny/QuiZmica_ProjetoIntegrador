@@ -122,7 +122,7 @@ public class AdicionarQuestaoController {
     private String pedirUrlImagem(String titulo) {
         String url = JOptionPane.showInputDialog(
                 view,
-                "Cole aqui o link público da imagem (Google Drive, Imgur, etc.):",
+                "⚠️ Cole aqui o link do Google Drive.\nAtenção: o arquivo deve estar compartilhado como 'Qualquer pessoa com o link'.",
                 titulo,
                 JOptionPane.PLAIN_MESSAGE);
         return (url != null && !url.isBlank()) ? url.trim() : null;

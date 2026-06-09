@@ -50,30 +50,69 @@ public class TelaQuizController {
         this.view  = view;
         this.nivel = nivel;
 
-        int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
-        partidaService.iniciarPartida(idUsuario, nivel);
-
-        questoes = new ArrayList<>(partidaService.getQuestoesDaPartida());
-
-        questaoCorrigida = new boolean[questoes.size()];
-
-        if (questoes.isEmpty()) {
-            JOptionPane.showMessageDialog(view,
-                "Nenhuma questão encontrada.", "Aviso", JOptionPane.WARNING_MESSAGE);
-        }
-
-        respostasSelecionadas = new String[questoes.size()];
-        usouDica              = new boolean[questoes.size()];
-
-        // FIX 1: embaralha alternativas uma vez por questão e guarda a ordem fixa
-        for (Questao q : questoes) {
-            List<Alternativa> copia = new ArrayList<>(q.getAlternativas());
-            Collections.shuffle(copia);
-            alternativasEmbaralhadas.add(copia);
-        }
+        // Mostra loading enquanto carrega as questões do banco
+        view.getLblEnunciado().setText("Carregando questões...");
+        view.getBtnAlternativaA().setEnabled(false);
+        view.getBtnAlternativaB().setEnabled(false);
+        view.getBtnAlternativaC().setEnabled(false);
+        view.getBtnAlternativaD().setEnabled(false);
+        view.getBtnProxima().setEnabled(false);
+        view.getBtnDica().setEnabled(false);
 
         configurarEventos();
-        carregarQuestaoAtual();
+
+        new javax.swing.SwingWorker<Boolean, Void>() {
+            @Override
+            protected Boolean doInBackground() {
+                int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
+                return partidaService.iniciarPartida(idUsuario, nivel);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    boolean ok = get();
+                    if (!ok) {
+                        JOptionPane.showMessageDialog(view, "Erro ao iniciar partida.");
+                        new DashboardAlunoNovo().setVisible(true);
+                        view.dispose();
+                        return;
+                    }
+
+                    questoes = new ArrayList<>(partidaService.getQuestoesDaPartida());
+                    questaoCorrigida = new boolean[questoes.size()];
+                    respostasSelecionadas = new String[questoes.size()];
+                    usouDica = new boolean[questoes.size()];
+
+                    if (questoes.isEmpty()) {
+                        JOptionPane.showMessageDialog(view, "Nenhuma questão encontrada.");
+                        new DashboardAlunoNovo().setVisible(true);
+                        view.dispose();
+                        return;
+                    }
+
+                    // Embaralha alternativas
+                    for (Questao q : questoes) {
+                        List<Alternativa> copia = new ArrayList<>(q.getAlternativas());
+                        Collections.shuffle(copia);
+                        alternativasEmbaralhadas.add(copia);
+                    }
+
+                    // Reabilita botões e carrega a primeira questão
+                    view.getBtnAlternativaA().setEnabled(true);
+                    view.getBtnAlternativaB().setEnabled(true);
+                    view.getBtnAlternativaC().setEnabled(true);
+                    view.getBtnAlternativaD().setEnabled(true);
+                    view.getBtnProxima().setEnabled(true);
+                    view.getBtnDica().setEnabled(true);
+
+                    carregarQuestaoAtual();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, "Erro ao carregar quiz.");
+                }
+            }
+        }.execute();
     }
 
     private void configurarEventos() {
@@ -411,45 +450,52 @@ public class TelaQuizController {
     }
 
     private void finalizar() {
-        int acertos = 0;
-        int erros   = 0;
+        view.getBtnProxima().setEnabled(false);
 
-        for (int i = 0; i < questoes.size(); i++) {
-            Questao q = questoes.get(i);
-            String respostaAluno = respostasSelecionadas[i];
-            // FIX 1: usa lista embaralhada, não q.getAlternativas()
-            List<Alternativa> alts = alternativasEmbaralhadas.get(i);
+        new javax.swing.SwingWorker<Void, Void>() {
+            int acertos = 0, erros = 0, pontuacao = 0;
 
-            if (respostaAluno != null) {
-                int idx = switch (respostaAluno) {
-                    case "A" -> 0; case "B" -> 1;
-                    case "C" -> 2; case "D" -> 3;
-                    default  -> -1;
-                };
-                if (idx >= 0 && idx < alts.size()) {
-                    Alternativa alt = alts.get(idx);
-                    partidaService.responder(q.getIdQuestao(), alt.getIdAlternativa(), usouDica[i]);
-                    if (alt.isAlternativaCorreta()) acertos++;
-                    else erros++;
+            @Override
+            protected Void doInBackground() {
+                for (int i = 0; i < questoes.size(); i++) {
+                    Questao q = questoes.get(i);
+                    String respostaAluno = respostasSelecionadas[i];
+                    List<Alternativa> alts = alternativasEmbaralhadas.get(i);
+
+                    if (respostaAluno != null) {
+                        int idx = switch (respostaAluno) {
+                            case "A" -> 0; case "B" -> 1;
+                            case "C" -> 2; case "D" -> 3;
+                            default  -> -1;
+                        };
+                        if (idx >= 0 && idx < alts.size()) {
+                            Alternativa alt = alts.get(idx);
+                            partidaService.responder(q.getIdQuestao(), alt.getIdAlternativa(), usouDica[i]);
+                            if (alt.isAlternativaCorreta()) acertos++;
+                            else erros++;
+                        }
+                    }
                 }
+                partidaService.finalizarPartida();
+                pontuacao = partidaService.getPontuacao();
+                return null;
             }
-        }
 
-        partidaService.finalizarPartida();
-        int pontuacao = partidaService.getPontuacao();
+            @Override
+            protected void done() {
+                int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
+                DashboardAlunoNovoController.verificarDesbloqueio(view, idUsuario, nivel);
 
-        int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
-        DashboardAlunoNovoController.verificarDesbloqueio(view, idUsuario, nivel);
-
-        PopupQuizFinalizado popup = new PopupQuizFinalizado(view, true);
-        // FIX 5: passa pontuação real para o popup
-        popup.setDadosResultado(nivel, acertos, erros, pontuacao);
-        popup.getBtnVoltar().addActionListener(e -> {
-            popup.dispose();
-            new DashboardAlunoNovo().setVisible(true);
-            view.dispose();
-        });
-        popup.setVisible(true);
+                PopupQuizFinalizado popup = new PopupQuizFinalizado(view, true);
+                popup.setDadosResultado(nivel, acertos, erros, pontuacao);
+                popup.getBtnVoltar().addActionListener(e -> {
+                    popup.dispose();
+                    new DashboardAlunoNovo().setVisible(true);
+                    view.dispose();
+                });
+                popup.setVisible(true);
+            }
+        }.execute();
     }
 
     private void atualizarBotaoProxima() {

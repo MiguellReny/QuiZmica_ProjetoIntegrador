@@ -31,60 +31,58 @@ public class DesempenhoAlunoController {
         this.aluno  = aluno;
         this.origem = origem;
 
-        carregarDadosAluno();
-        carregarHistorico();
         configurarEventos();
+        carregarTudo(); 
     }
 
-    private void carregarDadosAluno() {
-        List<Partida> partidas = partidaDAO.buscarPorAluno(aluno.getIdUsuario());
+   private void carregarTudo() {
+        new javax.swing.SwingWorker<Void, Void>() {
+            // dados calculados no background
+            int quizzesRealizados, melhorPontuacao, acertos, erros;
+            double media, taxaAcerto;
+            List<Partida> partidas;
 
-        int quizzesRealizados = partidas.size();
-        int melhorPontuacao = calcularMelhorPontuacao(partidas);
-        double media = partidaDAO.calcularMedia(aluno.getIdUsuario());
-        RespostaDAO respostaDAO = new RespostaDAO();
+            @Override
+            protected Void doInBackground() {
+                partidas          = partidaDAO.buscarPorAluno(aluno.getIdUsuario());
+                quizzesRealizados = partidas.size();
+                melhorPontuacao   = calcularMelhorPontuacao(partidas);
+                media             = partidaDAO.calcularMedia(aluno.getIdUsuario());
 
-        int acertos = respostaDAO.contarAcertos(aluno.getIdUsuario());
-        int erros = respostaDAO.contarErros(aluno.getIdUsuario());
+                RespostaDAO respostaDAO = new RespostaDAO();
+                acertos = respostaDAO.contarAcertos(aluno.getIdUsuario());
+                erros   = respostaDAO.contarErros(aluno.getIdUsuario());
+                taxaAcerto = (acertos + erros > 0)
+                    ? (acertos * 100.0) / (acertos + erros) : 0;
+                return null;
+            }
 
-        double taxaAcerto = 0;
+            @Override
+            protected void done() {
+                // Labels do perfil
+                view.getLblAvatar().setText(gerarIniciais(aluno.getNome()));
+                view.getLblNomeAluno().setText(aluno.getNome());
+                view.getLblTurmaAluno().setText("Turma: " + aluno.getTurma());
 
-        if (acertos + erros > 0) {
-            taxaAcerto = (acertos * 100.0) / (acertos + erros);
-        }
+                // Estatísticas
+                view.getLblQuizzesConcluidos().setText(String.valueOf(quizzesRealizados));
+                view.getLblMediaGeral().setText(String.format("%.1f %%", media));
+                view.getLblMelhorPontuacao().setText(melhorPontuacao + " %");
+                view.getLblAcertosTotais().setText(String.valueOf(acertos));
+                view.getLblErrosTotais().setText(String.valueOf(erros));
+                view.getLblTaxaAcerto().setText(String.format("%.1f %%", taxaAcerto));
+                view.getLblQuizzesRealizados().setText(String.valueOf(quizzesRealizados));
 
-        view.getLblAvatar().setText(gerarIniciais(aluno.getNome()));
-        view.getLblNomeAluno().setText(aluno.getNome());
-        view.getLblTurmaAluno().setText("Turma: " + aluno.getTurma());
-
-        view.getLblQuizzesConcluidos().setText(String.valueOf(quizzesRealizados));
-        view.getLblMediaGeral().setText(
-            String.format("%.1f %%", media)
-        );
-        view.getLblMelhorPontuacao().setText(melhorPontuacao + " %");
-
-        view.getLblAcertosTotais().setText(String.valueOf(acertos));
-        view.getLblErrosTotais().setText(String.valueOf(erros));
-        view.getLblTaxaAcerto().setText(
-            String.format("%.1f %%", taxaAcerto)
-        );
-        view.getLblQuizzesRealizados().setText(String.valueOf(quizzesRealizados));
-    }
-
-    private void carregarHistorico() {
-        List<Partida> partidas = partidaDAO.buscarPorAluno(aluno.getIdUsuario());
-
-        DefaultTableModel modelo = (DefaultTableModel) view.getTblHistorico().getModel();
-        modelo.setRowCount(0);
-
-        for (Partida partida : partidas) {
-            modelo.addRow(new Object[]{
-                montarNomeQuiz(partida),
-                partida.getPontuacao(),
-                partida.getDicasUsadas(),
-                "DETALHES"
-            });
-        }
+                // Histórico na tabela
+                DefaultTableModel modelo = (DefaultTableModel) view.getTblHistorico().getModel();
+                modelo.setRowCount(0);
+                for (Partida p : partidas) {
+                    modelo.addRow(new Object[]{
+                        montarNomeQuiz(p), p.getPontuacao(), p.getDicasUsadas(), "DETALHES"
+                    });
+                }
+            }
+        }.execute();
     }
 
     private void configurarEventos() {

@@ -6,6 +6,12 @@ public class AlunosPesquisa extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
+            javax.swing.table.DefaultTableModel model = 
+            (javax.swing.table.DefaultTableModel) tabelaAlunos.getModel();
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new String[]{"Nome", "Email", "Ação", "Ação", "Ação"});
+        model.addRow(new Object[]{"Carregando alunos...", "", "", "", ""});
+
         tabelaAlunos.setRowHeight(40);
         tabelaAlunos.setDefaultEditor(Object.class, null);
 

@@ -1,7 +1,6 @@
 package quizquimica.service;
 
 import quizquimica.dao.PartidaDAO;
-import quizquimica.dao.QuestaoDAO;
 import quizquimica.dao.RespostaDAO;
 import quizquimica.model.Partida;
 import quizquimica.model.Questao;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class PartidaService {
 
-    private final QuestaoDAO questaoDAO = new QuestaoDAO();
+    private final QuestaoService questaoService = new QuestaoService();
     private final PartidaDAO partidaDAO = new PartidaDAO();
     private final RespostaDAO respostaDAO = new RespostaDAO();
 
@@ -50,20 +49,32 @@ public class PartidaService {
     }
 
     private List<Questao> montarQuestoes(String nivel) {
+        // Garante que o cache está populado
+        questaoService.listarTodas();
+        
+        // Agora filtra do cache por dificuldade
         List<Questao> lista = new ArrayList<>();
-
         if (nivel.equals(Constantes.nivelFacil)) {
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil,   Constantes.facilFaceis));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio,   Constantes.facilMedias));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelDificil, Constantes.facilDificeis));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelFacil)
+                .stream().limit(Constantes.facilFaceis).collect(java.util.stream.Collectors.toList()));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelMedio)
+                .stream().limit(Constantes.facilMedias).collect(java.util.stream.Collectors.toList()));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelDificil)
+                .stream().limit(Constantes.facilDificeis).collect(java.util.stream.Collectors.toList()));
         } else if (nivel.equals(Constantes.nivelMedio)) {
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil,   Constantes.medioFaceis));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio,   Constantes.medioMedias));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelDificil, Constantes.medioDificeis));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelFacil)
+                .stream().limit(Constantes.medioFaceis).collect(java.util.stream.Collectors.toList()));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelMedio)
+                .stream().limit(Constantes.medioMedias).collect(java.util.stream.Collectors.toList()));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelDificil)
+                .stream().limit(Constantes.medioDificeis).collect(java.util.stream.Collectors.toList()));
         } else {
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelFacil,   Constantes.dificilFaceis));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelMedio,   Constantes.dificilMedias));
-            lista.addAll(questaoDAO.listarPorDificuldade(Constantes.nivelDificil, Constantes.dificilDificeis));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelFacil)
+                .stream().limit(Constantes.dificilFaceis).collect(java.util.stream.Collectors.toList()));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelMedio)
+                .stream().limit(Constantes.dificilMedias).collect(java.util.stream.Collectors.toList()));
+            lista.addAll(questaoService.listarPorDificuldade(Constantes.nivelDificil)
+                .stream().limit(Constantes.dificilDificeis).collect(java.util.stream.Collectors.toList()));
         }
 
         Collections.shuffle(lista);

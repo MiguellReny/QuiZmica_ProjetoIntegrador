@@ -20,12 +20,26 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.nomeAluno = nomeAluno;
         lblNomeAluno.setText(nomeAluno);
-        
+
+        lblQuizzesConcluidos.setText("-");
+        lblMediaGeral.setText("-");
+        lblMelhorPontuacao.setText("-");
+        lblAcertosTotais.setText("-");
+        lblErrosTotais.setText("-");
+        lblTaxaAcerto.setText("-");
+        lblQuizzesRealizados.setText("-");
+            
+            javax.swing.table.DefaultTableModel model =
+            (javax.swing.table.DefaultTableModel) tblHistorico.getModel();
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new String[]{"Quiz", "Pontuação", "Dicas Usadas", "Ações"});
+        model.addRow(new Object[]{"Carregando histórico...", "", "", ""});
+
         jToggleButton1.addActionListener(e -> {
-    MenuProfessor menu = new MenuProfessor(this, true);
-    menu.setLocationRelativeTo(this);
-    menu.setVisible(true);
-});
+            MenuProfessor menu = new MenuProfessor(this, true);
+            menu.setLocationRelativeTo(this);
+            menu.setVisible(true);
+        });
 
     }
 

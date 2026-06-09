@@ -64,31 +64,43 @@ public class ProfessorController {
     }
 
     private void carregarQuestoes() {
-        List<Questao> lista = questaoService.listarTodas();
+        // Mostra loading enquanto busca
         DefaultTableModel model = (DefaultTableModel) view.getTabelaQuestoes().getModel();
         model.setRowCount(0);
         model.setColumnIdentifiers(new String[]{"Questão", "Editar", "Remover", "ID"});
+        model.addRow(new Object[]{"Carregando questões...", "", "", -1});
 
-        for (Questao q : lista) {
-            model.addRow(new Object[]{
-                q.getEnunciado(),
-                "Editar",
-                "Remover",
-                q.getIdQuestao()
-            });
-        }
+        new javax.swing.SwingWorker<List<Questao>, Void>() {
+            @Override
+            protected List<Questao> doInBackground() {
+                return questaoService.listarTodas(); // roda fora da thread da UI
+            }
 
-        // Configura o sorter para filtro em memória (sem banco)
-        sorter = new TableRowSorter<>(model);
-        view.getTabelaQuestoes().setRowSorter(sorter);
+            @Override
+            protected void done() {
+                try {
+                    List<Questao> lista = get();
+                    model.setRowCount(0);
 
-        // Oculta coluna ID (índice 3)
-        var colID = view.getTabelaQuestoes().getColumnModel().getColumn(3);
-        colID.setMinWidth(0);
-        colID.setMaxWidth(0);
-        colID.setWidth(0);
+                    for (Questao q : lista) {
+                        model.addRow(new Object[]{
+                            q.getEnunciado(), "Editar", "Remover", q.getIdQuestao()
+                        });
+                    }
 
-        view.getTabelaQuestoes().setRowHeight(25);
+                    sorter = new TableRowSorter<>(model);
+                    view.getTabelaQuestoes().setRowSorter(sorter);
+
+                    var colID = view.getTabelaQuestoes().getColumnModel().getColumn(3);
+                    colID.setMinWidth(0); colID.setMaxWidth(0); colID.setWidth(0);
+                    view.getTabelaQuestoes().setRowHeight(25);
+
+                } catch (Exception ex) {
+                    model.setRowCount(0);
+                    model.addRow(new Object[]{"Erro ao carregar questões.", "", "", -1});
+                }
+            }
+        }.execute();
     }
 
     private void filtrarQuestoes(String texto) {
@@ -139,47 +151,57 @@ public class ProfessorController {
     }
 
     private void carregarEstatisticas() {
-        RespostaDAO respostaDAO = new RespostaDAO();
-        Map<Integer, Integer> erros = respostaDAO.questoesMaisErradas();
+        new javax.swing.SwingWorker<Map<Integer, Integer>, Void>() {
+            @Override
+            protected Map<Integer, Integer> doInBackground() {
+                return new RespostaDAO().questoesMaisErradas();
+            }
 
-        List<Map.Entry<Integer, Integer>> top3 = erros.entrySet()
-                .stream()
-                .limit(3)
-                .collect(java.util.stream.Collectors.toList());
+            @Override
+            protected void done() {
+                try {
+                    Map<Integer, Integer> erros = get();
 
-        int totalErros = erros.values().stream().mapToInt(Integer::intValue).sum();
+                    List<Map.Entry<Integer, Integer>> top3 = erros.entrySet()
+                            .stream().limit(3)
+                            .collect(java.util.stream.Collectors.toList());
 
-        javax.swing.JLabel[] labels = {
-            view.getLblQuestoesErros(),
-            view.getLblQuestoesErros1(),
-            view.getLblQuestoesErros2()
-        };
-        javax.swing.JProgressBar[] bars = {
-            view.getProgressBar1(),
-            view.getProgressBar2(),
-            view.getProgressBar3()
-        };
-        Color[] cores = { Color.RED, Color.ORANGE, Color.YELLOW };
+                    int totalErros = erros.values().stream().mapToInt(Integer::intValue).sum();
 
-        for (int i = 0; i < top3.size(); i++) {
-            int idQuestao = top3.get(i).getKey();
-            int qtdErros  = top3.get(i).getValue();
+                    javax.swing.JLabel[] labels = {
+                        view.getLblQuestoesErros(),
+                        view.getLblQuestoesErros1(),
+                        view.getLblQuestoesErros2()
+                    };
+                    javax.swing.JProgressBar[] bars = {
+                        view.getProgressBar1(),
+                        view.getProgressBar2(),
+                        view.getProgressBar3()
+                    };
+                    Color[] cores = { Color.RED, Color.ORANGE, Color.YELLOW };
 
-            Questao q = questaoService.buscarPorId(idQuestao);
-            String enunciado = (q != null) ? q.getEnunciado() : "Questão #" + idQuestao;
-            if (enunciado.length() > 50) enunciado = enunciado.substring(0, 47) + "...";
+                    for (int i = 0; i < top3.size(); i++) {
+                        int idQuestao = top3.get(i).getKey();
+                        int qtdErros  = top3.get(i).getValue();
+                        Questao q = questaoService.buscarPorId(idQuestao);
+                        String enunciado = (q != null) ? q.getEnunciado() : "Questão #" + idQuestao;
+                        if (enunciado.length() > 50) enunciado = enunciado.substring(0, 47) + "...";
+                        int percentual = (totalErros > 0) ? (qtdErros * 100 / totalErros) : 0;
+                        labels[i].setText((i + 1) + ". " + enunciado);
+                        bars[i].setValue(percentual);
+                        bars[i].setForeground(cores[i]);
+                    }
 
-            int percentual = (totalErros > 0) ? (qtdErros * 100 / totalErros) : 0;
+                    for (int i = top3.size(); i < 3; i++) {
+                        labels[i].setText("—");
+                        bars[i].setValue(0);
+                    }
 
-            labels[i].setText((i + 1) + ". " + enunciado);
-            bars[i].setValue(percentual);
-            bars[i].setForeground(cores[i]);
-        }
-
-        for (int i = top3.size(); i < 3; i++) {
-            labels[i].setText("—");
-            bars[i].setValue(0);
-        }
+                } catch (Exception ex) {
+                    System.out.println("[ProfessorController] Erro ao carregar estatísticas: " + ex.getMessage());
+                }
+            }
+        }.execute();
     }
 
     private Color corDificuldade(String dificuldade) {

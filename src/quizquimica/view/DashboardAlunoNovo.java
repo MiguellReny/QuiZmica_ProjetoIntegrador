@@ -18,10 +18,10 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
      * Creates new form DashboardAlunoNovo
      */
     public DashboardAlunoNovo() {
-    initComponents();
-    adicionarBotaoDesempenho();
-    setLocationRelativeTo(null);
-    new DashboardAlunoNovoController(this);
+        initComponents();
+        adicionarBotaoDesempenho();
+        setLocationRelativeTo(null);
+        new DashboardAlunoNovoController(this);
     }
 
     /**
@@ -49,7 +49,6 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         btnParticiparMateriaisLab = new javax.swing.JButton();
         lblIconeMateriaisLab = new javax.swing.JLabel();
         cardSeguranca = new javax.swing.JPanel();
-        lblTextoEquipamentos = new javax.swing.JLabel();
         lblTextoSeguranca = new javax.swing.JLabel();
         btnParticiparSeguranca = new javax.swing.JButton();
         lblIconeSeguranca = new javax.swing.JLabel();
@@ -118,11 +117,11 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         cardExperimentos.setBackground(new java.awt.Color(255, 255, 255));
         cardExperimentos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTextoExperimentos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTextoExperimentos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTextoExperimentos.setForeground(new java.awt.Color(35, 45, 60));
         lblTextoExperimentos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTextoExperimentos.setText("Experimentos Químicos");
-        cardExperimentos.add(lblTextoExperimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 78, 190, 55));
+        lblTextoExperimentos.setText("FÁCIL");
+        cardExperimentos.add(lblTextoExperimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 200, 210));
 
         btnParticiparExperimentos.setBackground(new java.awt.Color(5, 68, 75));
         btnParticiparExperimentos.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -139,11 +138,11 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         cardMateriaisLab.setBackground(new java.awt.Color(255, 255, 255));
         cardMateriaisLab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTextoMateriaisLab.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTextoMateriaisLab.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTextoMateriaisLab.setForeground(new java.awt.Color(35, 45, 60));
         lblTextoMateriaisLab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTextoMateriaisLab.setText("Materiais do laboratório");
-        cardMateriaisLab.add(lblTextoMateriaisLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 78, 190, 55));
+        lblTextoMateriaisLab.setText("MÉDIO");
+        cardMateriaisLab.add(lblTextoMateriaisLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 210));
 
         btnParticiparMateriaisLab.setBackground(new java.awt.Color(5, 68, 75));
         btnParticiparMateriaisLab.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -160,17 +159,11 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         cardSeguranca.setBackground(new java.awt.Color(255, 255, 255));
         cardSeguranca.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTextoEquipamentos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTextoEquipamentos.setForeground(new java.awt.Color(35, 45, 60));
-        lblTextoEquipamentos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTextoEquipamentos.setText("Equipamentos de");
-        cardSeguranca.add(lblTextoEquipamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 55));
-
-        lblTextoSeguranca.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTextoSeguranca.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTextoSeguranca.setForeground(new java.awt.Color(35, 45, 60));
         lblTextoSeguranca.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTextoSeguranca.setText("Segurança");
-        cardSeguranca.add(lblTextoSeguranca, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, 55));
+        lblTextoSeguranca.setText("DIFÍCIL");
+        cardSeguranca.add(lblTextoSeguranca, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 210));
 
         btnParticiparSeguranca.setBackground(new java.awt.Color(5, 68, 75));
         btnParticiparSeguranca.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
@@ -180,7 +173,7 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
         cardSeguranca.add(btnParticiparSeguranca, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 175, 200, 35));
 
         lblIconeSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/materiaisSeguranca.png"))); // NOI18N
-        cardSeguranca.add(lblIconeSeguranca, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 20, -1, -1));
+        cardSeguranca.add(lblIconeSeguranca, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         painelFundo.add(cardSeguranca, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 200, 210));
 
@@ -350,7 +343,6 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
     private javax.swing.JLabel lblIconeMateriaisLab;
     private javax.swing.JLabel lblIconeSeguranca;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblTextoEquipamentos;
     private javax.swing.JLabel lblTextoExperimentos;
     private javax.swing.JLabel lblTextoMateriaisLab;
     private javax.swing.JLabel lblTextoSeguranca;

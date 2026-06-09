@@ -35,8 +35,7 @@ public class DashboardAlunoNovoController {
         this.view = view;
         configurarBotoes();
         configurarEventos();
-        carregarDesempenho();
-        aplicarBloqueios();
+        carregarDesempenhoEBloqueios();
     }
 
     private void configurarEventos() {
@@ -48,32 +47,6 @@ public class DashboardAlunoNovoController {
     }
 
     // FIX 4: aplica o estado correto (bloqueado ou desbloqueado) para os dois níveis
-    private void aplicarBloqueios() {
-        int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
-
-        double aprovFacil = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
-        double aprovMedio = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelMedio);
-
-        boolean medioBloqueado   = aprovFacil < Constantes.pontuacaoMin;
-        boolean dificilBloqueado = aprovMedio < Constantes.pontuacaoMin;
-
-        if (medioBloqueado) {
-            view.getBtnParticiparMateriaisLab().setBackground(new java.awt.Color(150, 150, 150));
-            view.getBtnParticiparMateriaisLab().setText("🔒 Bloqueado");
-        } else {
-            // Restaura visual correto caso tenha desbloqueado após a última sessão
-            view.getBtnParticiparMateriaisLab().setBackground(COR_BTN_MATERIAIS);
-            view.getBtnParticiparMateriaisLab().setText(TEXTO_MATERIAIS);
-        }
-
-        if (dificilBloqueado) {
-            view.getBtnParticiparSeguranca().setBackground(new java.awt.Color(150, 150, 150));
-            view.getBtnParticiparSeguranca().setText("🔒 Bloqueado");
-        } else {
-            view.getBtnParticiparSeguranca().setBackground(COR_BTN_SEGURANCA);
-            view.getBtnParticiparSeguranca().setText(TEXTO_SEGURANCA);
-        }
-    }
 
     private void iniciarQuiz(String categoria) {
         int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
@@ -145,26 +118,63 @@ public class DashboardAlunoNovoController {
         }
     }
 
-    private void carregarDesempenho() {
-        int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
-        List<Partida> partidas = new PartidaDAO().buscarPorAluno(idUsuario);
+    private void carregarDesempenhoEBloqueios() {
+        new javax.swing.SwingWorker<int[], Void>() {
+            double aprovFacil, aprovMedio;
+            int acertos, erros, progresso;
+            boolean temPartidas;
 
-        if (partidas.isEmpty()) {
-            configurarProgressBar(view.getProgressAcertos(),   0, "0%");
-            configurarProgressBar(view.getProgressErros(),     0, "0%");
-            configurarProgressBar(view.getProgressProgresso(), 0, "0%");
-            return;
-        }
+            @Override
+            protected int[] doInBackground() {
+                int idUsuario = Sessao.getUsuarioLogado().getIdUsuario();
+                List<Partida> partidas = new PartidaDAO().buscarPorAluno(idUsuario);
+                temPartidas = !partidas.isEmpty();
 
-        double melhorAprov = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
+                aprovFacil = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelFacil);
+                aprovMedio = partidaDAO.aproveitamentoNoNivel(idUsuario, Constantes.nivelMedio);
 
-        int acertos   = (int) Math.round(melhorAprov * 100);
-        int erros     = 100 - acertos;
-        int progresso = Math.min(partidas.size() * 10, 100);
+                if (temPartidas) {
+                    acertos   = (int) Math.round(aprovFacil * 100);
+                    erros     = 100 - acertos;
+                    progresso = Math.min(partidas.size() * 10, 100);
+                }
+                return null;
+            }
 
-        configurarProgressBar(view.getProgressAcertos(),   acertos,   acertos   + "%");
-        configurarProgressBar(view.getProgressErros(),     erros,     erros     + "%");
-        configurarProgressBar(view.getProgressProgresso(), progresso, progresso + "%");
+            @Override
+            protected void done() {
+                // Barras de desempenho
+                if (!temPartidas) {
+                    configurarProgressBar(view.getProgressAcertos(),   0, "0%");
+                    configurarProgressBar(view.getProgressErros(),     0, "0%");
+                    configurarProgressBar(view.getProgressProgresso(), 0, "0%");
+                } else {
+                    configurarProgressBar(view.getProgressAcertos(),   acertos,   acertos   + "%");
+                    configurarProgressBar(view.getProgressErros(),     erros,     erros     + "%");
+                    configurarProgressBar(view.getProgressProgresso(), progresso, progresso + "%");
+                }
+
+                // Bloqueios
+                boolean medioBloqueado   = aprovFacil < Constantes.pontuacaoMin;
+                boolean dificilBloqueado = aprovMedio < Constantes.pontuacaoMin;
+
+                if (medioBloqueado) {
+                    view.getBtnParticiparMateriaisLab().setBackground(new java.awt.Color(150, 150, 150));
+                    view.getBtnParticiparMateriaisLab().setText("🔒 Bloqueado");
+                } else {
+                    view.getBtnParticiparMateriaisLab().setBackground(COR_BTN_MATERIAIS);
+                    view.getBtnParticiparMateriaisLab().setText(TEXTO_MATERIAIS);
+                }
+
+                if (dificilBloqueado) {
+                    view.getBtnParticiparSeguranca().setBackground(new java.awt.Color(150, 150, 150));
+                    view.getBtnParticiparSeguranca().setText("🔒 Bloqueado");
+                } else {
+                    view.getBtnParticiparSeguranca().setBackground(COR_BTN_SEGURANCA);
+                    view.getBtnParticiparSeguranca().setText(TEXTO_SEGURANCA);
+                }
+            }
+        }.execute();
     }
 
     private void configurarProgressBar(javax.swing.JProgressBar bar, int valor, String texto) {
