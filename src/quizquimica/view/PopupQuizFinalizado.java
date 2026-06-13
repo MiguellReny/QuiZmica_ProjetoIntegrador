@@ -61,7 +61,6 @@ public class PopupQuizFinalizado extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(520, 330));
         setModal(true);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(520, 330));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -89,6 +88,7 @@ public class PopupQuizFinalizado extends javax.swing.JDialog {
         cardResultado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(179, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,6 +99,7 @@ public class PopupQuizFinalizado extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 2, Short.MAX_VALUE)
         );
+
         cardResultado.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 45, 200, 2));
 
         lblNomeQuiz.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
@@ -136,23 +137,18 @@ public class PopupQuizFinalizado extends javax.swing.JDialog {
         cardResultado.add(lblErros, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 30, 30));
 
         lblImagemQuimica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagemQuimica.setIcon(new javax.swing.ImageIcon(
-            getClass().getResource("/quizquimica/images/finalizadoOFC.png"))); // NOI18N
-        cardResultado.add(lblImagemQuimica,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 220, 230));
+        lblImagemQuimica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/finalizadoOFC.png"))); // NOI18N
+        cardResultado.add(lblImagemQuimica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 230, 230));
 
         btnVoltar.setBackground(new java.awt.Color(25, 72, 85));
         btnVoltar.setFont(new java.awt.Font("Segoe UI Symbol", 0, 18)); // NOI18N
         btnVoltar.setForeground(java.awt.Color.white);
         btnVoltar.setText("Voltar");
-        cardResultado.add(btnVoltar,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 150, 30));
+        cardResultado.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 150, 30));
 
-        panelPrincipal.add(cardResultado,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 500, 260));
+        panelPrincipal.add(cardResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 500, 260));
 
-        getContentPane().add(panelPrincipal,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 330));
+        getContentPane().add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
 import quizquimica.model.Alternativa;
 import quizquimica.model.Questao;
 import quizquimica.model.Sessao;
@@ -38,6 +37,8 @@ public class TelaQuizController {
     private int dicasUsadasTotal = 0;
     private int indiceQuestaoAtual = 0;
     private boolean[] questaoCorrigida;
+    private int pontuacao = 0;
+    private boolean[] questoesJaPontuadas;
     private final Color COR_ACERTO = new Color(46, 204, 113);
     private final Color COR_ERRO = new Color(231, 76, 60);
 
@@ -83,6 +84,11 @@ public class TelaQuizController {
                     questaoCorrigida = new boolean[questoes.size()];
                     respostasSelecionadas = new String[questoes.size()];
                     usouDica = new boolean[questoes.size()];
+                    questoesJaPontuadas = new boolean[questoes.size()];
+
+                    pontuacao = 0;
+                    atualizarPontuacaoNaTela();
+                    view.getLblFeedbackPontuacao().setVisible(false);
 
                     if (questoes.isEmpty()) {
                         JOptionPane.showMessageDialog(view, "Nenhuma questão encontrada.");
@@ -412,6 +418,13 @@ public class TelaQuizController {
 
             botoes[indiceAlternativa].setBackground(COR_ACERTO);
 
+            if (!questoesJaPontuadas[indiceQuestaoAtual]) {
+                pontuacao++;
+                questoesJaPontuadas[indiceQuestaoAtual] = true;
+                atualizarPontuacaoNaTela();
+                mostrarFeedbackPontuacao();
+            }
+
             JOptionPane.showMessageDialog(
                 view,
                 "✅ Você acertou!"
@@ -427,6 +440,8 @@ public class TelaQuizController {
                     break;
                 }
             }
+
+            questoesJaPontuadas[indiceQuestaoAtual] = true;
 
             JOptionPane.showMessageDialog(
                 view,
@@ -496,6 +511,21 @@ public class TelaQuizController {
                 popup.setVisible(true);
             }
         }.execute();
+    }
+
+    private void atualizarPontuacaoNaTela() {
+     view.getLblPontuacao().setText(String.format("%02d pts", pontuacao));
+    }
+
+    private void mostrarFeedbackPontuacao() {
+      view.getLblFeedbackPontuacao().setVisible(true);
+
+      javax.swing.Timer timer = new javax.swing.Timer(1000, e -> {
+        view.getLblFeedbackPontuacao().setVisible(false);
+      });
+
+      timer.setRepeats(false);
+      timer.start();
     }
 
     private void atualizarBotaoProxima() {

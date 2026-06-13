@@ -34,19 +34,16 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
         jComboBox6 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
@@ -97,11 +94,12 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
         setBackground(new java.awt.Color(230, 240, 251));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(230, 240, 251));
@@ -123,32 +121,10 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(202, 217, 233));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Categoria");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, 20));
-
-        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("Quiz");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 120, 20));
-
         jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("Imagem do enunciado");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 30));
-
-        jComboBox5.setBackground(new java.awt.Color(232, 238, 241));
-        jComboBox5.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jComboBox5.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox5.setToolTipText("");
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 240, 30));
 
         jComboBox6.setBackground(new java.awt.Color(232, 238, 241));
         jComboBox6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -160,12 +136,12 @@ public class AdicionarQuestao extends javax.swing.JFrame {
                 jComboBox6ActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 190, 30));
+        jPanel4.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 190, 30));
 
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Dificulade");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 170, 20));
+        jLabel9.setText("Dificuldade");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 170, 20));
 
         jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(160, 0, 0));
@@ -176,18 +152,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(51, 51, 51));
         jLabel19.setText("Informação da Questão");
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 340, 30));
-
-        jComboBox2.setBackground(new java.awt.Color(232, 238, 241));
-        jComboBox2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Experimentos Químicos", "Materiais do laboratório", "Materiais de segurança" }));
-        jComboBox2.setToolTipText("");
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 190, 30));
 
         jScrollPane2.setBackground(new java.awt.Color(229, 229, 229));
 
@@ -406,13 +370,17 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         });
         jPanel5.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 480, 40));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 40));
 
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 30));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 40));
 
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
+        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 40));
 
         jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(51, 51, 51));
@@ -467,17 +435,9 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox6ActionPerformed
-
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
@@ -529,9 +489,7 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -543,6 +501,7 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -553,7 +512,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -569,7 +527,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -597,7 +554,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
     public javax.swing.JTextField getTxtAlternativaC()   { return jTextField9; }
     public javax.swing.JTextField getTxtAlternativaD()   { return jTextField6; }
     public javax.swing.JComboBox<String> getComboDificuldade()  { return jComboBox6; }
-    public javax.swing.JComboBox<String> getComboCategoria()    { return jComboBox5; }
     public javax.swing.JComboBox<String> getComboResposta()     { return jComboBox1; }
     public javax.swing.JComboBox<String> getComboPersonagem()   { return jComboBox3; }
     public javax.swing.JButton getBtnSalvar()   { return jButton1; }

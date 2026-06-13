@@ -95,6 +95,10 @@ public class TelaQuiz extends javax.swing.JFrame {
         btnProxima = new javax.swing.JButton();
         btnDica = new javax.swing.JButton();
         lblEtec = new javax.swing.JLabel();
+        painelPontuacao = new javax.swing.JPanel();
+        lblTituloPontuacao = new javax.swing.JLabel();
+        lblPontuacao = new javax.swing.JLabel();
+        lblFeedbackPontuacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica - Quiz");
@@ -225,6 +229,32 @@ public class TelaQuiz extends javax.swing.JFrame {
         lblEtec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/etecR.png"))); // NOI18N
         painelFundo.add(lblEtec, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, -1, -1));
 
+        painelPontuacao.setBackground(java.awt.Color.white);
+        painelPontuacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
+        painelPontuacao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTituloPontuacao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTituloPontuacao.setForeground(new java.awt.Color(0, 51, 204));
+        lblTituloPontuacao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloPontuacao.setText("PONTUAÇÃO");
+        lblTituloPontuacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        painelPontuacao.add(lblTituloPontuacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, -1));
+
+        lblPontuacao.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblPontuacao.setForeground(new java.awt.Color(179, 40, 36));
+        lblPontuacao.setText("00 pts");
+        painelPontuacao.add(lblPontuacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        painelFundo.add(painelPontuacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 120, 120, 90));
+
+        lblFeedbackPontuacao.setBackground(new java.awt.Color(230, 255, 235));
+        lblFeedbackPontuacao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFeedbackPontuacao.setForeground(new java.awt.Color(34, 177, 76));
+        lblFeedbackPontuacao.setText("+1");
+        lblFeedbackPontuacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(34, 177, 76)));
+        lblFeedbackPontuacao.setOpaque(true);
+        painelFundo.add(lblFeedbackPontuacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 140, 30, -1));
+
         getContentPane().add(painelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
@@ -302,6 +332,14 @@ public class TelaQuiz extends javax.swing.JFrame {
     public javax.swing.JButton getBtnDica() {
     return btnDica;
     }
+    
+    public javax.swing.JLabel getLblPontuacao() {
+    return lblPontuacao;
+    }
+
+    public javax.swing.JLabel getLblFeedbackPontuacao() {
+    return lblFeedbackPontuacao;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlternativaA;
@@ -318,13 +356,17 @@ public class TelaQuiz extends javax.swing.JFrame {
     private javax.swing.JLabel lblAlternativaD;
     private javax.swing.JLabel lblEnunciado;
     private javax.swing.JLabel lblEtec;
+    private javax.swing.JLabel lblFeedbackPontuacao;
     private javax.swing.JLabel lblImagemQuestao;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblPontuacao;
     private javax.swing.JLabel lblProgresso;
     private javax.swing.JLabel lblQuestaoAtual;
+    private javax.swing.JLabel lblTituloPontuacao;
     private javax.swing.JPanel linhaEnunciado;
     private javax.swing.JPanel linhaTopo;
     private javax.swing.JPanel painelFundo;
+    private javax.swing.JPanel painelPontuacao;
     private javax.swing.JPanel painelQuestaoAtual;
     // End of variables declaration//GEN-END:variables
 
