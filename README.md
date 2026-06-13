@@ -1,5 +1,5 @@
 # QuiZmica_ProjetoIntegrador
-Projeto da matéria Projeto Integrador do Instituto Mauá de Tecnologia em parceria com a ETEC para os cursos de Quimica
+Projeto de gamificação da matéria "Projeto Integrador", do Instituto Mauá de Tecnologia, em parceria com a ETEC para alunos ingressantes nos cursos de Química.
 
 Membros do Grupo:
 
