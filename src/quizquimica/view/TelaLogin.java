@@ -6,6 +6,7 @@ import quizquimica.view.DashboardAlunoNovo;
 import quizquimica.model.Professor;
 import quizquimica.model.Sessao;
 import quizquimica.controller.AuthController;
+import quizquimica.controller.TermoController;
 
 public class TelaLogin extends javax.swing.JFrame {
 
@@ -122,6 +123,14 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void abrirTelaPrincipal(Usuario usuario) {
+    if (usuario instanceof Professor) {
+        new DashboardProfessor().setVisible(true);
+    } else {
+        new DashboardAlunoNovo().setVisible(true);
+    }
+    }
+
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
@@ -144,10 +153,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
         Sessao.setUsuarioLogado(usuario);
 
-        if (usuario instanceof Professor) {
-            new DashboardProfessor().setVisible(true);
+        if (TermoController.usuarioJaAceitouTermos(usuario)) {
+            abrirTelaPrincipal(usuario);
         } else {
-            new DashboardAlunoNovo().setVisible(true);
+            new TermodeUso(usuario).setVisible(true);
         }
 
         dispose();
@@ -155,8 +164,10 @@ public class TelaLogin extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(null, "Login ou senha inválidos");
     }
-}
 
+    
+
+}
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
