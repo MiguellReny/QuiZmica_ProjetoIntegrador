@@ -38,3 +38,4 @@ build/classes/config.properties
 hs_err_pid*
 replay_pid*src/config.properties
 src/config.properties
+src/quizquimica/config.properties
