@@ -102,8 +102,8 @@ public class EditarQuestao extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
+        //jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
+        //jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
@@ -259,10 +259,10 @@ public class EditarQuestao extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 480, 40));
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 40));
-        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 30));
-        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 40));
-        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 40));
+        //jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 40));
+        //jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 30));
+        //jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 40));
+        //jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 40));
 
         jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(51, 51, 51));

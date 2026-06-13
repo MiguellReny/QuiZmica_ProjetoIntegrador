@@ -83,7 +83,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -94,8 +93,6 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Quizmica 2 sem fundo 1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica");
@@ -370,17 +367,17 @@ public class AdicionarQuestao extends javax.swing.JFrame {
         });
         jPanel5.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 480, 40));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 40));
+       // jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        //jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 40));
 
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
-        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 30));
+        //jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        //jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, 30));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
-        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 40));
+        //jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        //jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 40));
 
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/imagem_1.png"))); // NOI18N
-        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 40));
+        //jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quizquimica/images/Imagem_1.png"))); // NOI18N
+        //jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 40));
 
         jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(51, 51, 51));
