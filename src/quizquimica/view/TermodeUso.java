@@ -88,7 +88,7 @@ public class TermodeUso extends javax.swing.JFrame {
 
         btnContinuar.setBackground(new java.awt.Color(227, 227, 227));
         btnContinuar.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        btnContinuar.setText("Cotinuar");
+        btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);

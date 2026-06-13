@@ -48,6 +48,33 @@ public class UsuarioDAO {
         return false;
     }
 
+    // Verifica se o usuário já aceitou os termos de uso
+    public boolean termoAceito(String login) {
+        String sql = "SELECT termo_aceito FROM usuario WHERE login = ?";
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return rs.getBoolean("termo_aceito");
+        } catch (SQLException e) {
+            System.out.println("[UsuarioDAO] Erro ao verificar termo aceito: " + e.getMessage());
+        }
+        return false;
+    }
+
+    // Marca que o usuário aceitou os termos de uso
+    public boolean marcarTermoAceito(String login) {
+        String sql = "UPDATE usuario SET termo_aceito = 1 WHERE login = ?";
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, login);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("[UsuarioDAO] Erro ao marcar termo aceito: " + e.getMessage());
+        }
+        return false;
+    }
+
     // Atualiza senha (professor redefine para aluno)
     public boolean atualizarSenha(String login, String novaSenhaHash) {
         String sql = "UPDATE usuario SET senha = ? WHERE login = ?";

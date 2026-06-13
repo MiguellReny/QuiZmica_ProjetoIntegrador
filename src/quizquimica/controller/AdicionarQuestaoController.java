@@ -243,9 +243,11 @@ public class AdicionarQuestaoController {
     }
 
     private void voltarDashboard() {
+        quizquimica.util.CacheQuestoes.getInstance().invalidar();
         new DashboardProfessor().setVisible(true);
         view.dispose();
     }
+
 
     private String converterDificuldade(String exibido) {
         switch (exibido) {

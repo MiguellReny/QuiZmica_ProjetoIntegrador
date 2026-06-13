@@ -218,7 +218,9 @@ public class EditarQuestaoController {
     }
 
     private void voltarDashboard() {
+        quizquimica.util.CacheQuestoes.getInstance().invalidar();
         new DashboardProfessor().setVisible(true);
         view.dispose();
     }
+
 }

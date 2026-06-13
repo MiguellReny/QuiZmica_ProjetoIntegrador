@@ -1,6 +1,5 @@
 package quizquimica.controller;
 
-import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
 import quizquimica.model.Professor;
 import quizquimica.model.Usuario;
@@ -33,6 +32,8 @@ public class TermoController {
     new TelaJogar().setVisible(true);
     view.dispose();
     }
+
+    
 
     public void aceitarTermos() {
 
@@ -68,17 +69,13 @@ public class TermoController {
         if (usuario == null || usuario.getLogin() == null) {
             return false;
         }
-
-        Preferences prefs = Preferences.userNodeForPackage(TermoController.class);
-        return prefs.getBoolean("termos_" + usuario.getLogin(), false);
+        return new quizquimica.dao.UsuarioDAO().termoAceito(usuario.getLogin());
     }
 
     public static void marcarTermosComoAceitos(Usuario usuario) {
         if (usuario == null || usuario.getLogin() == null) {
             return;
         }
-
-        Preferences prefs = Preferences.userNodeForPackage(TermoController.class);
-        prefs.putBoolean("termos_" + usuario.getLogin(), true);
+        new quizquimica.dao.UsuarioDAO().marcarTermoAceito(usuario.getLogin());
     }
 }
