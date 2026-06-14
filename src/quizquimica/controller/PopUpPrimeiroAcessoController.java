@@ -1,14 +1,22 @@
 package quizquimica.controller;
 
+import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
+import quizquimica.model.Usuario;
 import quizquimica.view.PopUpPrimeiroAcesso;
 
 public class PopUpPrimeiroAcessoController {
 
     private final PopUpPrimeiroAcesso view;
+    private final Usuario usuario;
 
     public PopUpPrimeiroAcessoController(PopUpPrimeiroAcesso view) {
+        this(view, null);
+    }
+
+    public PopUpPrimeiroAcessoController(PopUpPrimeiroAcesso view, Usuario usuario) {
         this.view = view;
+        this.usuario = usuario;
         configurarEventos();
     }
 
@@ -44,12 +52,38 @@ public class PopUpPrimeiroAcessoController {
             return;
         }
 
-        // Temporário: depois vamos trocar isso pela chamada ao banco
+        /*
+         * Temporário:
+         * Depois sua colega vai trocar essa parte por uma atualização real no banco,
+         * usando DAO/Service para salvar a nova senha.
+         */
+        if (usuario != null) {
+            marcarPrimeiroAcessoConcluido(usuario);
+        }
+
         JOptionPane.showMessageDialog(
                 view,
                 "Senha redefinida com sucesso!"
         );
 
         view.dispose();
+    }
+
+    public static boolean usuarioJaRedefiniuSenhaPrimeiroAcesso(Usuario usuario) {
+        if (usuario == null || usuario.getLogin() == null) {
+            return false;
+        }
+
+        Preferences prefs = Preferences.userNodeForPackage(PopUpPrimeiroAcessoController.class);
+        return prefs.getBoolean("primeiro_acesso_" + usuario.getLogin(), false);
+    }
+
+    public static void marcarPrimeiroAcessoConcluido(Usuario usuario) {
+        if (usuario == null || usuario.getLogin() == null) {
+            return;
+        }
+
+        Preferences prefs = Preferences.userNodeForPackage(PopUpPrimeiroAcessoController.class);
+        prefs.putBoolean("primeiro_acesso_" + usuario.getLogin(), true);
     }
 }

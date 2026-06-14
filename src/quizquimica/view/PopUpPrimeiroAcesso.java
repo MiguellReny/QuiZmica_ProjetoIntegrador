@@ -10,6 +10,7 @@ package quizquimica.view;
  */
 
 import quizquimica.controller.PopUpPrimeiroAcessoController;
+import quizquimica.model.Usuario;
 
 
 public class PopUpPrimeiroAcesso extends javax.swing.JDialog {
@@ -20,13 +21,32 @@ public class PopUpPrimeiroAcesso extends javax.swing.JDialog {
      * Creates new form PopUpPrimeiroAcesso
      */
     public PopUpPrimeiroAcesso(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        setSize(850, 600);
-        setLocationRelativeTo(parent);
-        configurarVisual();
+     this(parent, modal, null);
+    }
 
-        new PopUpPrimeiroAcessoController(this);
+    public PopUpPrimeiroAcesso(java.awt.Frame parent, boolean modal, Usuario usuario) {
+     super(parent, modal);
+     initComponents();
+
+     setSize(850, 600);
+     setLocationRelativeTo(parent);
+     setResizable(false);
+
+     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+     addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent e) {
+        javax.swing.JOptionPane.showMessageDialog(
+                PopUpPrimeiroAcesso.this,
+                "Para continuar, você precisa redefinir sua senha."
+        );
+      }
+     });
+
+     configurarVisual();
+
+     new PopUpPrimeiroAcessoController(this, usuario);
     }
 
     /**
@@ -57,7 +77,7 @@ public class PopUpPrimeiroAcesso extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         btnSalvarContinuar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Primeiro acesso");
         setModal(true);
         setResizable(false);
@@ -238,12 +258,6 @@ public class PopUpPrimeiroAcesso extends javax.swing.JDialog {
             @Override
             public void run() {
                 PopUpPrimeiroAcesso dialog = new PopUpPrimeiroAcesso(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
                 dialog.setVisible(true);
             }
         });
