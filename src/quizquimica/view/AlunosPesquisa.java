@@ -1,9 +1,13 @@
 package quizquimica.view;
 
+import quizquimica.util.TelaUtil;
+
 public class AlunosPesquisa extends javax.swing.JFrame {
 
     public AlunosPesquisa() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
 
             javax.swing.table.DefaultTableModel model = 
@@ -43,6 +47,8 @@ public class AlunosPesquisa extends javax.swing.JFrame {
             }
         });
     }
+
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

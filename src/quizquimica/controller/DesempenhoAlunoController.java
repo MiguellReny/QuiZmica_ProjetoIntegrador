@@ -27,6 +27,11 @@ public class DesempenhoAlunoController {
 
     // Construtor com origem — usado pelo próprio aluno
     public DesempenhoAlunoController(DesempenhoAluno view, Aluno aluno, String origem) {
+
+        if ("aluno".equalsIgnoreCase(origem)) {
+            view.getBtnMenu().setVisible(false);
+        }
+
         this.view   = view;
         this.aluno  = aluno;
         this.origem = origem;

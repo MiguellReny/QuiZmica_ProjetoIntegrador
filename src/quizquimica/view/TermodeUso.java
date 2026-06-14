@@ -1,6 +1,7 @@
 package quizquimica.view;
 
 import quizquimica.model.Usuario;
+import quizquimica.util.TelaUtil;
 import quizquimica.controller.TermoController;
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,9 @@ public class TermodeUso extends javax.swing.JFrame {
     }
 
     public TermodeUso(Usuario usuario) {
+    TelaUtil.prepararTelaCheia(this);
     initComponents();
+    TelaUtil.aplicarTelaCheia(this);
     setLocationRelativeTo(null);
 
     this.usuario = usuario;
@@ -31,6 +34,11 @@ public class TermodeUso extends javax.swing.JFrame {
     btnContinuar.addActionListener(e -> {
         controller.aceitarTermos();
     });
+    }
+
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
     }
 
     

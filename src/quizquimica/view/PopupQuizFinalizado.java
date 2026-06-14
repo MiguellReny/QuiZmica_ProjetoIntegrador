@@ -31,10 +31,12 @@ public class PopupQuizFinalizado extends javax.swing.JDialog {
 
         // Adiciona label de pontuação abaixo dos erros no cardResultado
         lblPontuacao = new javax.swing.JLabel("Pontuação: 0 pts");
-        lblPontuacao.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
+        lblPontuacao.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
         lblPontuacao.setForeground(new java.awt.Color(20, 25, 45));
+
+        // coloca abaixo do "Erros"
         cardResultado.add(lblPontuacao,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 165, 220, 30));
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 250, 30));
     }
 
     @SuppressWarnings("unchecked")
@@ -126,11 +128,13 @@ public class PopupQuizFinalizado extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(20, 25, 45));
         jLabel3.setText("Acertos: ");
         cardResultado.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
+        cardResultado.add(lblAcertos, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(20, 25, 45));
         jLabel4.setText("Erros:");
-        cardResultado.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 50, 30));
+        cardResultado.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 50, 30));
+        cardResultado.add(lblErros, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 30, 30));
 
         lblErros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblErros.setText("05");

@@ -2,6 +2,7 @@ package quizquimica.view;
 
 import quizquimica.controller.EditarQuestaoController;
 import quizquimica.model.Questao;
+import quizquimica.util.TelaUtil;
 
 public class EditarQuestao extends javax.swing.JFrame {
 
@@ -9,15 +10,23 @@ public class EditarQuestao extends javax.swing.JFrame {
      * Creates new form DashboardAluno
      */
     public EditarQuestao() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
     }
 
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
+    }
     /**
      * Construtor usado pelo ProfessorController para editar uma questão existente.
      */
     public EditarQuestao(Questao questao) {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
         new EditarQuestaoController(this, questao);
 
@@ -31,6 +40,7 @@ public class EditarQuestao extends javax.swing.JFrame {
         jButton10.setOpaque(true);
         jButton10.setBorderPainted(true);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

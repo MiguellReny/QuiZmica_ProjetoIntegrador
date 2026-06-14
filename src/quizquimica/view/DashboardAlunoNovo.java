@@ -5,6 +5,7 @@
 package quizquimica.view;
 
 import quizquimica.controller.DashboardAlunoNovoController;
+import quizquimica.util.TelaUtil;
 
 /**
  *
@@ -18,11 +19,19 @@ public class DashboardAlunoNovo extends javax.swing.JFrame {
      * Creates new form DashboardAlunoNovo
      */
     public DashboardAlunoNovo() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         adicionarBotaoDesempenho();
         setLocationRelativeTo(null);
         new DashboardAlunoNovoController(this);
     }
+
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -88,4 +88,50 @@ public class UsuarioDAO {
         }
         return false;
     }
+
+    // Verifica se ainda é o primeiro acesso
+    public boolean primeiroLogin(String login) {
+        String sql = "SELECT primeiro_login FROM usuario WHERE login = ?";
+
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, login);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getBoolean("primeiro_login");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("[UsuarioDAO] Erro ao verificar primeiro login: "
+                    + e.getMessage());
+        }
+
+        return false;
+    }
+
+    // Marca que o usuário já redefiniu a senha
+    public boolean marcarPrimeiroLoginConcluido(String login) {
+
+        String sql =
+            "UPDATE usuario SET primeiro_login = 0 WHERE login = ?";
+
+        try (Connection conn = ConexaoDB.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, login);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println(
+                "[UsuarioDAO] Erro ao atualizar primeiro login: "
+                + e.getMessage()
+            );
+        }
+
+        return false;
+    }
 }

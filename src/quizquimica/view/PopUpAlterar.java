@@ -1,5 +1,7 @@
 package quizquimica.view;
 
+import quizquimica.util.TelaUtil;
+
 public class PopUpAlterar extends javax.swing.JDialog {
 
     public PopUpAlterar(java.awt.Window parent, boolean modal) {

@@ -1,6 +1,5 @@
 -- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
--- Host: quizmica-brenorossinimaua-7324.d.aivencloud.com    Database: defaultdb
 -- ------------------------------------------------------
 -- Server version	8.0.45
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -78,109 +77,6 @@ CREATE TABLE `pergunta_partida` (
   CONSTRAINT `fk_pergunta_partida_Perguntas1` FOREIGN KEY (`idPerguntas`) REFERENCES `perguntas` (`idPerguntas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-INSERT INTO perguntas (enunciado, perguntaImagem, dificuldade, dica, tipo, personagem) VALUES
-('O que é uma bureta?', NULL, 'FACIL', 'É usada para medir volumes variáveis de líquidos.', 'textual', 'curie'),
-('O que é um béquer?', NULL, 'FACIL', 'É um recipiente cilíndrico usado para conter líquidos.', 'textual', 'curie'),
-('Para que serve um funil de separação?', NULL, 'FACIL', 'É usado para separar líquidos imiscíveis.', 'textual', 'curie'),
-('O que é um erlenmeyer?', NULL, 'FACIL', 'É um frasco cônico usado em titulações.', 'textual', 'curie'),
-('Para que serve uma pipeta?', NULL, 'FACIL', 'É usada para transferir volumes precisos de líquidos.', 'textual', 'curie'),
-('O que é um bastão de vidro?', NULL, 'FACIL', 'É usado para agitar soluções.', 'textual', 'curie'),
-('Para que serve um vidro de relógio?', NULL, 'FACIL', 'É usado para cobrir béqueres ou pesar substâncias.', 'textual', 'curie'),
-('O que é uma proveta?', NULL, 'FACIL', 'É usada para medir volumes aproximados de líquidos.', 'textual', 'curie'),
-('Para que serve um cadinho?', NULL, 'FACIL', 'É usado para aquecer substâncias em altas temperaturas.', 'textual', 'curie'),
-('O que é um funil de vidro simples?', NULL, 'FACIL', 'É usado para transferir líquidos ou filtrar.', 'textual', 'curie'),
-('Para que serve o tripé de laboratório?', NULL, 'FACIL', 'É usado para apoiar vidrarias durante o aquecimento.', 'textual', 'curie'),
-('O que é uma tela de amianto?', NULL, 'FACIL', 'É usada para distribuir o calor uniformemente.', 'textual', 'curie'),
-('Para que serve o suporte universal?', NULL, 'FACIL', 'É usado para fixar e suportar equipamentos de laboratório.', 'textual', 'curie'),
-('O que é um balão volumétrico?', NULL, 'FACIL', 'É usado para preparar soluções de concentração exata.', 'textual', 'curie'),
-('O que é uma centrífuga?', NULL, 'MEDIO', 'É usada para separar substâncias por diferença de densidade.', 'textual', 'curie'),
-('Para que serve um condensador?', NULL, 'MEDIO', 'É usado para resfriar vapores e convertê-los em líquido.', 'textual', 'curie'),
-('O que é um dessecador?', NULL, 'MEDIO', 'É usado para armazenar substâncias sem umidade.', 'textual', 'curie'),
-('O que é uma mufla?', NULL, 'MEDIO', 'É um forno usado para calcinar substâncias.', 'textual', 'curie'),
-('O que é um espectrofotômetro?', NULL, 'DIFICIL', 'É usado para medir a absorção de luz por uma solução.', 'textual', 'curie'),
-('O que é uma coluna cromatográfica?', NULL, 'DIFICIL', 'É usada para separar componentes de uma mistura.', 'textual', 'curie');
-
-INSERT INTO alternativa (idAlternativa, alternativaCorreta, alternativa, perguntas_idPerguntas) VALUES
-(1, 1, 'Instrumento para medir volumes variáveis', 1),
-(2, 0, 'Instrumento para pesar substâncias', 1),
-(3, 0, 'Instrumento para aquecer líquidos', 1),
-(4, 0, 'Instrumento para filtrar soluções', 1),
-(5, 1, 'Recipiente cilíndrico para conter líquidos', 2),
-(6, 0, 'Instrumento para medir temperatura', 2),
-(7, 0, 'Instrumento para filtrar gases', 2),
-(8, 0, 'Recipiente para pesar sólidos', 2),
-(9, 1, 'Separar líquidos imiscíveis', 3),
-(10, 0, 'Medir volumes de gases', 3),
-(11, 0, 'Aquecer substâncias sólidas', 3),
-(12, 0, 'Transferir sólidos entre recipientes', 3),
-(13, 1, 'Frasco cônico usado em titulações', 4),
-(14, 0, 'Frasco para armazenar gases', 4),
-(15, 0, 'Recipiente para calcinar substâncias', 4),
-(16, 0, 'Instrumento para medir pressão', 4),
-(17, 1, 'Transferir volumes precisos de líquidos', 5),
-(18, 0, 'Medir a temperatura de líquidos', 5),
-(19, 0, 'Agitar soluções químicas', 5),
-(20, 0, 'Filtrar substâncias sólidas', 5),
-(21, 1, 'Agitar soluções', 6),
-(22, 0, 'Medir volumes de líquidos', 6),
-(23, 0, 'Separar misturas heterogêneas', 6),
-(24, 0, 'Aquecer substâncias', 6),
-(25, 1, 'Cobrir béqueres ou pesar substâncias', 7),
-(26, 0, 'Medir volumes de gases', 7),
-(27, 0, 'Filtrar líquidos', 7),
-(28, 0, 'Armazenar substâncias voláteis', 7),
-(29, 1, 'Medir volumes aproximados de líquidos', 8),
-(30, 0, 'Preparar soluções exatas', 8),
-(31, 0, 'Separar substâncias por densidade', 8),
-(32, 0, 'Aquecer substâncias em altas temperaturas', 8),
-(33, 1, 'Aquecer substâncias em altas temperaturas', 9),
-(34, 0, 'Medir volumes de líquidos', 9),
-(35, 0, 'Filtrar soluções', 9),
-(36, 0, 'Armazenar substâncias sem umidade', 9),
-(37, 1, 'Transferir líquidos ou filtrar', 10),
-(38, 0, 'Medir temperatura de líquidos', 10),
-(39, 0, 'Agitar soluções', 10),
-(40, 0, 'Pesar substâncias sólidas', 10),
-(41, 1, 'Apoiar vidrarias durante o aquecimento', 11),
-(42, 0, 'Medir volumes de líquidos', 11),
-(43, 0, 'Filtrar substâncias', 11),
-(44, 0, 'Armazenar substâncias químicas', 11),
-(45, 1, 'Distribuir o calor uniformemente', 12),
-(46, 0, 'Medir a temperatura de substâncias', 12),
-(47, 0, 'Filtrar gases', 12),
-(48, 0, 'Separar líquidos imiscíveis', 12),
-(49, 1, 'Fixar e suportar equipamentos de laboratório', 13),
-(50, 0, 'Medir volumes de líquidos', 13),
-(51, 0, 'Aquecer substâncias', 13),
-(52, 0, 'Filtrar soluções', 13),
-(53, 1, 'Preparar soluções de concentração exata', 14),
-(54, 0, 'Medir volumes aproximados', 14),
-(55, 0, 'Separar substâncias por densidade', 14),
-(56, 0, 'Aquecer substâncias em altas temperaturas', 14),
-(57, 1, 'Separar substâncias por diferença de densidade', 15),
-(58, 0, 'Medir volumes de líquidos', 15),
-(59, 0, 'Filtrar substâncias sólidas', 15),
-(60, 0, 'Aquecer substâncias', 15),
-(61, 1, 'Resfriar vapores e convertê-los em líquido', 16),
-(62, 0, 'Medir a temperatura de gases', 16),
-(63, 0, 'Separar líquidos imiscíveis', 16),
-(64, 0, 'Filtrar substâncias sólidas', 16),
-(65, 1, 'Armazenar substâncias sem umidade', 17),
-(66, 0, 'Medir volumes de líquidos', 17),
-(67, 0, 'Aquecer substâncias', 17),
-(68, 0, 'Separar misturas', 17),
-(69, 1, 'Forno usado para calcinar substâncias', 18),
-(70, 0, 'Instrumento para medir pressão', 18),
-(71, 0, 'Recipiente para armazenar gases', 18),
-(72, 0, 'Instrumento para filtrar líquidos', 18),
-(73, 1, 'Medir a absorção de luz por uma solução', 19),
-(74, 0, 'Medir volumes de líquidos', 19),
-(75, 0, 'Separar substâncias por densidade', 19),
-(76, 0, 'Aquecer substâncias em altas temperaturas', 19),
-(77, 1, 'Separar componentes de uma mistura', 20),
-(78, 0, 'Medir a temperatura de soluções', 20),
-(79, 0, 'Filtrar substâncias sólidas', 20),
-(80, 0, 'Armazenar substâncias sem umidade', 20);
 
 INSERT INTO usuario (nome, login, senha, tipo) VALUES (
   'Maria do Socorro',
@@ -189,6 +85,13 @@ INSERT INTO usuario (nome, login, senha, tipo) VALUES (
   'professor'
 );
 
+UPDATE quizmica.usuario 
+SET senha = SHA2('482951', 256) 
+WHERE login = 'mariadosocorro@cps.sp.gov.br';
+
+ALTER TABLE usuario ADD COLUMN medio_desbloqueado_avisado TINYINT(1) NOT NULL DEFAULT 0;
+ALTER TABLE usuario ADD COLUMN termo_aceito TINYINT(1) NOT NULL DEFAULT 0;
+ALTER TABLE usuario ADD COLUMN primeiro_login TINYINT(1) NOT NULL DEFAULT 1;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

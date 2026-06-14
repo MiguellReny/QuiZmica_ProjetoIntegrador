@@ -6,6 +6,7 @@
 package quizquimica.view;
 
 import quizquimica.controller.AlunosPesquisaController;
+import quizquimica.util.TelaUtil;
 
 public class MenuProfessor extends javax.swing.JDialog {
 

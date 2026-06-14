@@ -1,7 +1,8 @@
 package quizquimica.controller;
 
-import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
+
+import quizquimica.dao.UsuarioDAO;
 import quizquimica.model.Usuario;
 import quizquimica.view.PopUpPrimeiroAcesso;
 
@@ -25,6 +26,7 @@ public class PopUpPrimeiroAcessoController {
     }
 
     private void salvarNovaSenha() {
+
         String novaSenha = new String(view.getTxtNovaSenha().getPassword()).trim();
         String confirmarSenha = new String(view.getTxtConfirmarSenha().getPassword()).trim();
 
@@ -52,38 +54,69 @@ public class PopUpPrimeiroAcessoController {
             return;
         }
 
-        /*
-         * Temporário:
-         * Depois sua colega vai trocar essa parte por uma atualização real no banco,
-         * usando DAO/Service para salvar a nova senha.
-         */
-        if (usuario != null) {
-            marcarPrimeiroAcessoConcluido(usuario);
+        try {
+
+            java.security.MessageDigest md =
+                    java.security.MessageDigest.getInstance("SHA-256");
+
+            byte[] hash = md.digest(
+                    novaSenha.getBytes(java.nio.charset.StandardCharsets.UTF_8)
+            );
+
+            StringBuilder senhaHash = new StringBuilder();
+
+            for (byte b : hash) {
+                senhaHash.append(String.format("%02x", b));
+            }
+
+            quizquimica.dao.UsuarioDAO usuarioDAO =
+                    new quizquimica.dao.UsuarioDAO();
+
+            boolean atualizou =
+                    usuarioDAO.atualizarSenha(
+                            usuario.getLogin(),
+                            senhaHash.toString()
+                    );
+
+            if (!atualizou) {
+                JOptionPane.showMessageDialog(
+                        view,
+                        "Erro ao atualizar senha."
+                );
+                return;
+            }
+
+            usuarioDAO.marcarPrimeiroLoginConcluido(usuario.getLogin());
+
+            JOptionPane.showMessageDialog(
+                    view,
+                    "Senha redefinida com sucesso!"
+            );
+
+            view.dispose();
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(
+                    view,
+                    "Erro ao processar senha: " + e.getMessage()
+            );
         }
-
-        JOptionPane.showMessageDialog(
-                view,
-                "Senha redefinida com sucesso!"
-        );
-
-        view.dispose();
     }
 
-    public static boolean usuarioJaRedefiniuSenhaPrimeiroAcesso(Usuario usuario) {
-        if (usuario == null || usuario.getLogin() == null) {
-            return false;
-        }
+    public static boolean usuarioJaRedefiniuSenhaPrimeiroAcesso(
+            Usuario usuario) {
 
-        Preferences prefs = Preferences.userNodeForPackage(PopUpPrimeiroAcessoController.class);
-        return prefs.getBoolean("primeiro_acesso_" + usuario.getLogin(), false);
+        return !new UsuarioDAO()
+                .primeiroLogin(usuario.getLogin());
     }
 
-    public static void marcarPrimeiroAcessoConcluido(Usuario usuario) {
-        if (usuario == null || usuario.getLogin() == null) {
-            return;
-        }
+    public static void marcarPrimeiroAcessoConcluido(
+            Usuario usuario) {
 
-        Preferences prefs = Preferences.userNodeForPackage(PopUpPrimeiroAcessoController.class);
-        prefs.putBoolean("primeiro_acesso_" + usuario.getLogin(), true);
+        new UsuarioDAO()
+            .marcarPrimeiroLoginConcluido(
+                usuario.getLogin()
+            );
     }
 }

@@ -1,6 +1,6 @@
 package quizquimica.util;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,8 +18,8 @@ public class ConexaoDB {
 
             Properties prop = new Properties();
 
-            FileInputStream input =
-                new FileInputStream("src/config.properties");
+            InputStream input =
+                ConexaoDB.class.getResourceAsStream("/config.properties");
 
             prop.load(input);
 

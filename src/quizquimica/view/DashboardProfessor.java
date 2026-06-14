@@ -3,13 +3,16 @@ package quizquimica.view;
 import quizquimica.controller.AdicionarQuestaoController;
 import quizquimica.controller.JogarController;
 import quizquimica.controller.ProfessorController;
+import quizquimica.util.TelaUtil;
 
 public class DashboardProfessor extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardProfessor.class.getName());
 
     public DashboardProfessor() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         new ProfessorController(this);
 
         btnNovaQuestao.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +57,13 @@ public class DashboardProfessor extends javax.swing.JFrame {
             }
         });
     }
+
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
+    }
+
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

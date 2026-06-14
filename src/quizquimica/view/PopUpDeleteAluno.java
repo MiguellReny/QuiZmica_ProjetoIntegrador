@@ -11,6 +11,7 @@ public class PopUpDeleteAluno extends javax.swing.JDialog {
                             javax.swing.JTable tabela) {
         super(parent, modal);
         initComponents();
+        
 
         jButton2.setOpaque(true);
         jButton2.setBorderPainted(false);

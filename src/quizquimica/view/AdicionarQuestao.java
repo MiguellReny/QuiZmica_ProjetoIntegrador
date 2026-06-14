@@ -1,6 +1,7 @@
 package quizquimica.view;
 
 import quizquimica.controller.AdicionarQuestaoController;
+import quizquimica.util.TelaUtil;
 
 public class AdicionarQuestao extends javax.swing.JFrame {
 
@@ -8,7 +9,9 @@ public class AdicionarQuestao extends javax.swing.JFrame {
      * Creates new form DashboardAluno
      */
     public AdicionarQuestao() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
         new AdicionarQuestaoController(this);
 
@@ -22,7 +25,8 @@ public class AdicionarQuestao extends javax.swing.JFrame {
 
         jButton10.setOpaque(true);
         jButton10.setBorderPainted(true);
-            }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

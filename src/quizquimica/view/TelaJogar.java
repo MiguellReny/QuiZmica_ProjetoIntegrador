@@ -1,13 +1,17 @@
 package quizquimica.view;
 
 import quizquimica.controller.JogarController;
+import quizquimica.util.TelaUtil;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TelaJogar extends JFrame {
 
     public TelaJogar() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
             // para corrigir as cores dos botões
     BotaoJogar.setOpaque(true);
@@ -19,6 +23,11 @@ public class TelaJogar extends JFrame {
     BotaoProfessor.setFocusPainted(false);
 
     }
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -6,6 +6,7 @@
 package quizquimica.view;
 
 import quizquimica.controller.TelaQuizController;
+import quizquimica.util.TelaUtil;
 
 /**
  *
@@ -19,8 +20,16 @@ public class TelaQuiz extends javax.swing.JFrame {
 
     /** Creates new form TelaQuiz */
     public TelaQuiz() {
+    TelaUtil.prepararTelaCheia(this);
     initComponents();
+    TelaUtil.aplicarTelaCheia(this);
     setLocationRelativeTo(null);
+    }
+    
+
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
     }
 
     public TelaQuiz(String categoriaQuiz) {

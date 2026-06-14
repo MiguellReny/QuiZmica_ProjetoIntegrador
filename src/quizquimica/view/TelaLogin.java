@@ -2,6 +2,7 @@ package quizquimica.view;
 
 import javax.swing.JOptionPane;
 import quizquimica.model.Usuario;
+import quizquimica.util.TelaUtil;
 import quizquimica.view.DashboardAlunoNovo;
 import quizquimica.model.Professor;
 import quizquimica.model.Sessao;
@@ -11,11 +12,18 @@ import quizquimica.controller.TermoController;
 public class TelaLogin extends javax.swing.JFrame {
 
     public TelaLogin() {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
         jButton1.setOpaque(true);
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
+    }
+
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

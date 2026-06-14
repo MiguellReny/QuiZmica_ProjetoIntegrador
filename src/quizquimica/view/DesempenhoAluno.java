@@ -4,6 +4,8 @@
  */
 package quizquimica.view;
 
+import quizquimica.util.TelaUtil;
+
 /**
  *
  * @author Angela
@@ -16,7 +18,9 @@ public class DesempenhoAluno extends javax.swing.JFrame {
      * Creates new form DesempenhoAluno
      */
     public DesempenhoAluno(java.awt.Frame parent, String nomeAluno) {
+        TelaUtil.prepararTelaCheia(this);
         initComponents();
+        TelaUtil.aplicarTelaCheia(this);
         setLocationRelativeTo(null);
         this.nomeAluno = nomeAluno;
         lblNomeAluno.setText(nomeAluno);
@@ -42,6 +46,12 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         });
 
     }
+
+    @Override
+    public void pack() {
+        // neutraliza o pack() do NetBeans
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,6 +103,7 @@ public class DesempenhoAluno extends javax.swing.JFrame {
         jPanel20 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmica - Desempenho do Aluno");
@@ -395,6 +406,10 @@ public class DesempenhoAluno extends javax.swing.JFrame {
     }
     public javax.swing.JLabel getLblAvatar() {
        return lblAvatar;
+    }
+
+    public javax.swing.JToggleButton getBtnMenu() {
+        return jToggleButton1;
     }
 
     public javax.swing.JLabel getLblNomeAluno() {

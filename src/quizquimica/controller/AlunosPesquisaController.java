@@ -19,6 +19,11 @@ public class AlunosPesquisaController {
     private final AlunoDAO   alunoDAO   = new AlunoDAO();
     private final PartidaDAO partidaDAO = new PartidaDAO();
     private List<Aluno> todosAlunos     = new ArrayList<>();
+    private static final String DOMINIO_ALUNO = "@aluno.cps.sp.gov.br";
+
+    private boolean emailValidoAluno(String email) {
+        return email != null && email.endsWith(DOMINIO_ALUNO);
+    }
 
     public AlunosPesquisaController(AlunosPesquisa view) {
         this.view = view;
@@ -125,6 +130,12 @@ public class AlunosPesquisaController {
                 String email = popup.getTxtEmail().getText().trim();
                 String senha = popup.getTxtSenha().getText().trim();
 
+                if (!emailValidoAluno(email)) {
+                    javax.swing.JOptionPane.showMessageDialog(popup,
+                        "Email inválido! Use apenas @aluno.cps.sp.gov.br");
+                    return;
+                }
+
                 if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
                     javax.swing.JOptionPane.showMessageDialog(popup, "Todos os campos são obrigatórios.");
                     return;
@@ -211,6 +222,12 @@ public class AlunosPesquisaController {
             String novoNome  = popup.getTxtNome().getText().trim();
             String novoLogin = popup.getTxtEmail().getText().trim();
             String novaSenha = popup.getTxtSenha().getText().trim();
+
+            if (!emailValidoAluno(novoLogin)) {
+                javax.swing.JOptionPane.showMessageDialog(popup,
+                    "Email inválido! Use apenas @aluno.cps.sp.gov.br");
+                return;
+            }
 
             if (novoNome.isEmpty() || novoLogin.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(popup, "Nome e email são obrigatórios.");

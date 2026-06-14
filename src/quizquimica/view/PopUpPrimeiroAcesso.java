@@ -27,6 +27,8 @@ public class PopUpPrimeiroAcesso extends javax.swing.JDialog {
     public PopUpPrimeiroAcesso(java.awt.Frame parent, boolean modal, Usuario usuario) {
      super(parent, modal);
      initComponents();
+     txtNovaSenha.setText("");
+     txtConfirmarSenha.setText("");
 
      setSize(850, 600);
      setLocationRelativeTo(parent);
